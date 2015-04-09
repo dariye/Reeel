@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		767E79441AD61392003E9A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79431AD61392003E9A23 /* main.m */; };
+		767E79471AD61392003E9A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79461AD61392003E9A23 /* AppDelegate.m */; };
+		767E794A1AD61392003E9A23 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79491AD61392003E9A23 /* ViewController.m */; };
+		767E794D1AD61392003E9A23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767E794B1AD61392003E9A23 /* Main.storyboard */; };
+		767E794F1AD61392003E9A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767E794E1AD61392003E9A23 /* Images.xcassets */; };
+		767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767E79501AD61392003E9A23 /* LaunchScreen.xib */; };
+		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
+		767E79751AD615BA003E9A23 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79731AD615BA003E9A23 /* Bolts.framework */; };
+		767E79761AD615BA003E9A23 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79741AD615BA003E9A23 /* Parse.framework */; };
+		767E79781AD615FC003E9A23 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79771AD615FC003E9A23 /* AudioToolbox.framework */; };
+		767E79821AD61699003E9A23 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79791AD61699003E9A23 /* CFNetwork.framework */; };
+		767E79831AD61699003E9A23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797A1AD61699003E9A23 /* CoreGraphics.framework */; };
+		767E79841AD61699003E9A23 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797B1AD61699003E9A23 /* CoreLocation.framework */; };
+		767E79851AD61699003E9A23 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797C1AD61699003E9A23 /* libz.dylib */; };
+		767E79861AD61699003E9A23 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797D1AD61699003E9A23 /* MobileCoreServices.framework */; };
+		767E79871AD61699003E9A23 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797E1AD61699003E9A23 /* QuartzCore.framework */; };
+		767E79881AD61699003E9A23 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797F1AD61699003E9A23 /* Security.framework */; };
+		767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79801AD61699003E9A23 /* StoreKit.framework */; };
+		767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79811AD61699003E9A23 /* SystemConfiguration.framework */; };
+		767E798C1AD616AD003E9A23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E798B1AD616AD003E9A23 /* libsqlite3.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		767E79581AD61393003E9A23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 767E79361AD61392003E9A23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 767E793D1AD61392003E9A23;
+			remoteInfo = Reeel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		767E793E1AD61392003E9A23 /* Reeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		767E79421AD61392003E9A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		767E79431AD61392003E9A23 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		767E79451AD61392003E9A23 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		767E79461AD61392003E9A23 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		767E79481AD61392003E9A23 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		767E79491AD61392003E9A23 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		767E794C1AD61392003E9A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		767E794E1AD61392003E9A23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		767E79511AD61392003E9A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		767E79571AD61393003E9A23 /* ReeelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReeelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		767E795C1AD61393003E9A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		767E795D1AD61393003E9A23 /* ReeelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReeelTests.m; sourceTree = "<group>"; };
+		767E79731AD615BA003E9A23 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		767E79741AD615BA003E9A23 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		767E79771AD615FC003E9A23 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		767E79791AD61699003E9A23 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		767E797A1AD61699003E9A23 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		767E797B1AD61699003E9A23 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		767E797C1AD61699003E9A23 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		767E797D1AD61699003E9A23 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		767E797E1AD61699003E9A23 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		767E797F1AD61699003E9A23 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		767E79801AD61699003E9A23 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		767E79811AD61699003E9A23 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		767E798B1AD616AD003E9A23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		767E793B1AD61392003E9A23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767E798C1AD616AD003E9A23 /* libsqlite3.dylib in Frameworks */,
+				767E79821AD61699003E9A23 /* CFNetwork.framework in Frameworks */,
+				767E79831AD61699003E9A23 /* CoreGraphics.framework in Frameworks */,
+				767E79841AD61699003E9A23 /* CoreLocation.framework in Frameworks */,
+				767E79851AD61699003E9A23 /* libz.dylib in Frameworks */,
+				767E79861AD61699003E9A23 /* MobileCoreServices.framework in Frameworks */,
+				767E79871AD61699003E9A23 /* QuartzCore.framework in Frameworks */,
+				767E79881AD61699003E9A23 /* Security.framework in Frameworks */,
+				767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */,
+				767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */,
+				767E79781AD615FC003E9A23 /* AudioToolbox.framework in Frameworks */,
+				767E79761AD615BA003E9A23 /* Parse.framework in Frameworks */,
+				767E79751AD615BA003E9A23 /* Bolts.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		767E79541AD61393003E9A23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		767E79351AD61392003E9A23 = {
+			isa = PBXGroup;
+			children = (
+				767E79721AD6158C003E9A23 /* Frameworks */,
+				767E79401AD61392003E9A23 /* Reeel */,
+				767E795A1AD61393003E9A23 /* ReeelTests */,
+				767E793F1AD61392003E9A23 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		767E793F1AD61392003E9A23 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				767E793E1AD61392003E9A23 /* Reeel.app */,
+				767E79571AD61393003E9A23 /* ReeelTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		767E79401AD61392003E9A23 /* Reeel */ = {
+			isa = PBXGroup;
+			children = (
+				767E79451AD61392003E9A23 /* AppDelegate.h */,
+				767E79461AD61392003E9A23 /* AppDelegate.m */,
+				767E79481AD61392003E9A23 /* ViewController.h */,
+				767E79491AD61392003E9A23 /* ViewController.m */,
+				767E794B1AD61392003E9A23 /* Main.storyboard */,
+				767E794E1AD61392003E9A23 /* Images.xcassets */,
+				767E79501AD61392003E9A23 /* LaunchScreen.xib */,
+				767E79411AD61392003E9A23 /* Supporting Files */,
+			);
+			path = Reeel;
+			sourceTree = "<group>";
+		};
+		767E79411AD61392003E9A23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				767E79421AD61392003E9A23 /* Info.plist */,
+				767E79431AD61392003E9A23 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		767E795A1AD61393003E9A23 /* ReeelTests */ = {
+			isa = PBXGroup;
+			children = (
+				767E795D1AD61393003E9A23 /* ReeelTests.m */,
+				767E795B1AD61393003E9A23 /* Supporting Files */,
+			);
+			path = ReeelTests;
+			sourceTree = "<group>";
+		};
+		767E795B1AD61393003E9A23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				767E795C1AD61393003E9A23 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		767E79721AD6158C003E9A23 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				767E798B1AD616AD003E9A23 /* libsqlite3.dylib */,
+				767E79791AD61699003E9A23 /* CFNetwork.framework */,
+				767E797A1AD61699003E9A23 /* CoreGraphics.framework */,
+				767E797B1AD61699003E9A23 /* CoreLocation.framework */,
+				767E797C1AD61699003E9A23 /* libz.dylib */,
+				767E797D1AD61699003E9A23 /* MobileCoreServices.framework */,
+				767E797E1AD61699003E9A23 /* QuartzCore.framework */,
+				767E797F1AD61699003E9A23 /* Security.framework */,
+				767E79801AD61699003E9A23 /* StoreKit.framework */,
+				767E79811AD61699003E9A23 /* SystemConfiguration.framework */,
+				767E79771AD615FC003E9A23 /* AudioToolbox.framework */,
+				767E79731AD615BA003E9A23 /* Bolts.framework */,
+				767E79741AD615BA003E9A23 /* Parse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		767E793D1AD61392003E9A23 /* Reeel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 767E79611AD61393003E9A23 /* Build configuration list for PBXNativeTarget "Reeel" */;
+			buildPhases = (
+				767E793A1AD61392003E9A23 /* Sources */,
+				767E793B1AD61392003E9A23 /* Frameworks */,
+				767E793C1AD61392003E9A23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Reeel;
+			productName = Reeel;
+			productReference = 767E793E1AD61392003E9A23 /* Reeel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		767E79561AD61393003E9A23 /* ReeelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 767E79641AD61393003E9A23 /* Build configuration list for PBXNativeTarget "ReeelTests" */;
+			buildPhases = (
+				767E79531AD61393003E9A23 /* Sources */,
+				767E79541AD61393003E9A23 /* Frameworks */,
+				767E79551AD61393003E9A23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				767E79591AD61393003E9A23 /* PBXTargetDependency */,
+			);
+			name = ReeelTests;
+			productName = ReeelTests;
+			productReference = 767E79571AD61393003E9A23 /* ReeelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		767E79361AD61392003E9A23 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = colp;
+				TargetAttributes = {
+					767E793D1AD61392003E9A23 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					767E79561AD61393003E9A23 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 767E793D1AD61392003E9A23;
+					};
+				};
+			};
+			buildConfigurationList = 767E79391AD61392003E9A23 /* Build configuration list for PBXProject "Reeel" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 767E79351AD61392003E9A23;
+			productRefGroup = 767E793F1AD61392003E9A23 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				767E793D1AD61392003E9A23 /* Reeel */,
+				767E79561AD61393003E9A23 /* ReeelTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		767E793C1AD61392003E9A23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767E794D1AD61392003E9A23 /* Main.storyboard in Resources */,
+				767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */,
+				767E794F1AD61392003E9A23 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		767E79551AD61393003E9A23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		767E793A1AD61392003E9A23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767E794A1AD61392003E9A23 /* ViewController.m in Sources */,
+				767E79471AD61392003E9A23 /* AppDelegate.m in Sources */,
+				767E79441AD61392003E9A23 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		767E79531AD61393003E9A23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		767E79591AD61393003E9A23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 767E793D1AD61392003E9A23 /* Reeel */;
+			targetProxy = 767E79581AD61393003E9A23 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		767E794B1AD61392003E9A23 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				767E794C1AD61392003E9A23 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		767E79501AD61392003E9A23 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				767E79511AD61392003E9A23 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		767E795F1AD61393003E9A23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		767E79601AD61393003E9A23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		767E79621AD61393003E9A23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/pauldariye/Downloads/parse-library-1.7.1",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Reeel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		767E79631AD61393003E9A23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/pauldariye/Downloads/parse-library-1.7.1",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Reeel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		767E79651AD61393003E9A23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ReeelTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reeel.app/Reeel";
+			};
+			name = Debug;
+		};
+		767E79661AD61393003E9A23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ReeelTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reeel.app/Reeel";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		767E79391AD61392003E9A23 /* Build configuration list for PBXProject "Reeel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				767E795F1AD61393003E9A23 /* Debug */,
+				767E79601AD61393003E9A23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		767E79611AD61393003E9A23 /* Build configuration list for PBXNativeTarget "Reeel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				767E79621AD61393003E9A23 /* Debug */,
+				767E79631AD61393003E9A23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		767E79641AD61393003E9A23 /* Build configuration list for PBXNativeTarget "ReeelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				767E79651AD61393003E9A23 /* Debug */,
+				767E79661AD61393003E9A23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 767E79361AD61392003E9A23 /* Project object */;
+}
