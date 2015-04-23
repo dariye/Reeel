@@ -7,10 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "ScreeningDetailViewController.h"
+#import "RSVPTableViewController.h"
+#import "ProfileTableViewController.h"
+#import "ScreeningsTableViewController.h"
 
 #import <Parse/Parse.h>
 
 @interface AppDelegate ()
+
+@property(nonatomic, retain) UIView *titleView;
 
 @end
 
@@ -18,6 +24,43 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // ScreeningsTableViewController
+    ScreeningsTableViewController *screening = [[ScreeningsTableViewController alloc] init];
+    
+    // RSVPsViewController
+    RSVPTableViewController *rsvp = [[RSVPTableViewController alloc] init];
+    
+    // ProfileViewController
+    
+    ProfileTableViewController *profile = [[ProfileTableViewController alloc] init];
+    
+    // Instantiate Tabbar Controller
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    UINavigationController *screeningNavController = [[UINavigationController alloc] initWithRootViewController:screening];
+    
+    UINavigationController *rsvpNavController = [[UINavigationController alloc] initWithRootViewController:rsvp];
+    
+    UINavigationController *profileNavController = [[UINavigationController alloc] initWithRootViewController:profile];
+    
+    tabBarController.viewControllers = @[screeningNavController, rsvpNavController, profileNavController];
+    
+    [[tabBarController.tabBar.items objectAtIndex:0] setImage:[UIImage imageNamed:@"home"]];
+    [[tabBarController.tabBar.items objectAtIndex:0] setTitle:@"Home"];
+
+    [[tabBarController.tabBar.items objectAtIndex:1] setImage:[UIImage imageNamed:@"movie"]];
+    [[tabBarController.tabBar.items objectAtIndex:1] setTitle:@"RSVP"];
+
+    [[tabBarController.tabBar.items objectAtIndex:2] setImage:[UIImage imageNamed:@"account-circle"]];
+    [[tabBarController.tabBar.items objectAtIndex:2] setTitle:@"Profile"];
+    
+    self.window.rootViewController = tabBarController;
+    
     
     // [Optional] Power your app with Local Datastore. For more info, go to
     // https://parse.com/docs/ios_guide#localdatastore/iOS
@@ -35,9 +78,11 @@
     
     
     
+    
     // Override point for customization after application launch.
    
-    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
    
     return YES;
 }

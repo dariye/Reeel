@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */; };
+		7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */; };
 		767E79441AD61392003E9A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79431AD61392003E9A23 /* main.m */; };
 		767E79471AD61392003E9A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79461AD61392003E9A23 /* AppDelegate.m */; };
-		767E794A1AD61392003E9A23 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79491AD61392003E9A23 /* ViewController.m */; };
-		767E794D1AD61392003E9A23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767E794B1AD61392003E9A23 /* Main.storyboard */; };
 		767E794F1AD61392003E9A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767E794E1AD61392003E9A23 /* Images.xcassets */; };
 		767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767E79501AD61392003E9A23 /* LaunchScreen.xib */; };
 		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
@@ -27,6 +27,14 @@
 		767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79801AD61699003E9A23 /* StoreKit.framework */; };
 		767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79811AD61699003E9A23 /* SystemConfiguration.framework */; };
 		767E798C1AD616AD003E9A23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E798B1AD616AD003E9A23 /* libsqlite3.dylib */; };
+		76E734F01AE8233A00F312E2 /* Screening.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734EF1AE8233A00F312E2 /* Screening.m */; };
+		76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */; };
+		76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */; };
+		76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E735021AE83C2B00F312E2 /* ProfileTableViewController.xib */; };
+		76E735081AE83C5600F312E2 /* RSVPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E735061AE83C5600F312E2 /* RSVPTableViewController.m */; };
+		76E735091AE83C5600F312E2 /* RSVPTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */; };
+		76E7350D1AE8424200F312E2 /* ScreeningsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E7350B1AE8424200F312E2 /* ScreeningsTableViewCell.m */; };
+		76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E7350C1AE8424200F312E2 /* ScreeningsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,14 +48,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7665D2D51AE4571200487F59 /* ScreeningDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningDetailViewController.h; sourceTree = "<group>"; };
+		7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningDetailViewController.m; sourceTree = "<group>"; };
+		7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningDetailViewController.xib; sourceTree = "<group>"; };
 		767E793E1AD61392003E9A23 /* Reeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		767E79421AD61392003E9A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		767E79431AD61392003E9A23 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		767E79451AD61392003E9A23 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		767E79461AD61392003E9A23 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		767E79481AD61392003E9A23 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		767E79491AD61392003E9A23 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		767E794C1AD61392003E9A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		767E794E1AD61392003E9A23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		767E79511AD61392003E9A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		767E79571AD61393003E9A23 /* ReeelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReeelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +74,19 @@
 		767E79801AD61699003E9A23 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		767E79811AD61699003E9A23 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		767E798B1AD616AD003E9A23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		76E734EE1AE8233A00F312E2 /* Screening.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screening.h; sourceTree = "<group>"; };
+		76E734EF1AE8233A00F312E2 /* Screening.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screening.m; sourceTree = "<group>"; };
+		76E734F11AE827C300F312E2 /* ScreeningsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningsTableViewController.h; sourceTree = "<group>"; };
+		76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningsTableViewController.m; sourceTree = "<group>"; };
+		76E735001AE83C2B00F312E2 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
+		76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
+		76E735021AE83C2B00F312E2 /* ProfileTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableViewController.xib; sourceTree = "<group>"; };
+		76E735051AE83C5600F312E2 /* RSVPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVPTableViewController.h; sourceTree = "<group>"; };
+		76E735061AE83C5600F312E2 /* RSVPTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVPTableViewController.m; sourceTree = "<group>"; };
+		76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSVPTableViewController.xib; sourceTree = "<group>"; };
+		76E7350A1AE8424200F312E2 /* ScreeningsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningsTableViewCell.h; sourceTree = "<group>"; };
+		76E7350B1AE8424200F312E2 /* ScreeningsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningsTableViewCell.m; sourceTree = "<group>"; };
+		76E7350C1AE8424200F312E2 /* ScreeningsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,14 +142,27 @@
 		767E79401AD61392003E9A23 /* Reeel */ = {
 			isa = PBXGroup;
 			children = (
+				7665D2D51AE4571200487F59 /* ScreeningDetailViewController.h */,
+				7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */,
+				7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */,
 				767E79451AD61392003E9A23 /* AppDelegate.h */,
 				767E79461AD61392003E9A23 /* AppDelegate.m */,
-				767E79481AD61392003E9A23 /* ViewController.h */,
-				767E79491AD61392003E9A23 /* ViewController.m */,
-				767E794B1AD61392003E9A23 /* Main.storyboard */,
+				76E734EE1AE8233A00F312E2 /* Screening.h */,
+				76E734EF1AE8233A00F312E2 /* Screening.m */,
+				76E734F11AE827C300F312E2 /* ScreeningsTableViewController.h */,
+				76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */,
+				76E7350A1AE8424200F312E2 /* ScreeningsTableViewCell.h */,
+				76E7350B1AE8424200F312E2 /* ScreeningsTableViewCell.m */,
+				76E7350C1AE8424200F312E2 /* ScreeningsTableViewCell.xib */,
 				767E794E1AD61392003E9A23 /* Images.xcassets */,
 				767E79501AD61392003E9A23 /* LaunchScreen.xib */,
 				767E79411AD61392003E9A23 /* Supporting Files */,
+				76E735001AE83C2B00F312E2 /* ProfileTableViewController.h */,
+				76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */,
+				76E735021AE83C2B00F312E2 /* ProfileTableViewController.xib */,
+				76E735051AE83C5600F312E2 /* RSVPTableViewController.h */,
+				76E735061AE83C5600F312E2 /* RSVPTableViewController.m */,
+				76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */,
 			);
 			path = Reeel;
 			sourceTree = "<group>";
@@ -259,8 +293,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767E794D1AD61392003E9A23 /* Main.storyboard in Resources */,
+				76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */,
 				767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */,
+				7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */,
+				76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */,
+				76E735091AE83C5600F312E2 /* RSVPTableViewController.xib in Resources */,
 				767E794F1AD61392003E9A23 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,9 +316,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767E794A1AD61392003E9A23 /* ViewController.m in Sources */,
+				76E735081AE83C5600F312E2 /* RSVPTableViewController.m in Sources */,
+				76E7350D1AE8424200F312E2 /* ScreeningsTableViewCell.m in Sources */,
 				767E79471AD61392003E9A23 /* AppDelegate.m in Sources */,
+				7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */,
+				76E734F01AE8233A00F312E2 /* Screening.m in Sources */,
 				767E79441AD61392003E9A23 /* main.m in Sources */,
+				76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */,
+				76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,14 +346,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		767E794B1AD61392003E9A23 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				767E794C1AD61392003E9A23 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		767E79501AD61392003E9A23 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -482,6 +516,7 @@
 				767E79631AD61393003E9A23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		767E79641AD61393003E9A23 /* Build configuration list for PBXNativeTarget "ReeelTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +525,7 @@
 				767E79661AD61393003E9A23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
