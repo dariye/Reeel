@@ -14,8 +14,6 @@
 		767E794F1AD61392003E9A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767E794E1AD61392003E9A23 /* Images.xcassets */; };
 		767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767E79501AD61392003E9A23 /* LaunchScreen.xib */; };
 		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
-		767E79751AD615BA003E9A23 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79731AD615BA003E9A23 /* Bolts.framework */; };
-		767E79761AD615BA003E9A23 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79741AD615BA003E9A23 /* Parse.framework */; };
 		767E79781AD615FC003E9A23 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79771AD615FC003E9A23 /* AudioToolbox.framework */; };
 		767E79821AD61699003E9A23 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79791AD61699003E9A23 /* CFNetwork.framework */; };
 		767E79831AD61699003E9A23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797A1AD61699003E9A23 /* CoreGraphics.framework */; };
@@ -61,8 +59,6 @@
 		767E79571AD61393003E9A23 /* ReeelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReeelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		767E795C1AD61393003E9A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		767E795D1AD61393003E9A23 /* ReeelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReeelTests.m; sourceTree = "<group>"; };
-		767E79731AD615BA003E9A23 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		767E79741AD615BA003E9A23 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		767E79771AD615FC003E9A23 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		767E79791AD61699003E9A23 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		767E797A1AD61699003E9A23 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -105,8 +101,6 @@
 				767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */,
 				767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */,
 				767E79781AD615FC003E9A23 /* AudioToolbox.framework in Frameworks */,
-				767E79761AD615BA003E9A23 /* Parse.framework in Frameworks */,
-				767E79751AD615BA003E9A23 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,8 +201,6 @@
 				767E79801AD61699003E9A23 /* StoreKit.framework */,
 				767E79811AD61699003E9A23 /* SystemConfiguration.framework */,
 				767E79771AD615FC003E9A23 /* AudioToolbox.framework */,
-				767E79731AD615BA003E9A23 /* Bolts.framework */,
-				767E79741AD615BA003E9A23 /* Parse.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -262,6 +254,7 @@
 				TargetAttributes = {
 					767E793D1AD61392003E9A23 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 9U8B84CL7Y;
 					};
 					767E79561AD61393003E9A23 = {
 						CreatedOnToolsVersion = 6.2;
@@ -437,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/pauldariye/Downloads/parse-library-1.7.1",
@@ -452,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/pauldariye/Downloads/parse-library-1.7.1",

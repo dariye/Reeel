@@ -12,7 +12,6 @@
 #import "ProfileTableViewController.h"
 #import "ScreeningsTableViewController.h"
 
-#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -60,24 +59,7 @@
     [[tabBarController.tabBar.items objectAtIndex:2] setTitle:@"Profile"];
     
     self.window.rootViewController = tabBarController;
-    
-    
-    // [Optional] Power your app with Local Datastore. For more info, go to
-    // https://parse.com/docs/ios_guide#localdatastore/iOS
-    
-    [Parse enableLocalDatastore];
-    
-    // Initialize Parse.
-    [Parse setApplicationId:@"R0o50fZOPQuUPEsL5L4wSs0ToG9PF26eQRQD8W0s"
-                  clientKey:@"36cPEUKfUwRR9JtZCjthxgSUSMTdCjBIxD9b7ZWR"];
-    
-    // [Optional] Track statistics around application opens.
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
-    
-    
-    
-    
+
     
     // Override point for customization after application launch.
    

@@ -31,17 +31,7 @@
     [super viewDidLoad];
     
     // Set view background color
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    
-//    self.navController = [[UINavigationController alloc] initWithRootViewController:self];
-    
-//    [self.view addSubview:self.navController.view];
-//
-//    [self.view addSubview:self.navController.view];
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    testObject[@"foo"] = @"bar";
-//    [testObject saveInBackground];
-    
+//    self.view.backgroundColor = [UIColor lightGrayColor];
     
     
     // Uncomment the following line to preserve selection between presentations.
