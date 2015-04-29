@@ -34,12 +34,12 @@
     // Set assign image from assets
     UIImage *poster = [UIImage imageNamed:@"womaningold.jpg"];
     self.navigationItem.title = @"Woman in Gold";
-    NSLog(@"assigning image");
+    //NSLog(@"assigning image");
     // Set image on view
     self.screeningImageView.image = poster;
     self.rating = 7.5;
     self.movieRatingLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
-    //self.metaDataLabel.text = [NSString stringWithFormat:@"%@    "]
+    self.metaDataLabel.text = @"PG-13       109 min       April 1st, 2015 (USA)";
     self.movieSynopsisText.editable = NO;
     self.movieSynopsisText.text = @"Maria Altmann (Helen Mirren), an elderly Jewish survivor of World War II, sues the Austrian government for the return of artwork the Nazis stole from her family.";
     
