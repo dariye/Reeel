@@ -19,6 +19,7 @@
 		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
 		76BEB5251AF097DB00F708EF /* ProfileInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */; };
 		76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */; };
+		76E4B1251AF14F9600CA8A8B /* ScreeningImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E4B1241AF14F9600CA8A8B /* ScreeningImageStore.m */; };
 		76E734F01AE8233A00F312E2 /* Screening.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734EF1AE8233A00F312E2 /* Screening.m */; };
 		76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */; };
 		76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */; };
@@ -74,6 +75,8 @@
 		76BEB5221AF097DB00F708EF /* ProfileInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInformationViewController.h; sourceTree = "<group>"; };
 		76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInformationViewController.m; sourceTree = "<group>"; };
 		76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileInformationViewController.xib; sourceTree = "<group>"; };
+		76E4B1231AF14F9600CA8A8B /* ScreeningImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningImageStore.h; sourceTree = "<group>"; };
+		76E4B1241AF14F9600CA8A8B /* ScreeningImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningImageStore.m; sourceTree = "<group>"; };
 		76E734EE1AE8233A00F312E2 /* Screening.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screening.h; sourceTree = "<group>"; };
 		76E734EF1AE8233A00F312E2 /* Screening.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screening.m; sourceTree = "<group>"; };
 		76E734F11AE827C300F312E2 /* ScreeningsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningsTableViewController.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */,
 				764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */,
 				764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */,
+				76E4B1231AF14F9600CA8A8B /* ScreeningImageStore.h */,
+				76E4B1241AF14F9600CA8A8B /* ScreeningImageStore.m */,
 			);
 			path = Reeel;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				767E79471AD61392003E9A23 /* AppDelegate.m in Sources */,
 				7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */,
 				76E734F01AE8233A00F312E2 /* Screening.m in Sources */,
+				76E4B1251AF14F9600CA8A8B /* ScreeningImageStore.m in Sources */,
 				764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */,
 				767E79441AD61392003E9A23 /* main.m in Sources */,
 				76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */,

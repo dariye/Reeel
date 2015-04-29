@@ -65,6 +65,7 @@
         NSString *key = [uuid UUIDString];
         screeningKey = key;
     }
+    
     return self;
 }
 
@@ -79,7 +80,7 @@
 
 - (instancetype)init
 {
-    return [self initWithScreeningTitle: @"ScreeningTitle"];
+    return [self initWithScreeningTitle:@"ScreeningTitle"];
 }
 
 

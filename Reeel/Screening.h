@@ -19,7 +19,6 @@
 @property (nonatomic, readonly, strong) NSString *dateCreated;
 @property (nonatomic, copy) NSMutableDictionary *screeningMetaData;
 
-
 @property (nonatomic) float screeningFee;
 @property (nonatomic) float discount;
 

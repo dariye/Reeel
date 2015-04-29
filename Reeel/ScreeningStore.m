@@ -74,6 +74,8 @@
             movieMeta[@"director"] = @"Some Dudes and Gals";
             movieMeta[@"stars"] = @"Some Gals and Dudes";
             
+//            NSLog(<#NSString *format, ...#>)
+            
             
             randomDate = [today dateByAddingTimeInterval:randomNumber];
             
