@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ScreeningsTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *directorsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *rsvpLabel;
 
 @end

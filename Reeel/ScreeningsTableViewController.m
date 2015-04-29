@@ -72,6 +72,9 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     }
     
+    
+    // Configure the cell...
+    
     //cell.ratingsLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
     //cell.directorsLabel.text = @"Directors:";
     //cell.synopsisLabel.text = @"Synopsis:";
@@ -84,23 +87,25 @@
     cell.dateLabel.text = @"Monday April 13th @ 8:00 PM";
     cell.locationLabel.text = @"Angelika Film Center, New York";
     
- 
+    cell.rsvpLabel.text = @"";
     
-    // Configure the cell...
     
     return cell;
 }
 
+// set cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 135;
 }
 
+// adjust spacing of cells
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 1; // you can have your own choice, of course
 }
 
+// set header (spacing) color to transparent
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] init];
