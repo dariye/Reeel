@@ -105,7 +105,7 @@
     
 //    self.tableView.tableFooterView = [[UIView alloc] init];
     
-    
+    NSLog(@"%@", screening.screeningMetaData);
 
     // Configure the cell...
     

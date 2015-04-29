@@ -11,11 +11,9 @@
 #import "RSVPTableViewController.h"
 #import "ProfileTableViewController.h"
 #import "ScreeningsTableViewController.h"
-
+#import <Parse/Parse.h>
 
 @interface AppDelegate ()
-
-@property(nonatomic, retain) UIView *titleView;
 
 @end
 
@@ -24,6 +22,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+     // Initialize Parse
+    [Parse setApplicationId:@"R0o50fZOPQuUPEsL5L4wSs0ToG9PF26eQRQD8W0s"
+                  clientKey:@"36cPEUKfUwRR9JtZCjthxgSUSMTdCjBIxD9b7ZWR"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"name"] = @"paul";
+    
+    NSLog(@"%@", testObject);
+    
+    [testObject saveInBackground];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     

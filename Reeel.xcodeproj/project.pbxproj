@@ -17,17 +17,6 @@
 		767E794F1AD61392003E9A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767E794E1AD61392003E9A23 /* Images.xcassets */; };
 		767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767E79501AD61392003E9A23 /* LaunchScreen.xib */; };
 		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
-		767E79781AD615FC003E9A23 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79771AD615FC003E9A23 /* AudioToolbox.framework */; };
-		767E79821AD61699003E9A23 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79791AD61699003E9A23 /* CFNetwork.framework */; };
-		767E79831AD61699003E9A23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797A1AD61699003E9A23 /* CoreGraphics.framework */; };
-		767E79841AD61699003E9A23 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797B1AD61699003E9A23 /* CoreLocation.framework */; };
-		767E79851AD61699003E9A23 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797C1AD61699003E9A23 /* libz.dylib */; };
-		767E79861AD61699003E9A23 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797D1AD61699003E9A23 /* MobileCoreServices.framework */; };
-		767E79871AD61699003E9A23 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797E1AD61699003E9A23 /* QuartzCore.framework */; };
-		767E79881AD61699003E9A23 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E797F1AD61699003E9A23 /* Security.framework */; };
-		767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79801AD61699003E9A23 /* StoreKit.framework */; };
-		767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79811AD61699003E9A23 /* SystemConfiguration.framework */; };
-		767E798C1AD616AD003E9A23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E798B1AD616AD003E9A23 /* libsqlite3.dylib */; };
 		76BEB5251AF097DB00F708EF /* ProfileInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */; };
 		76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */; };
 		76E734F01AE8233A00F312E2 /* Screening.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734EF1AE8233A00F312E2 /* Screening.m */; };
@@ -38,6 +27,7 @@
 		76E735091AE83C5600F312E2 /* RSVPTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */; };
 		76E7350D1AE8424200F312E2 /* ScreeningsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E7350B1AE8424200F312E2 /* ScreeningsTableViewCell.m */; };
 		76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E7350C1AE8424200F312E2 /* ScreeningsTableViewCell.xib */; };
+		8F0FBE229E29BBB2CE14FAD3 /* Pods_Reeel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FEB03FA154DA69D6F0070C /* Pods_Reeel.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39CBF1BD44BB2317D498396A /* Pods-Reeel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reeel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Reeel/Pods-Reeel.debug.xcconfig"; sourceTree = "<group>"; };
 		7640021B1AEFE9E500681FD8 /* ScreeningStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningStore.h; sourceTree = "<group>"; };
 		7640021C1AEFE9E500681FD8 /* ScreeningStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningStore.m; sourceTree = "<group>"; };
 		764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsAndConditionsViewController.h; sourceTree = "<group>"; };
@@ -96,6 +87,8 @@
 		76E7350A1AE8424200F312E2 /* ScreeningsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningsTableViewCell.h; sourceTree = "<group>"; };
 		76E7350B1AE8424200F312E2 /* ScreeningsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningsTableViewCell.m; sourceTree = "<group>"; };
 		76E7350C1AE8424200F312E2 /* ScreeningsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningsTableViewCell.xib; sourceTree = "<group>"; };
+		B9FEB03FA154DA69D6F0070C /* Pods_Reeel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reeel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E308284A5C96ECBA1E9D5563 /* Pods-Reeel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reeel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reeel/Pods-Reeel.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,17 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767E798C1AD616AD003E9A23 /* libsqlite3.dylib in Frameworks */,
-				767E79821AD61699003E9A23 /* CFNetwork.framework in Frameworks */,
-				767E79831AD61699003E9A23 /* CoreGraphics.framework in Frameworks */,
-				767E79841AD61699003E9A23 /* CoreLocation.framework in Frameworks */,
-				767E79851AD61699003E9A23 /* libz.dylib in Frameworks */,
-				767E79861AD61699003E9A23 /* MobileCoreServices.framework in Frameworks */,
-				767E79871AD61699003E9A23 /* QuartzCore.framework in Frameworks */,
-				767E79881AD61699003E9A23 /* Security.framework in Frameworks */,
-				767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */,
-				767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */,
-				767E79781AD615FC003E9A23 /* AudioToolbox.framework in Frameworks */,
+				8F0FBE229E29BBB2CE14FAD3 /* Pods_Reeel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +117,7 @@
 				767E79401AD61392003E9A23 /* Reeel */,
 				767E795A1AD61393003E9A23 /* ReeelTests */,
 				767E793F1AD61392003E9A23 /* Products */,
+				E9346436934DD8FF288DEA9B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,8 +206,18 @@
 				767E79801AD61699003E9A23 /* StoreKit.framework */,
 				767E79811AD61699003E9A23 /* SystemConfiguration.framework */,
 				767E79771AD615FC003E9A23 /* AudioToolbox.framework */,
+				B9FEB03FA154DA69D6F0070C /* Pods_Reeel.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E9346436934DD8FF288DEA9B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				39CBF1BD44BB2317D498396A /* Pods-Reeel.debug.xcconfig */,
+				E308284A5C96ECBA1E9D5563 /* Pods-Reeel.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,9 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 767E79611AD61393003E9A23 /* Build configuration list for PBXNativeTarget "Reeel" */;
 			buildPhases = (
+				628E40291E4BD25DB70B128A /* Check Pods Manifest.lock */,
 				767E793A1AD61392003E9A23 /* Sources */,
 				767E793B1AD61392003E9A23 /* Frameworks */,
 				767E793C1AD61392003E9A23 /* Resources */,
+				8E9A651B1CF52B4D8715B824 /* Embed Pods Frameworks */,
+				06EB2EB1756A4CC1D0FB5845 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -326,6 +323,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06EB2EB1756A4CC1D0FB5845 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reeel/Pods-Reeel-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		628E40291E4BD25DB70B128A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E9A651B1CF52B4D8715B824 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Reeel/Pods-Reeel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		767E793A1AD61392003E9A23 /* Sources */ = {
@@ -454,14 +499,10 @@
 		};
 		767E79621AD61393003E9A23 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39CBF1BD44BB2317D498396A /* Pods-Reeel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/pauldariye/Downloads/parse-library-1.7.1",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = Reeel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -470,14 +511,10 @@
 		};
 		767E79631AD61393003E9A23 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E308284A5C96ECBA1E9D5563 /* Pods-Reeel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/pauldariye/Downloads/parse-library-1.7.1",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = Reeel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -18,6 +18,7 @@
 @synthesize dateCreated;
 @synthesize screeningFee;
 @synthesize screeningDescription;
+@synthesize screeningMetaData;
 @synthesize discount;
 @synthesize free;
 @synthesize discounted;
@@ -30,7 +31,7 @@
  *         Implementation of Initializers        *
  *************************************************/
 
-- (instancetype)initWithScreeningTitle:(NSString *)title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningDescription:(NSString *)description screeningFee:(float)fee discount:(float)discountValue
+- (instancetype)initWithScreeningTitle:(NSString *)title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningDescription:(NSString *)description screeningMetaData:(NSMutableDictionary *)metadata screeningFee:(float)fee discount:(float)discountValue
 {
     self = [super init];
     
@@ -41,6 +42,7 @@
         screeningFee = fee;
         discount = discountValue;
         screeningDescription = description;
+        screeningMetaData = metadata;
         if (screeningFee && discount) {
             discounted = YES;
             free = NO;
@@ -72,7 +74,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     
-    return [self initWithScreeningTitle:title screeningDate:@"" screeningLocation:@"" screeningTheatre:@"" screeningDescription:@""screeningFee:0 discount:0];
+    return [self initWithScreeningTitle:title screeningDate:@"" screeningLocation:@"" screeningTheatre:@"" screeningDescription:@"" screeningMetaData:[NSMutableDictionary alloc] screeningFee:0 discount:0];
 }
 
 - (instancetype)init

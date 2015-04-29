@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *screeningTheatre;
 @property (nonatomic, copy) NSString *screeningDescription;
 @property (nonatomic, readonly, strong) NSString *dateCreated;
+@property (nonatomic, copy) NSMutableDictionary *screeningMetaData;
 
 
 @property (nonatomic) float screeningFee;
@@ -34,7 +35,7 @@
 /*********************************
  *           Initializers        *
  *********************************/
-- (instancetype)initWithScreeningTitle:(NSString *) title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningDescription:(NSString *)description screeningFee:(float)fee discount:(float)discountValue;
+- (instancetype)initWithScreeningTitle:(NSString *) title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningDescription:(NSString *)description screeningMetaData:(NSMutableDictionary *)metadata screeningFee:(float)fee discount:(float)discountValue;
 
 - (instancetype)initWithScreeningTitle:(NSString *)title;
 
