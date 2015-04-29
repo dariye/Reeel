@@ -10,16 +10,26 @@
 
 @interface Screening : NSObject
 
-@property (nonatomic, strong) NSString *screeningTitle;
+// screening view attributes
 @property (nonatomic, strong) NSDate *screeningDate;
 @property (nonatomic, strong) NSString *screeningLocation;
-@property (nonatomic, strong) NSString *screeningTheatre;
-@property (nonatomic) float screeningFee;
+@property (nonatomic, strong) NSString *screeningDirectors;
+@property (nonatomic) float *screeningRating;
+@property (nonatomic, strong) NSString *screeningSynopsis;
 
-@property (nonatomic) BOOL free;
-@property (nonatomic) BOOL discount;
+// detail view only attributes
+@property (nonatomic, strong) NSString *screeningWriters;
+@property (nonatomic, strong) NSString *screeningStars;
+@property (nonatomic, strong) NSString *screeningMetadata;
+@property (nonatomic) BOOL rsvpStatus;
 
-@property (nonatomic, strong) NSDate *dateCreated;
+// other possible attributes
+//@property (nonatomic, strong) NSString *screeningTitle;
+//@property (nonatomic) float screeningFee;
+//@property (nonatomic) BOOL free;
+//@property (nonatomic) BOOL discount;
+//@property (nonatomic, strong) NSDate *dateCreated;
+
 
 /* ===================================
             Instance Methods
@@ -31,8 +41,8 @@
     Accessors(Getters & Setters)
  =================================== */
 
-- (void)setScreeningTitle:(NSString *)screeningTitle;
-- (NSString *)screeningTitle;
+//- (void)setScreeningTitle:(NSString *)screeningTitle;
+//- (NSString *)screeningTitle;
 
 - (void)setScreeningDate:(NSDate *)screeningDate;
 - (NSDate *)screeningDate;
@@ -40,8 +50,6 @@
 - (void)setScreeningLocation:(NSString *)screeningLocation;
 - (NSString *)screeningLocation;
 
-- (void)setScreeningTheatre:(NSString *)screeningTheatre;
-- (NSString *)screeningTheatre;
 
 
 
