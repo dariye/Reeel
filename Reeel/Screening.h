@@ -10,43 +10,59 @@
 
 @interface Screening : NSObject
 
-@property (nonatomic, strong) NSString *screeningTitle;
-@property (nonatomic, strong) NSDate *screeningDate;
-@property (nonatomic, strong) NSString *screeningLocation;
-@property (nonatomic, strong) NSString *screeningTheatre;
+@property (nonatomic, copy) NSString *screeningKey;
+@property (nonatomic, copy) NSString *screeningTitle;
+@property (nonatomic, copy) NSString *screeningDate;
+@property (nonatomic, copy) NSString *screeningLocation;
+@property (nonatomic, copy) NSString *screeningTheatre;
+@property (nonatomic, copy) NSString *screeningDescription;
+@property (nonatomic, readonly, strong) NSString *dateCreated;
+
+
 @property (nonatomic) float screeningFee;
+@property (nonatomic) float discount;
 
-@property (nonatomic) BOOL free;
-@property (nonatomic) BOOL discount;
+@property (nonatomic, getter=isFree) BOOL free;
+@property (nonatomic, getter=isDiscounted) BOOL discounted;
 
-@property (nonatomic, strong) NSDate *dateCreated;
+/**********************************
+ *           Class Methods        *
+ **********************************/
 
-/* ===================================
-            Instance Methods
- =================================== */
+//+ (instancetype)randomItem;
 
+/*********************************
+ *           Initializers        *
+ *********************************/
+- (instancetype)initWithScreeningTitle:(NSString *) title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningDescription:(NSString *)description screeningFee:(float)fee discount:(float)discountValue;
 
-
-/* ===================================
-    Accessors(Getters & Setters)
- =================================== */
-
-- (void)setScreeningTitle:(NSString *)screeningTitle;
-- (NSString *)screeningTitle;
-
-- (void)setScreeningDate:(NSDate *)screeningDate;
-- (NSDate *)screeningDate;
-
-- (void)setScreeningLocation:(NSString *)screeningLocation;
-- (NSString *)screeningLocation;
-
-- (void)setScreeningTheatre:(NSString *)screeningTheatre;
-- (NSString *)screeningTheatre;
+- (instancetype)initWithScreeningTitle:(NSString *)title;
 
 
+/*******************************************
+ *      Accessors(Getters & Setters)       *
+ *******************************************/
 
 
-
+//- (void)setScreeningTitle:(NSString *)str;
+//- (NSString *)screeningTitle;
+//
+//- (void)setScreeningDate:(NSString *)str;
+//- (NSString *)screeningDate;
+//
+//- (void)setScreeningLocation:(NSString *)str;
+//- (NSString *)screeningLocation;
+//
+//- (void)setScreeningTheatre:(NSString *)str;
+//- (NSString *)screeningTheatre;
+//
+//- (void)setScreeningFee:(float)value;
+//- (float)screeningFee;
+//
+//- (void)setDiscount:(float)value;
+//- (float)discount;
+//
+//- (NSString *)dateCreated;
 
 
 @end

@@ -9,15 +9,21 @@
 #import "ScreeningsTableViewController.h"
 #import "ScreeningsTableViewCell.h"
 #import "ScreeningDetailViewController.h"
+#import "Screening.h"
+#import "ScreeningStore.h"
 
-@interface ScreeningsTableViewController () <UINavigationControllerDelegate>
+@interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property(nonatomic, readonly, retain) UIScrollView *scrollView;
+
 
 @property (nonatomic) float rating;
 
 @end
 
 @implementation ScreeningsTableViewController
+
+@synthesize scrollView;
 
 //- (NSMutableArray *)dataSource
 //{
@@ -27,13 +33,31 @@
 //    return _dataSource;
 //}
 
+//NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//[formatter setDateFormat:@"yyyy"];
+//
+////Optionally for time zone conversions
+//[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
+//
+//NSString *stringFromDate = [formatter stringFromDate:myNSDateInstance];
+//
+////unless ARC is active
+//[formatter release];
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set view background color
-//    self.view.backgroundColor = [UIColor lightGrayColor];
+    if ([[[ScreeningStore sharedStore] allScreenings] count] > 1) {
+        self.navigationItem.title = @"Upcoming Screenings";
+    } else {
+        self.navigationItem.title = @"Upcoming Screening";
+    }
     
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -50,12 +74,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;//[self.dataSource count];
+    NSLog(@"Rows --> %i", [[[ScreeningStore sharedStore] allScreenings] count]);
+    return [[[ScreeningStore sharedStore] allScreenings] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
+    
+    NSArray *screenings = [[ScreeningStore sharedStore] allScreenings];
+    Screening *screening = screenings[indexPath.row];
     
     if (!cell) {
         [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
@@ -64,8 +92,10 @@
     
     cell.ratingsLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
     
- 
+//    self.tableView.tableFooterView = [[UIView alloc] init];
     
+    
+
     // Configure the cell...
     
     return cell;
@@ -73,7 +103,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 135;
+    return 151;
 }
 
 /*
@@ -84,17 +114,18 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//         //Delete the row from the data source
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//         //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//    }   
+//}
+
 
 /*
 // Override to support rearranging the table view.
@@ -143,5 +174,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    
+//}
 
 @end

@@ -59,7 +59,6 @@
     [[tabBarController.tabBar.items objectAtIndex:2] setTitle:@"Profile"];
     
     self.window.rootViewController = tabBarController;
-
     
     // Override point for customization after application launch.
    

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7640021D1AEFE9E500681FD8 /* ScreeningStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7640021C1AEFE9E500681FD8 /* ScreeningStore.m */; };
 		7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */; };
 		7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */; };
 		767E79441AD61392003E9A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79431AD61392003E9A23 /* main.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7640021B1AEFE9E500681FD8 /* ScreeningStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningStore.h; sourceTree = "<group>"; };
+		7640021C1AEFE9E500681FD8 /* ScreeningStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningStore.m; sourceTree = "<group>"; };
 		7665D2D51AE4571200487F59 /* ScreeningDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningDetailViewController.h; sourceTree = "<group>"; };
 		7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningDetailViewController.m; sourceTree = "<group>"; };
 		7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningDetailViewController.xib; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				76E735051AE83C5600F312E2 /* RSVPTableViewController.h */,
 				76E735061AE83C5600F312E2 /* RSVPTableViewController.m */,
 				76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */,
+				7640021B1AEFE9E500681FD8 /* ScreeningStore.h */,
+				7640021C1AEFE9E500681FD8 /* ScreeningStore.m */,
 			);
 			path = Reeel;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 			files = (
 				76E735081AE83C5600F312E2 /* RSVPTableViewController.m in Sources */,
 				76E7350D1AE8424200F312E2 /* ScreeningsTableViewCell.m in Sources */,
+				7640021D1AEFE9E500681FD8 /* ScreeningStore.m in Sources */,
 				767E79471AD61392003E9A23 /* AppDelegate.m in Sources */,
 				7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */,
 				76E734F01AE8233A00F312E2 /* Screening.m in Sources */,
