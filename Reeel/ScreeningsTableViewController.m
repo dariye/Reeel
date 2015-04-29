@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, readonly, retain) UIScrollView *scrollView;
 
-
 @property (nonatomic) float rating;
 
 @end
@@ -24,6 +23,7 @@
 @implementation ScreeningsTableViewController
 
 @synthesize scrollView;
+@synthesize rating;
 
 //- (NSMutableArray *)dataSource
 //{
@@ -81,6 +81,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
+    rating = 5.5;
     
     NSArray *screenings = [[ScreeningStore sharedStore] allScreenings];
     Screening *screening = screenings[indexPath.row];
@@ -90,7 +91,17 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     }
     
-    cell.ratingsLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
+    
+    [[cell screeningDescriptionTextView] setText:screening.screeningDescription];
+    [[cell screeningDateLabel] setText:screening.screeningDate];
+    [[cell screeningLocationLabel] setText:screening.screeningLocation];
+    
+    // remove padding/margin
+    cell.screeningDescriptionTextView.textContainerInset = UIEdgeInsetsZero;
+//    [[cell screeningDescriptionLabel] setLineBreakMode:NSLineBreakByWordWrapping];
+    
+    
+    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Ratings: %.01f/10", rating]];
     
 //    self.tableView.tableFooterView = [[UIView alloc] init];
     

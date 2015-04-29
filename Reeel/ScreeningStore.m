@@ -52,15 +52,20 @@
         
         // Date formatter
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+        
+        [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
+        // TODO: date formatter for next year events 
+        
+        
+        NSDate *today = [[NSDate alloc] init];
         
         
         for (int i = 0; i < 10; i++) {
             
             randomNumber = arc4random_uniform(60 * 60 * 24 * 60);
-            randomDate = [NSDate dateWithTimeIntervalSinceNow:randomNumber];
-            
-            Screening *screening = [[Screening alloc] initWithScreeningTitle:[NSString stringWithFormat:@"Screening - %d", i] screeningDate:@"April 28th, 2015" screeningLocation:@"Mercer, NY" screeningTheatre:@"Angelika" screeningDescription:@"Some Random text that tells something about the movie or screening...blah blah" screeningFee:i discount:0];
+//            randomDate = [NSDate dateWithTimeIntervalSinceNow:randomNumber];
+            randomDate = [today dateByAddingTimeInterval:randomNumber];
+            Screening *screening = [[Screening alloc] initWithScreeningTitle:[NSString stringWithFormat:@"Screening - %d", i] screeningDate:[dateFormat stringFromDate:randomDate] screeningLocation:@"Mercer, NY" screeningTheatre:@"Angelika" screeningDescription:@"Some Random text that tells something about the movie or screening...blah blah" screeningFee:i discount:0];
             
             NSLog(@"Adding item %@", screening);
             [screenings addObject:screening];

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7640021D1AEFE9E500681FD8 /* ScreeningStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7640021C1AEFE9E500681FD8 /* ScreeningStore.m */; };
+		764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */; };
+		764069361AF09BB6004DD42B /* TermsAndConditionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */; };
 		7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */; };
 		7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */; };
 		767E79441AD61392003E9A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79431AD61392003E9A23 /* main.m */; };
@@ -26,6 +28,8 @@
 		767E79891AD61699003E9A23 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79801AD61699003E9A23 /* StoreKit.framework */; };
 		767E798A1AD61699003E9A23 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E79811AD61699003E9A23 /* SystemConfiguration.framework */; };
 		767E798C1AD616AD003E9A23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 767E798B1AD616AD003E9A23 /* libsqlite3.dylib */; };
+		76BEB5251AF097DB00F708EF /* ProfileInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */; };
+		76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */; };
 		76E734F01AE8233A00F312E2 /* Screening.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734EF1AE8233A00F312E2 /* Screening.m */; };
 		76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */; };
 		76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */; };
@@ -49,6 +53,9 @@
 /* Begin PBXFileReference section */
 		7640021B1AEFE9E500681FD8 /* ScreeningStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningStore.h; sourceTree = "<group>"; };
 		7640021C1AEFE9E500681FD8 /* ScreeningStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningStore.m; sourceTree = "<group>"; };
+		764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsAndConditionsViewController.h; sourceTree = "<group>"; };
+		764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsAndConditionsViewController.m; sourceTree = "<group>"; };
+		764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndConditionsViewController.xib; sourceTree = "<group>"; };
 		7665D2D51AE4571200487F59 /* ScreeningDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningDetailViewController.h; sourceTree = "<group>"; };
 		7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningDetailViewController.m; sourceTree = "<group>"; };
 		7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningDetailViewController.xib; sourceTree = "<group>"; };
@@ -73,6 +80,9 @@
 		767E79801AD61699003E9A23 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		767E79811AD61699003E9A23 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		767E798B1AD616AD003E9A23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		76BEB5221AF097DB00F708EF /* ProfileInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInformationViewController.h; sourceTree = "<group>"; };
+		76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInformationViewController.m; sourceTree = "<group>"; };
+		76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileInformationViewController.xib; sourceTree = "<group>"; };
 		76E734EE1AE8233A00F312E2 /* Screening.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screening.h; sourceTree = "<group>"; };
 		76E734EF1AE8233A00F312E2 /* Screening.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screening.m; sourceTree = "<group>"; };
 		76E734F11AE827C300F312E2 /* ScreeningsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningsTableViewController.h; sourceTree = "<group>"; };
@@ -162,6 +172,12 @@
 				76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */,
 				7640021B1AEFE9E500681FD8 /* ScreeningStore.h */,
 				7640021C1AEFE9E500681FD8 /* ScreeningStore.m */,
+				76BEB5221AF097DB00F708EF /* ProfileInformationViewController.h */,
+				76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */,
+				76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */,
+				764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */,
+				764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */,
+				764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */,
 			);
 			path = Reeel;
 			sourceTree = "<group>";
@@ -294,6 +310,8 @@
 				76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */,
 				767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */,
 				7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */,
+				76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */,
+				764069361AF09BB6004DD42B /* TermsAndConditionsViewController.xib in Resources */,
 				76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */,
 				76E735091AE83C5600F312E2 /* RSVPTableViewController.xib in Resources */,
 				767E794F1AD61392003E9A23 /* Images.xcassets in Resources */,
@@ -320,9 +338,11 @@
 				767E79471AD61392003E9A23 /* AppDelegate.m in Sources */,
 				7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */,
 				76E734F01AE8233A00F312E2 /* Screening.m in Sources */,
+				764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */,
 				767E79441AD61392003E9A23 /* main.m in Sources */,
 				76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */,
 				76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */,
+				76BEB5251AF097DB00F708EF /* ProfileInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

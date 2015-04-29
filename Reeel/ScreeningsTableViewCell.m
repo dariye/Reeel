@@ -13,13 +13,13 @@
 @interface ScreeningsTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
-@property (weak, nonatomic) IBOutlet UILabel *screeningDescriptionLabel;
+
 
 @end
 
 @implementation ScreeningsTableViewCell
 
-@synthesize screeningDescriptionLabel;
+@synthesize screeningDescriptionTextView;
 @synthesize screeningImageView;
 
 - (void)awakeFromNib {
