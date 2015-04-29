@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>4DEB8803-69C2-4865-AA16-AFFC73274D5C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Reeel</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DBF1518501271FB15AA062BD6AA5287A7F9EB404</key>
 		<string>https://github.com/pauldd91/Reeel.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Reeel.xcodeproj/project.xcworkspace</string>
+	<string>Reeel.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DBF1518501271FB15AA062BD6AA5287A7F9EB404</key>
