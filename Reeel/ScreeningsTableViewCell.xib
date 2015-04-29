@@ -47,6 +47,12 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhf-jl-RFC">
+                                <rect key="frame" x="131" y="10" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hr1-XZ-WQf">
                                 <rect key="frame" x="11" y="63" width="218" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
@@ -96,6 +102,7 @@
                 <outlet property="directorsLabel" destination="Hr1-XZ-WQf" id="3nq-ce-ABV"/>
                 <outlet property="locationLabel" destination="4ej-lA-l72" id="AuX-aj-ydy"/>
                 <outlet property="ratingsLabel" destination="zTU-un-xG6" id="Icj-ID-7Rs"/>
+                <outlet property="rsvpLabel" destination="Uhf-jl-RFC" id="QeR-ZB-d9q"/>
                 <outlet property="screeningImageView" destination="nra-fq-QjA" id="aZh-aV-8Og"/>
                 <outlet property="synopsisLabel" destination="sHa-mH-bPb" id="Twh-b3-cca"/>
             </connections>
