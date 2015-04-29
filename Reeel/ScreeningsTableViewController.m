@@ -55,12 +55,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;//[self.dataSource count];
+    return 1;//[self.dataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,7 +72,17 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     }
     
+    //cell.ratingsLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
+    //cell.directorsLabel.text = @"Directors:";
+    //cell.synopsisLabel.text = @"Synopsis:";
+    //cell.dateLabel.text = @"Date:";
+    //cell.locationLabel.text = @"Location:";
+    
     cell.ratingsLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
+    cell.directorsLabel.text = @"Director: Simon Curtis";
+    cell.synopsisLabel.text = @"Maria Altmann, on octogenarian Jewish refugee, takes on the Autrian government to recover artwork she believes rightfully belongs to her family";
+    cell.dateLabel.text = @"Monday April 13th @ 8:00 PM";
+    cell.locationLabel.text = @"Angelika Film Center, New York";
     
  
     
@@ -84,6 +94,18 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 135;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 1; // you can have your own choice, of course
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor clearColor];
+    return headerView;
 }
 
 /*
