@@ -15,9 +15,13 @@
 
 @property (nonatomic, readonly) NSArray *allScreenings;
 
+@property (nonatomic, readonly) NSArray *allRSVPedScreenings;
+
 + (instancetype)sharedStore;
 
 //- (Screening *)createScreening;
 - (void)removeScreening:(Screening *)screening;
+
+- (void)rsvpForScreening:(Screening *)screening;
 
 @end

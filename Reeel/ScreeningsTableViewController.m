@@ -101,7 +101,7 @@
 //    [[cell screeningDescriptionLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     
     
-    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Ratings: %.01f/10", rating]];
+    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %.01f/10", rating]];
     
 //    self.tableView.tableFooterView = [[UIView alloc] init];
     

@@ -12,6 +12,8 @@
 
 @property (nonatomic) NSMutableArray *screenings;
 
+@property (nonatomic) NSMutableArray *rsvpedScreenings;
+
 @property (nonatomic) NSDate *randomDate;
 
 @property (nonatomic) long randomNumber;
@@ -21,8 +23,10 @@
 @implementation ScreeningStore
 
 @synthesize screenings;
+@synthesize rsvpedScreenings;
 @synthesize randomDate;
 @synthesize randomNumber;
+
 
 + (instancetype)sharedStore
 {
@@ -39,6 +43,7 @@
 {
     @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[ScreeningStore sharedStore]"  userInfo:nil];
     
+    
     return nil;
 }
 
@@ -48,21 +53,26 @@
     self = [super init];
     
     if (self) {
+        
         screenings = [[NSMutableArray alloc] init];
+        rsvpedScreenings = [[NSMutableArray alloc] init];
+        
         
         // Date formatter
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         
         [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
-        // TODO: date formatter for next year events 
-        
+        // TODO: date formatter for next year events
         
         NSDate *today = [[NSDate alloc] init];
         
         NSMutableDictionary *movieMeta;
         
+        
         for (int i = 0; i < 10; i++) {
             
+            short randBinary = arc4random() % 2;
+
             randomNumber = arc4random_uniform(60 * 60 * 24 * 60);
 //            randomDate = [NSDate dateWithTimeIntervalSinceNow:randomNumber];
             
@@ -85,7 +95,19 @@
             
             NSLog(@"Adding item %@", screening);
             
+            screening.rsvp = (randBinary == 1)? YES : NO;
+            
+            NSLog(@"RSVP -->  %i", screening.rsvp);
+            
             [screenings addObject:screening];
+            
+            
+            // REMOVE --- JUST FOR MOCK!
+            if ([screening isRsvped]) {
+                [self rsvpForScreening:screening];
+            }
+            
+            
             
             
         }
@@ -99,6 +121,30 @@
 {
     return screenings;
 }
+
+- (NSArray *)allRSVPedScreenings
+{
+//    for (id screening in screenings) {
+//        NSLog(@"in allRSVPedScreenings");
+//        [self rsvpForScreening:screening];
+//    }
+    
+    return rsvpedScreenings;
+}
+
+- (void)rsvpForScreening:(Screening *)screening
+{
+    NSLog(@"in rsvpForScreening");
+    if ([screening isRsvped]) {
+        [rsvpedScreenings addObject:screening];
+    }else {
+        screening.rsvp = YES;
+        [rsvpedScreenings addObject:screening];
+    }
+}
+
+
+
 - (void)removeScreening:(Screening *)screening
 {
     NSString *key = screening.screeningKey;

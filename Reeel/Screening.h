@@ -19,11 +19,13 @@
 @property (nonatomic, readonly, strong) NSString *dateCreated;
 @property (nonatomic, copy) NSMutableDictionary *screeningMetaData;
 
+
 @property (nonatomic) float screeningFee;
 @property (nonatomic) float discount;
 
 @property (nonatomic, getter=isFree) BOOL free;
 @property (nonatomic, getter=isDiscounted) BOOL discounted;
+@property (nonatomic, getter=isRsvped) BOOL rsvp;
 
 /**********************************
  *           Class Methods        *

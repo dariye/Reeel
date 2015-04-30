@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *screeningDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screeningLocationLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *rsvpLabel;
+
 @end

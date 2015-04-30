@@ -22,6 +22,7 @@
 @synthesize discount;
 @synthesize free;
 @synthesize discounted;
+@synthesize rsvp;
 
 /*************************************************
  *           Class Method Implementations        *
@@ -53,6 +54,8 @@
             free = YES;
             discounted = NO;
         }
+
+        rsvp = NO;
         
         // Date formatter
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
