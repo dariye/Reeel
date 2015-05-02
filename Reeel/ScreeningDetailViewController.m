@@ -7,6 +7,7 @@
 //
 
 #import "ScreeningDetailViewController.h"
+#import "RSVPDetailViewController.h"
 
 @interface ScreeningDetailViewController () <UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
@@ -24,6 +25,8 @@
 @implementation ScreeningDetailViewController
 
 - (IBAction)RSVPButtonPressed:(UIButton *)sender {
+    RSVPDetailViewController *rsvpDetail = [[RSVPDetailViewController alloc] init];
+    [self.navigationController pushViewController:rsvpDetail animated:YES];
 }
 
 - (void)viewDidLoad {
