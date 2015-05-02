@@ -91,13 +91,13 @@
             
             Screening *screening = [[Screening alloc] initWithScreeningTitle:[NSString stringWithFormat:@"Screening - %d", i] screeningDate:[dateFormat stringFromDate:randomDate] screeningLocation:@"Mercer, NY" screeningTheatre:@"Angelika" screeningDescription:@"Some Random text that tells something about the movie or screening...blah blah" screeningMetaData:[[NSMutableDictionary alloc] initWithDictionary:movieMeta] screeningFee:i discount:0];
             
-            NSLog(@"Meta Dict --> %@", screening.screeningMetaData[@"title"]);
+            //NSLog(@"Meta Dict --> %@", screening.screeningMetaData[@"title"]);
             
-            NSLog(@"Adding item %@", screening);
+            //NSLog(@"Adding item %@", screening);
             
             screening.rsvp = (randBinary == 1)? YES : NO;
             
-            NSLog(@"RSVP -->  %i", screening.rsvp);
+            //NSLog(@"RSVP -->  %i", screening.rsvp);
             
             [screenings addObject:screening];
             
@@ -134,7 +134,7 @@
 
 - (void)rsvpForScreening:(Screening *)screening
 {
-    NSLog(@"in rsvpForScreening");
+    //NSLog(@"in rsvpForScreening");
     if ([screening isRsvped]) {
         [rsvpedScreenings addObject:screening];
     }else {

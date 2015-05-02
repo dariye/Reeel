@@ -58,6 +58,18 @@
     
 }
 
+// confirmButton press action
+//**********************************
+- (IBAction)RSVPButtonPressed:(UIButton *)sender {
+    
+    //  call rsvpForScreening method here
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+}
+//**********************************
+
+// check to see if text field is in the format of an email, triggers an alert if it is not
 - (void)checkEmailAndDisplayAlert {
     if(![self validateEmail:[userEmailLabel text]]) {
         // user entered invalid email address

@@ -68,6 +68,9 @@
                     <state key="normal" title="Confirm">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="RSVPButtonPressed:" destination="-1" eventType="touchUpInside" id="RHc-Pw-dQL"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
