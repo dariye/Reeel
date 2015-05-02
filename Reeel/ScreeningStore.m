@@ -111,7 +111,7 @@
             
             
         }
-        NSLog(@"Count -- > %i", [screenings count]);
+        //NSLog(@"Count -- > %i", [screenings count]);
     }
     
     return self;
@@ -147,7 +147,7 @@
 
 - (void)removeScreening:(Screening *)screening
 {
-    NSString *key = screening.screeningKey;
+    //NSString *key = screening.screeningKey;
     
     [self.screenings removeObjectIdenticalTo:screening];
 }

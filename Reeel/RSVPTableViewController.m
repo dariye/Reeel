@@ -78,7 +78,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    NSLog(@"Rows --> %d", [[[ScreeningStore sharedStore] allRSVPedScreenings] count]);
+    //NSLog(@"Rows --> %d", [[[ScreeningStore sharedStore] allRSVPedScreenings] count]);
     return [[[ScreeningStore sharedStore] allRSVPedScreenings] count];
 }
 

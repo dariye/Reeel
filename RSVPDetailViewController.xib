@@ -25,18 +25,30 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="editingDidEnd" id="VX2-jB-oYz"/>
+                        <outlet property="delegate" destination="-1" id="EHX-AZ-kn8"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Pmg-Zq-5zg">
                     <rect key="frame" x="23" y="163" width="275" height="30"/>
                     <color key="textColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="editingDidEnd" id="7Tr-wq-WNa"/>
+                        <outlet property="delegate" destination="-1" id="EYC-dw-lhZ"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Number of Guests" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ceo-Ta-BNI">
                     <rect key="frame" x="23" y="221" width="275" height="30"/>
                     <color key="textColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                    <connections>
+                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="editingDidEnd" id="TI7-ro-CWs"/>
+                        <outlet property="delegate" destination="-1" id="oIR-i9-evc"/>
+                    </connections>
                 </textField>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9nd-XV-Kk7">
                     <rect key="frame" x="249" y="276" width="51" height="31"/>

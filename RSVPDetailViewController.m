@@ -8,7 +8,7 @@
 
 #import "RSVPDetailViewController.h"
 
-@interface RSVPDetailViewController () <UINavigationControllerDelegate>
+@interface RSVPDetailViewController () <UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userEmailLabel;
 @property (weak, nonatomic) IBOutlet UITextField *guestsLabel;
@@ -17,9 +17,12 @@
 @property (retain, nonatomic) IBOutlet UISwitch *termsSwitch;
 @property (retain, nonatomic) IBOutlet UIButton *confirmButton;
 
+@property (nonatomic, assign) id currentResponder;
+
+
 @end
 
-@implementation RSVPDetailViewController
+@implementation RSVPDetailViewController 
 
 @synthesize userNameLabel;
 @synthesize userEmailLabel;
@@ -46,16 +49,93 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"RSVP";
     
+    // remove keyboard with outside touch
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
+    [singleTap setNumberOfTapsRequired:1];
+    [singleTap setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:singleTap];
+    //[singleTap release];
+    
 }
 
-
-- (IBAction) toggleEnabledConfirmButton: (id) sender {
-    if (termsSwitch.on) confirmButton.enabled = YES;
-    else {
-        confirmButton.enabled = NO;
+- (void)checkEmailAndDisplayAlert {
+    if(![self validateEmail:[userEmailLabel text]]) {
+        // user entered invalid email address
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid email address." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        //[alert release];
+    } else {
+        // user entered valid email address
     }
 }
 
+// check to determine whether a text field is a valid email
+- (BOOL)validateEmail:(NSString *)emailStr {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:emailStr];
+}
+
+// restrict keyboard selection to non-zero integers for guests label
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == guestsLabel) {
+        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"123456789"] invertedSet];
+        if ([string stringByTrimmingCharactersInSet:nonNumberSet].length > 0)return YES;
+        if (!string.length)return YES;
+
+        return NO;
+    }
+    else {
+        return YES;
+    }
+    
+}
+
+// keyboard removal through touch outside keyboard
+- (void)resignOnTap:(id)iSender {
+    [self.currentResponder resignFirstResponder];
+}
+
+// assist keyboard removal by identifying first responder
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.currentResponder = textField;
+}
+
+
+// hide keyboard on return key
+-(BOOL) textFieldShouldReturn: (UITextField *) textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+// terms and conditions must be accepted, all fields completed correctly before confirmation enabled. specific warnings on exit of uncompleted fields
+- (IBAction) toggleEnabledConfirmButton: (id) sender {
+    if (sender == guestsLabel) {
+        if ((!guestsLabel.text.length > 0) && (![guestsLabel.text intValue] > 0)) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid number of guests" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+        }
+    }
+    if (sender == userNameLabel) {
+        if (!userNameLabel.text.length > 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+        }
+    }
+    if (sender == userEmailLabel) {
+        [self checkEmailAndDisplayAlert];
+    }
+    if ((termsSwitch.on) && (guestsLabel.text.length > 0) && (userEmailLabel.text.length > 0) && (userNameLabel.text.length > 0) && [self validateEmail:[userEmailLabel text]] && ([guestsLabel.text intValue] > 0)) {
+        confirmButton.enabled = YES;
+    }
+    else {
+        confirmButton.enabled = NO;
+    }
+    }
+
+
+// data persistence
 - (void)saveUserData: (NSNotification *)notify
 {
     [userNameLabel resignFirstResponder];
