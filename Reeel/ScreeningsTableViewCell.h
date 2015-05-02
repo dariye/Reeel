@@ -10,7 +10,7 @@
 
 @interface ScreeningsTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
-@property (weak, nonatomic) IBOutlet UITextView *screeningDescriptionTextView;
+@property (weak, nonatomic) IBOutlet UILabel *screeningDescriptionLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *screeningDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screeningLocationLabel;

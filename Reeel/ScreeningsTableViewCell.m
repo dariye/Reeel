@@ -19,7 +19,7 @@
 
 @implementation ScreeningsTableViewCell
 
-@synthesize screeningDescriptionTextView;
+@synthesize screeningDescriptionLabel;
 @synthesize screeningImageView;
 
 - (void)awakeFromNib {

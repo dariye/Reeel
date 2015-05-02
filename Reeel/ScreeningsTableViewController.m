@@ -92,12 +92,12 @@
     }
     
     
-    [[cell screeningDescriptionTextView] setText:screening.screeningDescription];
+    [[cell screeningDescriptionLabel] setText:screening.screeningDescription];
     [[cell screeningDateLabel] setText:screening.screeningDate];
     [[cell screeningLocationLabel] setText:screening.screeningLocation];
     
     // remove padding/margin
-    cell.screeningDescriptionTextView.textContainerInset = UIEdgeInsetsZero;
+    //cell.screeningDescriptionTextView.textContainerInset = UIEdgeInsetsZero;
 //    [[cell screeningDescriptionLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     
     
@@ -105,7 +105,7 @@
     
 //    self.tableView.tableFooterView = [[UIView alloc] init];
     
-    NSLog(@"%@", screening.screeningMetaData);
+    //NSLog(@"%@", screening.screeningMetaData);
 
     // Configure the cell...
     
