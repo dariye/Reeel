@@ -12,7 +12,7 @@
 @interface ScreeningDetailViewController () <UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
 @property (weak, nonatomic) IBOutlet UILabel *movieRatingLabel;
-@property (weak, nonatomic) IBOutlet UITextView *movieSynopsisText;
+@property (weak, nonatomic) IBOutlet UILabel *movieSynopsisText;
 @property (weak, nonatomic) IBOutlet UIButton *RSVPButton;
 @property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
 
@@ -43,8 +43,11 @@
     self.rating = 7.5;
     self.movieRatingLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
     //self.metaDataLabel.text = [NSString stringWithFormat:@"%@    "]
-    self.movieSynopsisText.editable = NO;
+    //self.movieSynopsisText.editable = NO;
     self.movieSynopsisText.text = @"Maria Altmann (Helen Mirren), an elderly Jewish survivor of World War II, sues the Austrian government for the return of artwork the Nazis stole from her family.";
+    
+    // mock purposes
+    self.metaDataLabel.text = @"PG-13    109 min    April, 1st 2015";
     
 //    [self.RSVPButton setBackgroundImage:[UIImage new] forState:UIControlStateNormal];
 
