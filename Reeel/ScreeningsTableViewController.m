@@ -95,18 +95,9 @@
     [[cell screeningDateLabel] setText:screening.screeningDate];
     [[cell screeningLocationLabel] setText:screening.screeningLocation];
     
-    // remove padding/margin
-    //cell.screeningDescriptionTextView.textContainerInset = UIEdgeInsetsZero;
-//    [[cell screeningDescriptionLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     
     
     [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %.01f/10", screening.screeningRating]];
-    
-//    self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    //NSLog(@"%@", screening.screeningMetaData);
-
-    // Configure the cell...
     
     return cell;
 }

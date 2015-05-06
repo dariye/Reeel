@@ -33,13 +33,15 @@
 @synthesize confirmButton;
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     userNameLabel.text = [defaults objectForKey:@"userName"];
     userEmailLabel.text = [defaults objectForKey:@"userEmail"];
     guestsLabel.text = @"Number of guests";
     termsLabel.text = @"Agree to Terms and Conditions";
     
-    [super viewDidLoad];
+   
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUserData:) name:UIKeyboardDidHideNotification object:nil];
 
@@ -70,7 +72,9 @@
     //  call rsvpForScreening method here
     [[ScreeningStore sharedStore] rsvpForScreening:screening];
     
+    
     [alert show];
+    
     
 }
 //**********************************

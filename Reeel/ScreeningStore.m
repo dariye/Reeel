@@ -71,10 +71,9 @@
         NSDate *today = [[NSDate alloc] init];
         
         
-        
         for (int i = 0; i < 10; i++) {
             
-            short randBinary = arc4random() % 2;
+//            short randBinary = arc4random() % 2;
             
             randomRating = arc4random_uniform(10);
 
@@ -91,23 +90,13 @@
             
             //NSLog(@"Adding item %@", screening);
             
-            screening.rsvp = (randBinary == 1)? YES : NO;
+            screening.rsvp = NO;
             
             //NSLog(@"RSVP -->  %i", screening.rsvp);
             
             [screenings addObject:screening];
             
-            
-            // REMOVE --- JUST FOR MOCK!
-//            if ([screening isRsvped]) {
-//                [self rsvpForScreening:screening];
-//            }
-            
-            
-            
-            
         }
-        //NSLog(@"Count -- > %i", [screenings count]);
     }
     
     return self;
@@ -125,9 +114,7 @@
 
 - (void)rsvpForScreening:(Screening *)screening
 {
-    if ([screening isRsvped]) {
-        [rsvpedScreenings addObject:screening];
-    }else {
+    if (![screening isRsvped]) {
         screening.rsvp = YES;
         [rsvpedScreenings addObject:screening];
     }
