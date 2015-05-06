@@ -10,6 +10,9 @@
 
 //IB_DESIGNABLE
 
+@class Screening;
+
 @interface RSVPDetailViewController : UIViewController
+@property (nonatomic, strong) Screening *screening;
 
 @end

@@ -96,7 +96,7 @@
     }
     
     
-    [[cell screeningDescriptionLabel] setText:screening.screeningDescription];
+    [[cell screeningDescriptionLabel] setText:screening.screeningSynopsis];
     [[cell screeningDateLabel] setText:screening.screeningDate];
     [[cell screeningLocationLabel] setText:screening.screeningLocation];
     
@@ -105,12 +105,10 @@
     //    [[cell screeningDescriptionLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     
     
-    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %.01f/10", rating]];
+    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %.01f/10", screening.screeningRating]];
     
     //    self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    NSLog(@"%@", screening.screeningMetaData);
-    
+        
 //    cell.rsvpLabel.text = @"RSVP'd!";
     
     // Configure the cell...

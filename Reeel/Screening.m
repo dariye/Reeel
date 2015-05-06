@@ -15,10 +15,15 @@
 @synthesize screeningDate;
 @synthesize screeningLocation;
 @synthesize screeningTheatre;
+@synthesize screeningSynopsis;
+@synthesize screeningReleaseDate;
+@synthesize screeningDuration;
+@synthesize screeningGenre;
+@synthesize screeningDirectorInfo;
+@synthesize screeningStarInfo;
 @synthesize dateCreated;
 @synthesize screeningFee;
-@synthesize screeningDescription;
-@synthesize screeningMetaData;
+@synthesize screeningRating;
 @synthesize discount;
 @synthesize free;
 @synthesize discounted;
@@ -32,7 +37,7 @@
  *         Implementation of Initializers        *
  *************************************************/
 
-- (instancetype)initWithScreeningTitle:(NSString *)title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningDescription:(NSString *)description screeningMetaData:(NSMutableDictionary *)metadata screeningFee:(float)fee discount:(float)discountValue
+- (instancetype)initWithScreeningTitle:(NSString *)title screeningDate:(NSString *)date screeningLocation:(NSString *)location screeningTheatre:(NSString *)theatre screeningSynopsis:(NSString *)synopsis screeningReleaseDate:(NSString *)release screeningDuration:(NSString *)duration screeningGenre:(NSString *)genre screeningDirectorInfo:(NSString *)directorInfo screeningStarInfo:(NSString *)starInfo screeningRating:(float)rating screeningFee:(float)fee discount:(float)discountValue
 {
     self = [super init];
     
@@ -42,8 +47,13 @@
         screeningTheatre = theatre;
         screeningFee = fee;
         discount = discountValue;
-        screeningDescription = description;
-        screeningMetaData = metadata;
+        screeningSynopsis = synopsis;
+        screeningReleaseDate = release;
+        screeningDuration = duration;
+        screeningGenre = genre;
+        screeningDirectorInfo = directorInfo;
+        screeningStarInfo = starInfo;
+        screeningRating = rating;
         if (screeningFee && discount) {
             discounted = YES;
             free = NO;
@@ -78,7 +88,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     
-    return [self initWithScreeningTitle:title screeningDate:@"" screeningLocation:@"" screeningTheatre:@"" screeningDescription:@"" screeningMetaData:[NSMutableDictionary alloc] screeningFee:0 discount:0];
+    return [self initWithScreeningTitle:@"" screeningDate:@"" screeningLocation:@"" screeningTheatre:@"" screeningSynopsis:@"" screeningReleaseDate:@"" screeningDuration:@"" screeningGenre:@"" screeningDirectorInfo:@"" screeningStarInfo:@"" screeningRating:0.0 screeningFee:0.0 discount:0.0];
 }
 
 - (instancetype)init

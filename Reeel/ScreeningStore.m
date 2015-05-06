@@ -18,6 +18,8 @@
 
 @property (nonatomic) long randomNumber;
 
+@property (nonatomic) float randomRating;
+
 @end
 
 @implementation ScreeningStore
@@ -26,6 +28,7 @@
 @synthesize rsvpedScreenings;
 @synthesize randomDate;
 @synthesize randomNumber;
+@synthesize randomRating;
 
 
 + (instancetype)sharedStore
@@ -60,36 +63,29 @@
         
         // Date formatter
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        
+        NSDateFormatter *releaseDateFormat = [[NSDateFormatter alloc] init];
+        [releaseDateFormat setDateFormat:@"y"];
         [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
         // TODO: date formatter for next year events
         
         NSDate *today = [[NSDate alloc] init];
         
-        NSMutableDictionary *movieMeta;
         
         
         for (int i = 0; i < 10; i++) {
             
             short randBinary = arc4random() % 2;
+            
+            randomRating = arc4random_uniform(10);
 
             randomNumber = arc4random_uniform(60 * 60 * 24 * 60);
 //            randomDate = [NSDate dateWithTimeIntervalSinceNow:randomNumber];
             
-            movieMeta[@"title"] = @"Some Title";
-            movieMeta[@"release"] = @"Apr 2015";
-            movieMeta[@"contentRating"] = @"PG";
-            movieMeta[@"duration"] = @"114 min";
-            movieMeta[@"genre"] = @"Horror";
-            movieMeta[@"director"] = @"Some Dudes and Gals";
-            movieMeta[@"stars"] = @"Some Gals and Dudes";
-            
-//            NSLog(<#NSString *format, ...#>)
-            
             
             randomDate = [today dateByAddingTimeInterval:randomNumber];
-            
-            Screening *screening = [[Screening alloc] initWithScreeningTitle:[NSString stringWithFormat:@"Screening - %d", i] screeningDate:[dateFormat stringFromDate:randomDate] screeningLocation:@"Mercer, NY" screeningTheatre:@"Angelika" screeningDescription:@"Some Random text that tells something about the movie or screening...blah blah" screeningMetaData:[[NSMutableDictionary alloc] initWithDictionary:movieMeta] screeningFee:i discount:0];
+        
+
+            Screening *screening = [[Screening alloc] initWithScreeningTitle:[NSString stringWithFormat:@"Screening - %d", i] screeningDate:[dateFormat stringFromDate:randomDate] screeningLocation:@"Mercer, NY" screeningTheatre:@"Angelika" screeningSynopsis:@"Some Random text that tells something about the movie or screening...blah blah" screeningReleaseDate:[releaseDateFormat stringFromDate:randomDate] screeningDuration:@"114 min" screeningGenre:@"Drama" screeningDirectorInfo:@"Paul, Collin" screeningStarInfo:@"Paul" screeningRating:randomRating screeningFee:0 discount:0];
             
             //NSLog(@"Meta Dict --> %@", screening.screeningMetaData[@"title"]);
             
@@ -103,9 +99,9 @@
             
             
             // REMOVE --- JUST FOR MOCK!
-            if ([screening isRsvped]) {
-                [self rsvpForScreening:screening];
-            }
+//            if ([screening isRsvped]) {
+//                [self rsvpForScreening:screening];
+//            }
             
             
             
@@ -124,17 +120,11 @@
 
 - (NSArray *)allRSVPedScreenings
 {
-//    for (id screening in screenings) {
-//        NSLog(@"in allRSVPedScreenings");
-//        [self rsvpForScreening:screening];
-//    }
-    
     return rsvpedScreenings;
 }
 
 - (void)rsvpForScreening:(Screening *)screening
 {
-    //NSLog(@"in rsvpForScreening");
     if ([screening isRsvped]) {
         [rsvpedScreenings addObject:screening];
     }else {

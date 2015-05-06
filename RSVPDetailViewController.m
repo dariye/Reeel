@@ -7,6 +7,7 @@
 //
 
 #import "RSVPDetailViewController.h"
+#import "ScreeningStore.h"
 
 @interface RSVPDetailViewController () <UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
@@ -62,10 +63,15 @@
 //**********************************
 - (IBAction)RSVPButtonPressed:(UIButton *)sender {
     
-    //  call rsvpForScreening method here
+    Screening *screening = self.screening;
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    
+    //  call rsvpForScreening method here
+    [[ScreeningStore sharedStore] rsvpForScreening:screening];
+    
     [alert show];
+    
 }
 //**********************************
 
@@ -172,14 +178,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

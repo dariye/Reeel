@@ -8,6 +8,8 @@
 
 #import "ScreeningDetailViewController.h"
 #import "RSVPDetailViewController.h"
+#import "Screening.h"
+#import "ScreeningStore.h"
 
 @interface ScreeningDetailViewController () <UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
@@ -15,10 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *movieSynopsisText;
 @property (weak, nonatomic) IBOutlet UIButton *RSVPButton;
 @property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
-
-@property (nonatomic) float rating;
-//@property (nonatomic) int denominator;
-//@property (nonatomic)
+@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *releaseDateLabel;
 
 @end
 
@@ -26,12 +26,20 @@
 
 - (IBAction)RSVPButtonPressed:(UIButton *)sender {
     RSVPDetailViewController *rsvpDetail = [[RSVPDetailViewController alloc] init];
+    
+    rsvpDetail.screening = self.screening;
+    
     [self.navigationController pushViewController:rsvpDetail animated:YES];
 }
 
+
 - (void)viewDidLoad {
     
+    
     [super viewDidLoad];
+    
+    Screening *screening = self.screening;
+    
     // Set background color of view
     self.view.backgroundColor = [UIColor whiteColor];
     // Set assign image from assets
@@ -40,14 +48,17 @@
     NSLog(@"assigning image");
     // Set image on view
     self.screeningImageView.image = poster;
-    self.rating = 7.5;
-    self.movieRatingLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", self.rating];
+//    self.rating = self.rating;
+    self.movieRatingLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", screening.screeningRating];
     //self.metaDataLabel.text = [NSString stringWithFormat:@"%@    "]
     //self.movieSynopsisText.editable = NO;
-    self.movieSynopsisText.text = @"Maria Altmann (Helen Mirren), an elderly Jewish survivor of World War II, sues the Austrian government for the return of artwork the Nazis stole from her family.";
+    self.movieSynopsisText.text = screening.screeningSynopsis;
     
     // mock purposes
-    self.metaDataLabel.text = @"PG-13    109 min    April, 1st 2015";
+    self.metaDataLabel.text = @"PG-13";
+    
+    self.durationLabel.text = screening.screeningDuration;
+    self.releaseDateLabel.text = screening.screeningReleaseDate;
     
 //    [self.RSVPButton setBackgroundImage:[UIImage new] forState:UIControlStateNormal];
 
