@@ -16,12 +16,15 @@
 
 @implementation ProfileTableViewController
 
+// differentiate alerts
+#define TAG_PRIMARY 1
+#define TAG_SECONDARY 2
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"Profile";
-
+    
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
@@ -42,13 +45,13 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-// #warning Potentially incomplete method implementation.
+    // #warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
+    //#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 1;
 }
@@ -63,6 +66,7 @@
         return @"";
     }
 }
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,38 +109,38 @@
 //
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 #pragma mark - Table view delegate
@@ -146,31 +150,61 @@
     // Navigation logic may go here, for example:
     // Create the next view controller.
     
-        // Pass the selected object to the new view controller.
+    // Pass the selected object to the new view controller.
     
     // Push the view controller.
     if (indexPath.section == 0) {
         ProfileInformationViewController *detailViewController = [[ProfileInformationViewController alloc] init];
-
+        
         [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+    if (indexPath.section == 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"'Reeel' Would Like to Send You Push Notifications" message:@"Notifications may include alerts, sounds and icon badges. These can be configured in Settings." delegate:self cancelButtonTitle:@"Don't Allow" otherButtonTitles:@"OK", nil];
+        [self.tableView deselectRowAtIndexPath:[self.tableView
+                                                indexPathForSelectedRow] animated: YES];
+        alert.tag = TAG_PRIMARY;
+        [alert show];
+        
     }
     if (indexPath.section == 2) {
         TermsAndConditionsViewController *detailViewController = [[TermsAndConditionsViewController alloc] init];
-
+        
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == TAG_PRIMARY){
+        if (buttonIndex == 0) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+            // Cancel button response
+            // disable push notifications
+            [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"'Reeel' Will No Longer Send You Push Notifications" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            alert.tag = TAG_SECONDARY;
+            [alert show];
+        }
+        if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+            // OK button response
+            // enable push notifications
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"'Reeel' Will Now Send You Push Notifications" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            alert.tag = TAG_SECONDARY;
+            [alert show];
+        }
+        
+    }
+}
+
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -9,7 +9,7 @@
 #import "RSVPDetailViewController.h"
 #import "ScreeningStore.h"
 
-@interface RSVPDetailViewController () <UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
+@interface RSVPDetailViewController () <UINavigationControllerDelegate, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userEmailLabel;
 @property (weak, nonatomic) IBOutlet UITextField *guestsLabel;
@@ -71,6 +71,8 @@
     
     //  call rsvpForScreening method here
     [[ScreeningStore sharedStore] rsvpForScreening:screening];
+    
+    
     
     
     [alert show];
