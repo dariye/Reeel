@@ -16,6 +16,9 @@
 
 @implementation ProfileTableViewController
 
+// differentiate alerts
+#define TAG_PRIMARY 1
+#define TAG_SECONDARY 2
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,6 +66,7 @@
         return @"";
     }
 }
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,12 +158,43 @@
 
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
+    if (indexPath.section == 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"'Reeel' Would Like to Send You Push Notifications" message:@"Notifications may include alerts, sounds and icon badges. These can be configured in Settings." delegate:self cancelButtonTitle:@"Don't Allow" otherButtonTitles:@"OK", nil];
+        [self.tableView deselectRowAtIndexPath:[self.tableView
+                                                  indexPathForSelectedRow] animated: YES];
+        alert.tag = TAG_PRIMARY;
+        [alert show];
+
+    }
     if (indexPath.section == 2) {
         TermsAndConditionsViewController *detailViewController = [[TermsAndConditionsViewController alloc] init];
 
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == TAG_PRIMARY){
+        if (buttonIndex == 0) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+        // Cancel button response
+        // disable push notifications
+        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"'Reeel' Will No Longer Send You Push Notifications" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        alert.tag = TAG_SECONDARY;
+        [alert show];
+        }
+    if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+        // OK button response
+        // enable push notifications
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"'Reeel' Will Now Send You Push Notifications" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        alert.tag = TAG_SECONDARY;
+        [alert show];
+    }
+
+    }
 }
 
 

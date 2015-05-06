@@ -9,7 +9,6 @@
 #import "TermsAndConditionsViewController.h"
 
 @interface TermsAndConditionsViewController ()
-
 @end
 
 @implementation TermsAndConditionsViewController
@@ -19,6 +18,7 @@
     
     self.navigationItem.title = @"Terms & Conditions";
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 - (void)didReceiveMemoryWarning {
