@@ -35,9 +35,11 @@
     // Set background color of view
     self.view.backgroundColor = [UIColor whiteColor];
     // Set assign image from assets
+    
+    // mock data
     UIImage *poster = [UIImage imageNamed:@"womaningold.jpg"];
     self.navigationItem.title = @"Woman in Gold";
-    NSLog(@"assigning image");
+    //NSLog(@"assigning image");
     // Set image on view
     self.screeningImageView.image = poster;
     self.rating = 7.5;
@@ -45,8 +47,6 @@
     //self.metaDataLabel.text = [NSString stringWithFormat:@"%@    "]
     //self.movieSynopsisText.editable = NO;
     self.movieSynopsisText.text = @"Maria Altmann (Helen Mirren), an elderly Jewish survivor of World War II, sues the Austrian government for the return of artwork the Nazis stole from her family.";
-    
-    // mock purposes
     self.metaDataLabel.text = @"PG-13    109 min    April, 1st 2015";
     
 //    [self.RSVPButton setBackgroundImage:[UIImage new] forState:UIControlStateNormal];
