@@ -50,8 +50,6 @@
     self.screeningImageView.image = poster;
 //    self.rating = self.rating;
     self.movieRatingLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", screening.screeningRating];
-    //self.metaDataLabel.text = [NSString stringWithFormat:@"%@    "]
-    //self.movieSynopsisText.editable = NO;
     self.movieSynopsisText.text = screening.screeningSynopsis;
     
     // mock purposes
@@ -59,10 +57,7 @@
     
     self.durationLabel.text = screening.screeningDuration;
     self.releaseDateLabel.text = screening.screeningReleaseDate;
-    
-//    [self.RSVPButton setBackgroundImage:[UIImage new] forState:UIControlStateNormal];
 
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,15 +65,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

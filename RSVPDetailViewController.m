@@ -38,7 +38,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     userNameLabel.text = [defaults objectForKey:@"userName"];
     userEmailLabel.text = [defaults objectForKey:@"userEmail"];
-    guestsLabel.text = @"Number of guests";
+    guestsLabel.text = [defaults objectForKey:@"guestCount"];
     termsLabel.text = @"Agree to Terms and Conditions";
     
    
@@ -72,13 +72,21 @@
     //  call rsvpForScreening method here
     [[ScreeningStore sharedStore] rsvpForScreening:screening];
     
+    [alert show];
     
+}
+
+- (IBAction)optOutButton:(id)sender {
+    Screening *screening = self.screening;
     
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    
+    [[ScreeningStore sharedStore] optOut:screening];
     
     [alert show];
     
-    
 }
+
 //**********************************
 
 // check to see if text field is in the format of an email, triggers an alert if it is not
@@ -134,7 +142,7 @@
 }
 
 // terms and conditions must be accepted, all fields completed correctly before confirmation enabled. specific warnings on exit of uncompleted fields
-- (IBAction) toggleEnabledConfirmButton: (id) sender {
+- (IBAction)toggleEnabledConfirmButton: (id) sender {
     if (sender == guestsLabel) {
         if ((!guestsLabel.text.length > 0) && (![guestsLabel.text intValue] > 0)) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid number of guests" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
@@ -168,12 +176,13 @@
     
     NSString *userName = [userNameLabel text];
     NSString *userEmail = [userEmailLabel text];
-    //NSString *guests = [guestsLabel text];
+    NSString *guests = [guestsLabel text];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setObject:userName forKey:@"userName"];
     [defaults setObject:userEmail forKey:@"userEmail"];
+    [defaults setObject:guests forKey:@"guestCount"];
     [defaults synchronize];
     
 }

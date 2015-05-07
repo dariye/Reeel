@@ -25,27 +25,6 @@
 @synthesize scrollView;
 @synthesize rating;
 
-//- (NSMutableArray *)dataSource
-//{
-//    if (!_dataSource) {
-//        _dataSource = [[NSMutableArray alloc] init];
-//    }
-//    return _dataSource;
-//}
-
-//NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//[formatter setDateFormat:@"yyyy"];
-//
-////Optionally for time zone conversions
-//[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
-//
-//NSString *stringFromDate = [formatter stringFromDate:myNSDateInstance];
-//
-////unless ARC is active
-//[formatter release];
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -57,12 +36,6 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark - Table view data source
@@ -80,7 +53,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
-    rating = 5.5;
     
     NSArray *screenings = [[ScreeningStore sharedStore] allScreenings];
     Screening *screening = screenings[indexPath.row];

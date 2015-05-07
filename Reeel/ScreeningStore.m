@@ -12,8 +12,6 @@
 
 @property (nonatomic) NSMutableArray *screenings;
 
-@property (nonatomic) NSMutableArray *rsvpedScreenings;
-
 @property (nonatomic) NSDate *randomDate;
 
 @property (nonatomic) long randomNumber;
@@ -25,10 +23,10 @@
 @implementation ScreeningStore
 
 @synthesize screenings;
-@synthesize rsvpedScreenings;
 @synthesize randomDate;
 @synthesize randomNumber;
 @synthesize randomRating;
+
 
 
 + (instancetype)sharedStore
@@ -58,7 +56,6 @@
     if (self) {
         
         screenings = [[NSMutableArray alloc] init];
-        rsvpedScreenings = [[NSMutableArray alloc] init];
         
         
         // Date formatter
@@ -78,21 +75,13 @@
             randomRating = arc4random_uniform(10);
 
             randomNumber = arc4random_uniform(60 * 60 * 24 * 60);
-//            randomDate = [NSDate dateWithTimeIntervalSinceNow:randomNumber];
-            
             
             randomDate = [today dateByAddingTimeInterval:randomNumber];
         
 
             Screening *screening = [[Screening alloc] initWithScreeningTitle:[NSString stringWithFormat:@"Screening - %d", i] screeningDate:[dateFormat stringFromDate:randomDate] screeningLocation:@"Mercer, NY" screeningTheatre:@"Angelika" screeningSynopsis:@"Some Random text that tells something about the movie or screening...blah blah" screeningReleaseDate:[releaseDateFormat stringFromDate:randomDate] screeningDuration:@"114 min" screeningGenre:@"Drama" screeningDirectorInfo:@"Paul, Collin" screeningStarInfo:@"Paul" screeningRating:randomRating screeningFee:0 discount:0];
             
-            //NSLog(@"Meta Dict --> %@", screening.screeningMetaData[@"title"]);
-            
-            //NSLog(@"Adding item %@", screening);
-            
             screening.rsvp = NO;
-            
-            //NSLog(@"RSVP -->  %i", screening.rsvp);
             
             [screenings addObject:screening];
             
@@ -109,29 +98,26 @@
 
 - (NSArray *)allRSVPedScreenings
 {
-    return rsvpedScreenings;
+    
+    NSPredicate *rsvpFilter = [NSPredicate predicateWithFormat:@"rsvp == 1"];
+    
+    NSLog(@"%i", [[screenings filteredArrayUsingPredicate:rsvpFilter] count]);
+    
+    return [screenings filteredArrayUsingPredicate:rsvpFilter];;
 }
 
 - (void)rsvpForScreening:(Screening *)screening
 {
-    if (![screening isRsvped]) {
-        screening.rsvp = YES;
-        [rsvpedScreenings addObject:screening];
-    }
+    screening.rsvp = YES;
 }
 
-
-
-- (void)removeScreening:(Screening *)screening
+- (void)optOut:(Screening *)screening
 {
-    //NSString *key = screening.screeningKey;
-    
-    [self.screenings removeObjectIdenticalTo:screening];
+    screening.rsvp = NO;
 }
 
-//- (Screening *)createScreening
-//{
-//    
-//}
+
+
+
 
 @end

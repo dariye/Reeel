@@ -19,9 +19,7 @@
 
 + (instancetype)sharedStore;
 
-//- (Screening *)createScreening;
-- (void)removeScreening:(Screening *)screening;
-
 - (void)rsvpForScreening:(Screening *)screening;
+- (void)optOut:(Screening *)screening;
 
 @end

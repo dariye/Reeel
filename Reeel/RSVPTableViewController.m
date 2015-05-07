@@ -14,7 +14,7 @@
 
 @interface RSVPTableViewController () <UINavigationControllerDelegate, UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property(nonatomic, readonly, retain) UIScrollView *scrollView;
+@property (nonatomic, readonly, retain) UIScrollView *scrollView;
 
 @end
 
@@ -23,6 +23,7 @@
 @synthesize scrollView;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.tableView reloadData];
@@ -54,6 +55,7 @@
     NSArray *screenings = [[ScreeningStore sharedStore] allRSVPedScreenings];
     
     Screening *screening = screenings[indexPath.row];
+    NSLog(@"%@", screening);
     
     if (!cell) {
         [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
@@ -80,6 +82,12 @@
 {
     
     ScreeningDetailViewController *detailViewController = [[ScreeningDetailViewController alloc] init];
+    
+    NSArray *screenings = [[ScreeningStore sharedStore] allRSVPedScreenings];
+    
+    Screening *selectedScreening = screenings[indexPath.row];
+    
+    detailViewController.screening = selectedScreening;
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
