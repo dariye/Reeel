@@ -12,9 +12,6 @@
 
 @interface ScreeningsTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
-
-
 @end
 
 @implementation ScreeningsTableViewCell
@@ -24,8 +21,6 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.screeningImageView.image = [UIImage imageNamed:@"womaningold"];
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

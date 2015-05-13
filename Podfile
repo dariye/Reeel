@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'Reeel' do
   pod 'Parse'
-  pod "AFNetworking", "~> 2.0"
+  pod 'ParseUI'
+  pod 'AFNetworking', '~> 2.0'
   pod 'FontAwesomeIconFactory'
 end

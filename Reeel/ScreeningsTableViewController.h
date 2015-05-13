@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-
-@interface ScreeningsTableViewController : UITableViewController
+@interface ScreeningsTableViewController : PFQueryTableViewController
 
 @end

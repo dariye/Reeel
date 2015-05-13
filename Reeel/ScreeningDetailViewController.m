@@ -24,6 +24,9 @@
 
 @implementation ScreeningDetailViewController
 
+@synthesize screening;
+
+
 - (IBAction)RSVPButtonPressed:(UIButton *)sender {
     RSVPDetailViewController *rsvpDetail = [[RSVPDetailViewController alloc] init];
     
@@ -38,25 +41,31 @@
     
     [super viewDidLoad];
     
-    Screening *screening = self.screening;
+    screening = self.screening;
     
     // Set background color of view
     self.view.backgroundColor = [UIColor whiteColor];
     // Set assign image from assets
-    UIImage *poster = [UIImage imageNamed:@"womaningold.jpg"];
-    self.navigationItem.title = @"Woman in Gold";
-    NSLog(@"assigning image");
-    // Set image on view
-    self.screeningImageView.image = poster;
-//    self.rating = self.rating;
-    self.movieRatingLabel.text = [NSString stringWithFormat:@"Ratings: %.01f/10", screening.screeningRating];
-    self.movieSynopsisText.text = screening.screeningSynopsis;
+    PFFile *screeningPoster =  [screening objectForKey:@"screeningPoster"];
     
-    // mock purposes
-    self.metaDataLabel.text = @"PG-13";
+    [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
+        if (!error) {
+            self.screeningImageView.image = [UIImage imageWithData:imageData];
+        }
+        
+    }];
     
-    self.durationLabel.text = screening.screeningDuration;
-    self.releaseDateLabel.text = screening.screeningReleaseDate;
+    [[self movieRatingLabel] setText:[NSString stringWithFormat:@"Rating: %@ / 10",[screening objectForKey:@"screeningContentRating"]]];
+    
+    
+    [[self movieSynopsisText] setText:[self.screening objectForKey:@"screeningSynopsis"]];
+    
+    [[self durationLabel] setText:[NSString stringWithFormat:@"%@ min",[screening objectForKey:@"screeningDuration"]]];
+    
+    NSDateFormatter *releaseDateFormat = [[NSDateFormatter alloc] init];
+    [releaseDateFormat setDateFormat:@"MMM d y"];
+    
+    [[self releaseDateLabel] setText:[releaseDateFormat stringFromDate:[self.screening objectForKey:@"screeningReleaseDate"]]];
 
 }
 

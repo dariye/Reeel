@@ -17,4 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *rsvpLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
+
 @end
