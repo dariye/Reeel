@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MDCCardTableViewCell.h"
 
-@interface ScreeningsTableViewCell : UITableViewCell
+@interface ScreeningsTableViewCell : MDCCardTableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screeningDescriptionLabel;
 

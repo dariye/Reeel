@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <MaterialDesignCocoa/UIColor+MaterialDesignCocoa.h>
+#import <MaterialDesignCocoa/UIFont+MaterialDesignCocoa.h>
 #import "ScreeningDetailViewController.h"
 #import "RSVPTableViewController.h"
 #import "ProfileTableViewController.h"
@@ -30,12 +32,17 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"name"] = @"paul";
     
-    NSLog(@"%@", testObject);
-    
-    [testObject saveInBackground];
+    // Material Design UINavigationController
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor mdcRedColorWithPaletteId:kUIColorMDCPaletteIdPrimary]];
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     @{
+       NSForegroundColorAttributeName: [UIColor whiteColor],
+       //     UITextAttributeTextShadowColor: [NSNull null],
+       //     UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, 0)],
+       NSFontAttributeName: [UIFont mdcHeadlineFont],
+       }];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -50,6 +57,7 @@
     ProfileTableViewController *profile = [[ProfileTableViewController alloc] init];
     
     // Instantiate Tabbar Controller
+  
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
@@ -71,6 +79,7 @@
     [[tabBarController.tabBar.items objectAtIndex:2] setTitle:@"Profile"];
     
     self.window.rootViewController = tabBarController;
+    
     
     // Override point for customization after application launch.
    

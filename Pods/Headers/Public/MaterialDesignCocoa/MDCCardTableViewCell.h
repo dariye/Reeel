@@ -1,0 +1,1 @@
+../../../MaterialDesignCocoa/Classes/MDCCardTableViewCell.h

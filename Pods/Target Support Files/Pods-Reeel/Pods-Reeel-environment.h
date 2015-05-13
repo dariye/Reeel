@@ -72,6 +72,12 @@
 #define COCOAPODS_VERSION_MINOR_FontAwesomeIconFactory 0
 #define COCOAPODS_VERSION_PATCH_FontAwesomeIconFactory 0
 
+// MaterialDesignCocoa
+#define COCOAPODS_POD_AVAILABLE_MaterialDesignCocoa
+#define COCOAPODS_VERSION_MAJOR_MaterialDesignCocoa 0
+#define COCOAPODS_VERSION_MINOR_MaterialDesignCocoa 0
+#define COCOAPODS_VERSION_PATCH_MaterialDesignCocoa 2
+
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
 #define COCOAPODS_VERSION_MAJOR_Parse 1

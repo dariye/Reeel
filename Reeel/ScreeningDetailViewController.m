@@ -43,6 +43,8 @@
     
     screening = self.screening;
     
+    self.navigationItem.title = [screening objectForKey:@"screeningTitle"];
+    
     // Set background color of view
     self.view.backgroundColor = [UIColor whiteColor];
     // Set assign image from assets

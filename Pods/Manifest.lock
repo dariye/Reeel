@@ -27,6 +27,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.1.5)
   - FontAwesomeIconFactory (2.0)
+  - MaterialDesignCocoa (0.0.2)
   - Parse (1.7.2):
     - Bolts (~> 1.1)
   - ParseUI (1.1.3):
@@ -35,6 +36,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - FontAwesomeIconFactory
+  - MaterialDesignCocoa
   - Parse
   - ParseUI
 
@@ -42,6 +44,7 @@ SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   Bolts: aac24961496d504aa56fc267cde95162a71bac39
   FontAwesomeIconFactory: d161a1832f8220d764033e0fcc4f4a8388495ab7
+  MaterialDesignCocoa: 271e7ed939a4825f125d1f2591d1e284e1999541
   Parse: e1959adb9fe2fcd4736dac20b3ac691d47a4f06c
   ParseUI: 1a68e9cebc3bd458eed9605ce7b33d7cc082f473
 

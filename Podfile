@@ -6,4 +6,5 @@ target 'Reeel' do
   pod 'ParseUI'
   pod 'AFNetworking', '~> 2.0'
   pod 'FontAwesomeIconFactory'
+  pod 'MaterialDesignCocoa'
 end
