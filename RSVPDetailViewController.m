@@ -20,6 +20,12 @@
 
 @property (nonatomic, assign) id currentResponder;
 
+@property (nonatomic, strong) PFObject *guestList;
+
+@property (nonatomic, strong) NSUserDefaults *defaults;
+
+@property (nonatomic, strong) PFQuery *query;
+
 
 @end
 
@@ -31,31 +37,44 @@
 @synthesize termsLabel;
 @synthesize termsSwitch;
 @synthesize confirmButton;
+@synthesize guestList;
+@synthesize screening;
+@synthesize defaults;
+@synthesize query;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //initialize new Guestlist Object
+    guestList = [PFObject objectWithClassName:@"GuestList"];
+    // query
+    query = [PFQuery queryWithClassName:@"GuestList"];
+    
+    // assign screening object
+    screening = self.screening;
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    
     userNameLabel.text = [defaults objectForKey:@"userName"];
     userEmailLabel.text = [defaults objectForKey:@"userEmail"];
     guestsLabel.text = [defaults objectForKey:@"guestCount"];
     termsLabel.text = @"Agree to Terms and Conditions";
     
-   
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUserData:) name:UIKeyboardDidHideNotification object:nil];
 
-
-    
     // Do any additional setup after loading the view from its nib.
     // Set background color of view
     self.view.backgroundColor = [UIColor whiteColor];
+    
     self.navigationItem.title = @"RSVP";
     
     // remove keyboard with outside touch
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
+    
     [singleTap setNumberOfTapsRequired:1];
+    
     [singleTap setNumberOfTouchesRequired:1];
+    
     [self.view addGestureRecognizer:singleTap];
     //[singleTap release];
     
@@ -63,28 +82,87 @@
 
 // confirmButton press action
 //**********************************
-- (IBAction)RSVPButtonPressed:(UIButton *)sender {
-    
-    Screening *screening = self.screening;
-    
+- (IBAction)RSVPButtonPressed:(UIButton *)sender
+{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     
-    //  call rsvpForScreening method here
-    [[ScreeningStore sharedStore] rsvpForScreening:screening];
+//    [query whereKey:@"screeningId" equalTo:screening.objectId];
+//    
+//    PFObject *storedGuestlist = [PFObject objectWithClassName:@"GuestList"];
     
-    [alert show];
+    guestList[@"screeningId"] = screening.objectId;
+    guestList[@"guestName"] = [defaults objectForKey:@"userName"];
+    guestList[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
+    guestList[@"guestCount"] = [defaults objectForKey:@"guestCount"];
+    
+        
+    [query getObjectInBackgroundWithId:[defaults objectForKey:@"screeningId"] block:^(PFObject *object, NSError *error) {
+        
+        if (!error) {
+            object[@"screeningId"] = screening.objectId;
+            object[@"guestName"] = [defaults objectForKey:@"userName"];
+            object[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
+            object[@"guestCount"] = [defaults objectForKey:@"guestCount"];
+            [object saveInBackground];
+            
+        }else {
+            
+            [guestList saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    
+                    [defaults setObject:guestList.objectId forKey:@"screeningId"];
+                    
+                    [alert show];
+                    
+                }else {
+                    
+                }
+                //            [guestList fetch];
+            }];
+            
+        }
+        
+        
+        
+        
+        //            [object fetch];
+        
+    }];
+    
+    
+    
+  
+    
+    // Check if user have RSVPed
+//    [query whereKey:@"objectId" equalTo:guestList.objectId];
+//    [query whereKey:@"screeningId" equalTo:screening.objectId];
+//    
+//    [query  getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+//        if (!object) {
+//            return;
+//        } else {
+//            tempGuestlist = object;
+//        }
+//        
+//    }];
+    
+    
+    
+
     
 }
 
 - (IBAction)optOutButton:(id)sender {
-    Screening *screening = self.screening;
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     
-    [[ScreeningStore sharedStore] optOut:screening];
-    
-    [alert show];
-    
+    [query getObjectInBackgroundWithId:guestList.objectId block:^(PFObject *guestList, NSError *error){
+        [guestList deleteInBackground];
+        [alert show];
+        
+    }];
+  
+
 }
 
 //**********************************
@@ -177,8 +255,6 @@
     NSString *userName = [userNameLabel text];
     NSString *userEmail = [userEmailLabel text];
     NSString *guests = [guestsLabel text];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setObject:userName forKey:@"userName"];
     [defaults setObject:userEmail forKey:@"userEmail"];

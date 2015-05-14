@@ -16,11 +16,40 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, readonly, retain) UIScrollView *scrollView;
 
+@property (nonatomic, strong) NSUserDefaults *defaults;
+
+@property (nonatomic, strong) NSArray *rsvps;
+@property (nonatomic, strong) NSArray *guestlist;
+
+@property (nonatomic, strong) PFQuery *screeningQuery;
+@property (nonatomic, strong) PFQuery *guestlistQuery;
+
+@property (nonatomic, strong) PFQuery *query;
+
 @end
 
 @implementation RSVPTableViewController
 
 @synthesize scrollView;
+@synthesize rsvps;
+@synthesize screeningQuery;
+@synthesize guestlistQuery;
+@synthesize defaults;
+@synthesize query;
+
+//
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        self.parseClassName = @"Screening";
+//        self.pullToRefreshEnabled = YES;
+//        self.paginationEnabled = NO;
+//        self.objectsPerPage = 25;
+//    }
+//    return self;
+//    
+//}
 
 - (void)viewDidLoad {
     
@@ -28,46 +57,77 @@
     
     [self.tableView reloadData];
     
-    if ([[[ScreeningStore sharedStore] allRSVPedScreenings] count] > 1) {
-        self.navigationItem.title = @"RSVPs";
-    } else {
-        self.navigationItem.title = @"RSVP";
+    defaults = [NSUserDefaults standardUserDefaults];
+    
+    self.navigationItem.title = @"RSVPs";
+
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
+- (PFQuery *)queryForTable
+{
+    
+    [guestlistQuery whereKey:@"guestEmail" equalTo:[[defaults objectForKey:@"userEmail"] lowercaseString]];
+    [guestlistQuery includeKey:@"screening"];
+    
+    [query whereKey:@"objectId" matchesQuery:guestlistQuery];
+    
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    
+    return  query;
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [[[ScreeningStore sharedStore] allRSVPedScreenings] count];
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return [self.objects count];
+//}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object
 {
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     
-    NSArray *screenings = [[ScreeningStore sharedStore] allRSVPedScreenings];
-    
-    Screening *screening = screenings[indexPath.row];
-    NSLog(@"%@", screening);
-    
     if (!cell) {
+        
         [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
+        
+        [cell setBackgroundColor:self.tableView.backgroundColor];
     }
     
+    [[cell screeningDescriptionLabel] setText:[object objectForKey:@"screeningSynopsis"]];
     
-    [[cell screeningDescriptionLabel] setText:screening.screeningSynopsis];
-    [[cell screeningDateLabel] setText:screening.screeningDate];
-    [[cell screeningLocationLabel] setText:screening.screeningLocation];
+    [[cell screeningLocationLabel] setText:[object objectForKey:@"screeningLocation"]];
     
-    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %.01f/10", screening.screeningRating]];
+//    NSLog(@"%@", [object objectForKey:@"createdBy"]);
+    // Date formatter
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
+    [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
+    
+    [[cell screeningDateLabel] setText:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
+    
+    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %@ / 10",[object objectForKey:@"screeningContentRating"]]];
+    
+    PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
+    
+    [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
+        if (!error) {
+            cell.screeningImageView.image = [UIImage imageWithData:imageData];
+        }
+        
+    }];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
     
     return cell;
 }

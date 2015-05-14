@@ -19,12 +19,15 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, readonly, retain) UIScrollView *scrollView;
 
+@property (nonatomic, strong) NSArray *screenings;
+
 
 @end
 
 @implementation ScreeningsTableViewController
 
 @synthesize scrollView;
+@synthesize screenings;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -47,8 +50,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([screenings count] > 1) {
+        self.navigationItem.title = @"Upcoming Screenings";
+    } else {
+        self.navigationItem.title = @"Upcoming Screening";
+    }
 
-    self.navigationItem.title = @"Upcoming Screening";
     
     self.tableView.rowHeight = 64.0;
     
@@ -121,7 +129,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningDetailViewController *detailViewController = [[ScreeningDetailViewController alloc] init];
-    NSArray *screenings = self.objects;
+    screenings = self.objects;
     
     PFObject *selectedScreening = screenings[indexPath.row];
     detailViewController.screening = selectedScreening;
