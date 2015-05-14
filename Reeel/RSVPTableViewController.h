@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-@interface RSVPTableViewController : PFQueryTableViewController
+@interface RSVPTableViewController : UITableViewController
 
 @end
