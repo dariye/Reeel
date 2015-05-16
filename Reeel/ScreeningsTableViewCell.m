@@ -12,12 +12,11 @@
 
 @interface ScreeningsTableViewCell ()
 
+
+
 @end
 
 @implementation ScreeningsTableViewCell
-
-@synthesize screeningDescriptionLabel;
-@synthesize screeningImageView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,13 +27,36 @@
     return self;
 }
 
+
+/* Code From: https://medium.com/@cwRichardKim/ios-xcode-tutorial-a-card-based-newsfeed-8bedeb7b8df7 */
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
-    
-    [self.screeningImageView.layer setCornerRadius:2.0];
+    [self cardSetup];
+    [self imageSetup];
 }
 
+- (void)cardSetup
+{
+    [self.cardView setAlpha:1];
+    self.cardView.layer.masksToBounds = NO;
+    self.cardView.layer.cornerRadius = 2;
+    self.cardView.layer.shadowOffset = CGSizeMake(1, 1);
+    self.cardView.layer.shadowRadius = 1;
+    self.cardView.layer.shadowColor = [UIColor blackColor].CGColor;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.cardView.bounds];
+    self.cardView.layer.shadowPath = path.CGPath;
+    self.cardView.layer.shadowOpacity = 0.2;
+    
+    self.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
+
+}
+
+- (void)imageSetup
+{
+    _screeningImageView.clipsToBounds = YES;
+    _screeningImageView.contentMode = UIViewContentModeScaleAspectFit;
+    _screeningImageView.backgroundColor = [UIColor whiteColor];
+}
 
 - (void)awakeFromNib {
     // Initialization code

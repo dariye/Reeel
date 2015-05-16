@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MDCCardTableViewCell.h"
 
-@interface ScreeningsTableViewCell : MDCCardTableViewCell
-
-@property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *screeningDescriptionLabel;
-
+@interface ScreeningsTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *screeningTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screeningDateLabel;
+\
 @property (weak, nonatomic) IBOutlet UILabel *screeningLocationLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *rsvpLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
+
+@property (weak, nonatomic) IBOutlet UIView *cardView;
 
 @end

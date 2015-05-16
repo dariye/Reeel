@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7612EEF31B0525760024A933 /* RSVPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7612EEF11B0525760024A933 /* RSVPTableViewCell.m */; };
 		7612EEF41B0525760024A933 /* RSVPTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */; };
+		7612EEF71B05A0CB0024A933 /* ParallaxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7612EEF61B05A0CB0024A933 /* ParallaxTableViewCell.m */; };
 		7640021D1AEFE9E500681FD8 /* ScreeningStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7640021C1AEFE9E500681FD8 /* ScreeningStore.m */; };
 		764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */; };
 		764069361AF09BB6004DD42B /* TermsAndConditionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */; };
@@ -50,6 +51,8 @@
 		7612EEF01B0525760024A933 /* RSVPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVPTableViewCell.h; sourceTree = "<group>"; };
 		7612EEF11B0525760024A933 /* RSVPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVPTableViewCell.m; sourceTree = "<group>"; };
 		7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSVPTableViewCell.xib; sourceTree = "<group>"; };
+		7612EEF51B05A0CB0024A933 /* ParallaxTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxTableViewCell.h; sourceTree = "<group>"; };
+		7612EEF61B05A0CB0024A933 /* ParallaxTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxTableViewCell.m; sourceTree = "<group>"; };
 		7640021B1AEFE9E500681FD8 /* ScreeningStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningStore.h; sourceTree = "<group>"; };
 		7640021C1AEFE9E500681FD8 /* ScreeningStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningStore.m; sourceTree = "<group>"; };
 		764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsAndConditionsViewController.h; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 		767E79401AD61392003E9A23 /* Reeel */ = {
 			isa = PBXGroup;
 			children = (
+				7612EEF51B05A0CB0024A933 /* ParallaxTableViewCell.h */,
+				7612EEF61B05A0CB0024A933 /* ParallaxTableViewCell.m */,
 				7612EEF01B0525760024A933 /* RSVPTableViewCell.h */,
 				7612EEF11B0525760024A933 /* RSVPTableViewCell.m */,
 				7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */,
@@ -409,6 +414,7 @@
 				76E734F01AE8233A00F312E2 /* Screening.m in Sources */,
 				76E4B1251AF14F9600CA8A8B /* ScreeningImageStore.m in Sources */,
 				764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */,
+				7612EEF71B05A0CB0024A933 /* ParallaxTableViewCell.m in Sources */,
 				767E79441AD61392003E9A23 /* main.m in Sources */,
 				76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */,
 				76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */,

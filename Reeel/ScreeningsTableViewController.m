@@ -7,19 +7,16 @@
 //
 
 #import "ScreeningsTableViewController.h"
-#import <MaterialDesignCocoa/MDCTableViewCell.h>
 #import "ScreeningsTableViewCell.h"
 #import "ScreeningDetailViewController.h"
-#import "Screening.h"
-#import "ScreeningStore.h"
 
-
-
-@interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate>
-@property (nonatomic, strong) NSMutableArray *dataSource;
+@interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate, UIScrollViewDelegate>
 @property(nonatomic, readonly, retain) UIScrollView *scrollView;
 
+@property (nonatomic) CGFloat height;
+
 @property (nonatomic, strong) NSArray *screenings;
+\
 
 
 @end
@@ -37,7 +34,9 @@
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = NO;
         self.objectsPerPage = 25;
+        
     }
+    
     return self;
     
 }
@@ -51,17 +50,13 @@
 {
     [super viewDidLoad];
     
-    if ([screenings count] > 1) {
-        self.navigationItem.title = @"Upcoming Screenings";
-    } else {
-        self.navigationItem.title = @"Upcoming Screening";
-    }
-
+    self.navigationItem.title = @"Upcoming Screening";
     
-    self.tableView.rowHeight = 64.0;
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
     
-    [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
 }
+
 
 -  (PFQuery *)queryForTable
 {
@@ -75,8 +70,32 @@
     return query;
 }
 
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    for (ParallaxTableViewCell *cell in [self.tableView visibleCells]) {
+//        [cell cellOnTableView:self.tableView didScrollOnView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 49)]];
+//    }
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    //CGRect screenRect = [[UIScreen mainScreen] bounds];
+    //CGFloat screenHeight = screenRect.size.height;
+    //CGFloat tabbarHeight = self.tabBarController.tabBar.frame.size.height;
+    //CGFloat navbarHeight = self.navigationController.navigationBar.frame.size.height;
+    //CGFloat rowHeight = (screenHeight - (tabbarHeight + navbarHeight + 30))/2;
+//    self.height = rowHeight;
+    return 220;
+}
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object
 {
+    
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     
     if (!cell) {
@@ -87,7 +106,18 @@
         [cell setBackgroundColor:self.tableView.backgroundColor];
     }
     
-    [[cell screeningDescriptionLabel] setText:[object objectForKey:@"screeningSynopsis"]];
+
+    
+    PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
+    
+    [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
+        if (!error) {
+            cell.screeningImageView.image = [UIImage imageWithData:imageData];
+        }
+        
+    }];
+    
+    [[cell screeningTitleLabel] setText:[object objectForKey:@"screeningTitle"]];
     
     [[cell screeningLocationLabel] setText:[object objectForKey:@"screeningLocation"]];
     
@@ -98,20 +128,7 @@
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
     [[cell screeningDateLabel] setText:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
-    
-    [[cell ratingsLabel] setText:[NSString stringWithFormat:@"Rating: %@ / 10",[object objectForKey:@"screeningContentRating"]]];
-    
-    PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
-    
-    [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
-        if (!error) {
-            cell.screeningImageView.image = [UIImage imageWithData:imageData];
-        }
-        
-    }];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    
+
     return cell;
 }
 
@@ -120,18 +137,13 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 151;
-}
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningDetailViewController *detailViewController = [[ScreeningDetailViewController alloc] init];
     screenings = self.objects;
     
     PFObject *selectedScreening = screenings[indexPath.row];
+    
     detailViewController.screening = selectedScreening;
     
     [self.navigationController pushViewController:detailViewController animated:YES];

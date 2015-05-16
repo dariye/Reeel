@@ -11,14 +11,14 @@
 #import "Screening.h"
 #import "ScreeningStore.h"
 
-@interface ScreeningDetailViewController () <UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
-@property (weak, nonatomic) IBOutlet UILabel *movieRatingLabel;
-@property (weak, nonatomic) IBOutlet UILabel *movieSynopsisText;
-@property (weak, nonatomic) IBOutlet UIButton *RSVPButton;
-@property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
-@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *releaseDateLabel;
+@interface ScreeningDetailViewController () <UINavigationControllerDelegate> 
+@property (strong, nonatomic) IBOutlet UIImageView *screeningImageView;
+//@property (weak, nonatomic) IBOutlet UILabel *movieRatingLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *movieSynopsisText;
+//@property (weak, nonatomic) IBOutlet UIButton *RSVPButton;
+//@property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *releaseDateLabel;
 
 @end
 
@@ -57,17 +57,19 @@
         
     }];
     
-    [[self movieRatingLabel] setText:[NSString stringWithFormat:@"Rating: %@ / 10",[screening objectForKey:@"screeningContentRating"]]];
+
     
-    
-    [[self movieSynopsisText] setText:[self.screening objectForKey:@"screeningSynopsis"]];
-    
-    [[self durationLabel] setText:[NSString stringWithFormat:@"%@ min",[screening objectForKey:@"screeningDuration"]]];
-    
-    NSDateFormatter *releaseDateFormat = [[NSDateFormatter alloc] init];
-    [releaseDateFormat setDateFormat:@"MMM d y"];
-    
-    [[self releaseDateLabel] setText:[releaseDateFormat stringFromDate:[self.screening objectForKey:@"screeningReleaseDate"]]];
+//    [[self movieRatingLabel] setText:[NSString stringWithFormat:@"Rating: %@ / 10",[screening objectForKey:@"screeningContentRating"]]];
+//    
+//    
+//    [[self movieSynopsisText] setText:[self.screening objectForKey:@"screeningSynopsis"]];
+//    
+//    [[self durationLabel] setText:[NSString stringWithFormat:@"%@ min",[screening objectForKey:@"screeningDuration"]]];
+//    
+//    NSDateFormatter *releaseDateFormat = [[NSDateFormatter alloc] init];
+//    [releaseDateFormat setDateFormat:@"MMM d y"];
+//    
+//    [[self releaseDateLabel] setText:[releaseDateFormat stringFromDate:[self.screening objectForKey:@"screeningReleaseDate"]]];
 
 }
 

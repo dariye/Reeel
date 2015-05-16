@@ -68,8 +68,7 @@
     defaults = [NSUserDefaults standardUserDefaults];
     
     self.navigationItem.title = @"RSVPs";
-    
-    //self.tableView.rowHeight = 100.0;
+ 
     
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
 
@@ -138,7 +137,7 @@
     backgroundView.layer.cornerRadius = 2.0f;
     [cell.contentView addSubview:backgroundView];
     
-    UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+//    UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
