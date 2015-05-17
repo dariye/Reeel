@@ -7,4 +7,5 @@ target 'Reeel' do
   pod 'AFNetworking', '~> 2.0'
   pod 'FontAwesomeIconFactory'
   pod 'MaterialDesignCocoa'
+  pod 'PACScrollView'
 end

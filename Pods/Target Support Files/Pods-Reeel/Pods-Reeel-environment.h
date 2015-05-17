@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_MaterialDesignCocoa 0
 #define COCOAPODS_VERSION_PATCH_MaterialDesignCocoa 2
 
+// PACScrollView
+#define COCOAPODS_POD_AVAILABLE_PACScrollView
+#define COCOAPODS_VERSION_MAJOR_PACScrollView 1
+#define COCOAPODS_VERSION_MINOR_PACScrollView 0
+#define COCOAPODS_VERSION_PATCH_PACScrollView 0
+
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
 #define COCOAPODS_VERSION_MAJOR_Parse 1

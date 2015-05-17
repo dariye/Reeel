@@ -52,6 +52,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Bolts.framework'
   install_framework 'FontAwesomeIconFactory.framework'
   install_framework 'MaterialDesignCocoa.framework'
+  install_framework 'PACScrollView.framework'
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
 fi
@@ -60,6 +61,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Bolts.framework'
   install_framework 'FontAwesomeIconFactory.framework'
   install_framework 'MaterialDesignCocoa.framework'
+  install_framework 'PACScrollView.framework'
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
 fi

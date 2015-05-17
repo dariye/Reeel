@@ -72,25 +72,24 @@
     
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
 
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
-//- (PFQuery *)queryForTable
-//{
-//    
-//    [guestlistQuery whereKey:@"guestEmail" equalTo:[[defaults objectForKey:@"userEmail"] lowercaseString]];
-//    [guestlistQuery includeKey:@"screening"];
-//    
-//    [query whereKey:@"objectId" matchesQuery:guestlistQuery];
-//    
+- (PFQuery *)queryForTable
+{
+    
+    [guestlistQuery whereKey:@"guestEmail" equalTo:[[defaults objectForKey:@"userEmail"] lowercaseString]];
+    [guestlistQuery includeKey:@"screening"];
+    
+    [query whereKey:@"objectId" matchesQuery:guestlistQuery];
+    
 //    if ([self.objects count] == 0) {
 //        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
 //    }
-//    
-//    
-//    
-//    return  query;
-//}
+    
+    
+    
+    return  query;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -105,37 +104,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     
     if (!cell) {
         
-        [tableView registerNib:[UINib nibWithNibName:@"RSVPTableViewCell" bundle:nil] forCellReuseIdentifier:@"RSVPCell"];
+        [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
         cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPCell"];
         
         [cell setBackgroundColor:self.tableView.backgroundColor];
     }
     
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
-    
-    cell.backgroundColor = [UIColor clearColor];
-    
-    CGFloat height = 0;
-    if (indexPath.row == 0) {
-        height = FIRST_ROW_HEIGHT;
-    } else {
-        height = OTHER_ROWS_HEIGHT;
-    }
-    
-    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, cell.frame.size.width - 20, height - 10)];
-    backgroundView.backgroundColor = [UIColor whiteColor];
-    backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
-    backgroundView.layer.shadowOffset = CGSizeMake(1, 1);
-    backgroundView.layer.shadowOpacity = 0.3;
-    backgroundView.layer.shadowRadius = 2.0f;
-    backgroundView.layer.cornerRadius = 2.0f;
-    [cell.contentView addSubview:backgroundView];
+//    for (UIView *view in cell.contentView.subviews) {
+//        [view removeFromSuperview];
+//    }
+//    
+//    cell.backgroundColor = [UIColor clearColor];
+//    
+//    CGFloat height = 0;
+//    if (indexPath.row == 0) {
+//        height = FIRST_ROW_HEIGHT;
+//    } else {
+//        height = OTHER_ROWS_HEIGHT;
+//    }
+//    
+//    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, cell.frame.size.width - 20, height - 10)];
+//    backgroundView.backgroundColor = [UIColor whiteColor];
+//    backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
+//    backgroundView.layer.shadowOffset = CGSizeMake(1, 1);
+//    backgroundView.layer.shadowOpacity = 0.3;
+//    backgroundView.layer.shadowRadius = 2.0f;
+//    backgroundView.layer.cornerRadius = 2.0f;
+//    [cell.contentView addSubview:backgroundView];
     
 //    UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
     
@@ -147,11 +146,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return FIRST_ROW_HEIGHT;
-    }else {
-        return OTHER_ROWS_HEIGHT;
-    }
+//    if (indexPath.row == 0) {
+//        return FIRST_ROW_HEIGHT;
+//    }else {
+//        return OTHER_ROWS_HEIGHT;
+//    }
+    
+    return 220;
     
 }
 

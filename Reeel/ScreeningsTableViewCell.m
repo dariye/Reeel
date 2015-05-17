@@ -18,9 +18,23 @@
 
 @implementation ScreeningsTableViewCell
 
+
+- (void)awakeFromNib {
+    // Initialization code
+    [super awakeFromNib];
+    [self setup];
+}
+
+- (void)setup
+{
+    
+}
+
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    [self setup];
     if (self) {
         // Initialization code
     }
@@ -53,15 +67,34 @@
 
 - (void)imageSetup
 {
-    _screeningImageView.clipsToBounds = YES;
-    _screeningImageView.contentMode = UIViewContentModeScaleAspectFit;
+   
+    _imageBackgroundView.clipsToBounds = YES;
+    _screeningImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
     _screeningImageView.backgroundColor = [UIColor whiteColor];
+    [_imageBackgroundView addSubview:_screeningImageView];
 }
 
-- (void)awakeFromNib {
-    // Initialization code
-    [super awakeFromNib];
+
+
+
+- (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view
+{
+    CGRect rectInSuperview = [tableView convertRect:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.imageBackgroundView.frame.size.width, self.imageBackgroundView.frame.size.height) toView:view];
+    
+    float distanceFromCenter = CGRectGetHeight(view.frame) / 2 - CGRectGetMinY(rectInSuperview);
+    
+    float difference = CGRectGetHeight(self.screeningImageView.frame) - CGRectGetHeight(CGRectMake(self.frame.origin.x, self.frame.origin.y, self.imageBackgroundView.frame.size.width, self.imageBackgroundView.frame.size.height));
+    
+    float move = (distanceFromCenter / CGRectGetHeight(view.frame)) * difference;
+    
+    CGRect imageRect = self.screeningImageView.frame;
+    imageRect.origin.y = -(difference * 0.4) + move;
+    self.screeningImageView.frame = imageRect;
 }
+
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     

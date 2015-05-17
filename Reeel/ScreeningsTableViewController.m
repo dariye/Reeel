@@ -9,8 +9,11 @@
 #import "ScreeningsTableViewController.h"
 #import "ScreeningsTableViewCell.h"
 #import "ScreeningDetailViewController.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
-@interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate, UIScrollViewDelegate>
+
+@interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate, UIScrollViewDelegate, MKMapViewDelegate>
 @property(nonatomic, readonly, retain) UIScrollView *scrollView;
 
 @property (nonatomic) CGFloat height;
@@ -49,8 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self queryForTable];
     self.navigationItem.title = @"Upcoming Screening";
+    
     
     self.tableView.separatorColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
@@ -67,35 +71,38 @@
     
     [query orderByDescending:@"createdAt"];
     
+    self.screenings = self.objects;
+    
     return query;
 }
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    for (ParallaxTableViewCell *cell in [self.tableView visibleCells]) {
-//        [cell cellOnTableView:self.tableView didScrollOnView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 49)]];
-//    }
+    for (ScreeningsTableViewCell *cell in [self.tableView visibleCells]) {
+        [cell cellOnTableView:self.tableView didScrollOnView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 49)]];
+    }
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //CGRect screenRect = [[UIScreen mainScreen] bounds];
-    //CGFloat screenHeight = screenRect.size.height;
-    //CGFloat tabbarHeight = self.tabBarController.tabBar.frame.size.height;
-    //CGFloat navbarHeight = self.navigationController.navigationBar.frame.size.height;
-    //CGFloat rowHeight = (screenHeight - (tabbarHeight + navbarHeight + 30))/2;
-//    self.height = rowHeight;
-    return 220;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    CGFloat tabbarHeight = self.tabBarController.tabBar.frame.size.height;
+    CGFloat navbarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat rowHeight = (screenHeight - (tabbarHeight + navbarHeight + 30))/2;
+    self.height = rowHeight;
+    NSLog(@"%f", self.height);
+    return self.height;
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object
 {
-    
+ 
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     
     if (!cell) {
@@ -103,16 +110,24 @@
        [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
         
-        [cell setBackgroundColor:self.tableView.backgroundColor];
     }
     
+    // set imageBackgroundView dynamically.
+    CGRect newFrame = cell.imageBackgroundView.frame;
 
+    newFrame.size.width = cell.imageBackgroundView.frame.size.width;
+    newFrame.size.height = cell.frame.size.height * 2/3 - 5;
+    
+    // set values for ui objects
+
+    [cell.imageBackgroundView setFrame:newFrame];
     
     PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
     
     [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
         if (!error) {
             cell.screeningImageView.image = [UIImage imageWithData:imageData];
+            cell.screeningImageView.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + 40);
         }
         
     }];
@@ -128,6 +143,8 @@
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
     [[cell screeningDateLabel] setText:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
+    
+  
 
     return cell;
 }

@@ -15,6 +15,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *screeningLocationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *imageBackgroundView;
+
 @property (weak, nonatomic) IBOutlet UIView *cardView;
+
+- (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view;
+
 
 @end
