@@ -7,7 +7,7 @@
 //
 
 #import "RSVPDetailViewController.h"
-#import "ScreeningStore.h"
+
 
 @interface RSVPDetailViewController () <UINavigationControllerDelegate, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameLabel;

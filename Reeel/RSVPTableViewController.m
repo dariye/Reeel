@@ -11,15 +11,13 @@
 #import <MaterialDesignCocoa/UIFont+MaterialDesignCocoa.h>
 #import "ScreeningsTableViewCell.h"
 #import "ScreeningDetailViewController.h"
-#import "Screening.h"
-#import "ScreeningStore.h"
+#import "RSVPedTableTableViewController.h"
 #import "RSVPTableViewCell.h"
 
 #define FIRST_ROW_HEIGHT 220;
 #define OTHER_ROWS_HEIGHT 110;
 
 @interface RSVPTableViewController () <UINavigationControllerDelegate, UITableViewDelegate>
-@property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, readonly, retain) UIScrollView *scrollView;
 
 @property (nonatomic, strong) NSUserDefaults *defaults;
@@ -31,7 +29,9 @@
 @property (nonatomic, strong) PFQuery *guestlistQuery;
 
 @property (nonatomic, strong) PFQuery *query;
-@property (nonatomic, strong) NSArray *screenings;
+@property (nonatomic, strong) NSMutableArray *screenings;
+
+@property (nonatomic) CGFloat height;
 
 @end
 
@@ -40,24 +40,48 @@
 @synthesize scrollView;
 @synthesize rsvps;
 @synthesize screeningQuery;
+@synthesize guestlist;
 @synthesize guestlistQuery;
 @synthesize defaults;
 @synthesize query;
 @synthesize screenings;
 
-//
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        self.parseClassName = @"Screening";
-//        self.pullToRefreshEnabled = YES;
-//        self.paginationEnabled = NO;
-//        self.objectsPerPage = 25;
-//    }
-//    return self;
-//    
-//}
+- (id)init
+{
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    guestlist = [[NSArray alloc] init];
+    screenings = [[NSMutableArray alloc] init];
+    NSString *userEmail = @"paul.dariye@gmail.com";
+    
+    guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
+    screeningQuery = [PFQuery queryWithClassName:@"Screening"];
+    
+    if (userEmail) {
+        [guestlistQuery whereKey:@"guestEmail" equalTo:userEmail];
+        
+        [guestlistQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+            
+            if (!error) {
+                for (PFObject *object in objects) {
+                    NSLog(@"yayaya %@", object[@"guestEmail"]);
+                    [screeningQuery  whereKey:@"objectId" equalTo:object[@"screeningId" ]];
+                    [screeningQuery getFirstObjectInBackgroundWithBlock:^(PFObject *screening, NSError *error) {
+                        if (!error) {
+                            [screenings addObject:screening];
+                        } else {
+                            
+                        }
+                    }];
+                }
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+            
+        }];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     
@@ -65,30 +89,19 @@
     
     [self.tableView reloadData];
     
-    defaults = [NSUserDefaults standardUserDefaults];
     
+
     self.navigationItem.title = @"RSVPs";
  
     
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
+    
+    
+    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.separatorColor  = [UIColor clearColor];
 
-}
 
-- (PFQuery *)queryForTable
-{
-    
-    [guestlistQuery whereKey:@"guestEmail" equalTo:[[defaults objectForKey:@"userEmail"] lowercaseString]];
-    [guestlistQuery includeKey:@"screening"];
-    
-    [query whereKey:@"objectId" matchesQuery:guestlistQuery];
-    
-//    if ([self.objects count] == 0) {
-//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-//    }
-    
-    
-    
-    return  query;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -99,60 +112,71 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [screenings count];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    for (ScreeningsTableViewCell *cell in [self.tableView visibleCells]) {
+        [cell cellOnTableView:self.tableView didScrollOnView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 49)]];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
+    ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
     
     if (!cell) {
         
         [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
         
         [cell setBackgroundColor:self.tableView.backgroundColor];
     }
     
-//    for (UIView *view in cell.contentView.subviews) {
-//        [view removeFromSuperview];
-//    }
-//    
-//    cell.backgroundColor = [UIColor clearColor];
-//    
-//    CGFloat height = 0;
-//    if (indexPath.row == 0) {
-//        height = FIRST_ROW_HEIGHT;
-//    } else {
-//        height = OTHER_ROWS_HEIGHT;
-//    }
-//    
-//    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, cell.frame.size.width - 20, height - 10)];
-//    backgroundView.backgroundColor = [UIColor whiteColor];
-//    backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
-//    backgroundView.layer.shadowOffset = CGSizeMake(1, 1);
-//    backgroundView.layer.shadowOpacity = 0.3;
-//    backgroundView.layer.shadowRadius = 2.0f;
-//    backgroundView.layer.cornerRadius = 2.0f;
-//    [cell.contentView addSubview:backgroundView];
+    // set imageBackgroundView dynamically.
+    CGRect newFrame = cell.imageBackgroundView.frame;
     
-//    UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+    newFrame.size.width = cell.imageBackgroundView.frame.size.width;
+    newFrame.size.height = cell.frame.size.height * 2/3 - 5;
+    [cell.imageBackgroundView setFrame:newFrame];
     
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    PFObject *screening = screenings[indexPath.row];
     
+    PFFile *screeningPoster = [screening objectForKey:@"screeningPoster"];
     
+    [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
+        if (!error) {
+            cell.screeningImageView.image = [UIImage imageWithData:imageData];
+            cell.screeningImageView.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + 40);
+        }
+        
+    }];
+    
+    [[cell screeningTitleLabel] setText:[screening objectForKey:@"screeningTitle"]];
+    
+    [[cell screeningLocationLabel] setText:[screening objectForKey:@"screeningLocation"]];
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
+    [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
+    
+    [[cell screeningDateLabel] setText:[dateFormat stringFromDate:[screening objectForKey:@"screeningDate"]]];
+
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row == 0) {
-//        return FIRST_ROW_HEIGHT;
-//    }else {
-//        return OTHER_ROWS_HEIGHT;
-//    }
+
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    CGFloat tabbarHeight = self.tabBarController.tabBar.frame.size.height;
+    CGFloat navbarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat rowHeight = (screenHeight - (tabbarHeight + navbarHeight + 30))/2;
+    self.height = rowHeight;
     
-    return 220;
+    return self.height;
     
 }
 
@@ -161,8 +185,7 @@
 {
     
     
-    ScreeningDetailViewController *detailViewController = [[ScreeningDetailViewController alloc] init];
-//    screenings = self.objects;
+    RSVPedTableTableViewController *detailViewController = [[RSVPedTableTableViewController alloc] init];
     
     PFObject *selectedScreening = screenings[indexPath.row];
     

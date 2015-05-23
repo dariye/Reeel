@@ -49,6 +49,12 @@
     [super awakeFromNib];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -94,7 +100,6 @@
     CGFloat navbarHeight = self.navigationController.navigationBar.frame.size.height;
     CGFloat rowHeight = (screenHeight - (tabbarHeight + navbarHeight + 30))/2;
     self.height = rowHeight;
-    NSLog(@"%f", self.height);
     return self.height;
 }
 
@@ -108,18 +113,20 @@
     if (!cell) {
                 
        [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
+        
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
+        
         
     }
     
-    // set imageBackgroundView dynamically.
-    CGRect newFrame = cell.imageBackgroundView.frame;
-
-    newFrame.size.width = cell.imageBackgroundView.frame.size.width;
-    newFrame.size.height = cell.frame.size.height * 2/3 - 5;
     
     // set values for ui objects
 
+    // set imageBackgroundView dynamically.
+    CGRect newFrame = cell.imageBackgroundView.frame;
+    
+    newFrame.size.width = cell.imageBackgroundView.frame.size.width;
+    newFrame.size.height = cell.frame.size.height * 2/3 - 5;
     [cell.imageBackgroundView setFrame:newFrame];
     
     PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
@@ -135,8 +142,7 @@
     [[cell screeningTitleLabel] setText:[object objectForKey:@"screeningTitle"]];
     
     [[cell screeningLocationLabel] setText:[object objectForKey:@"screeningLocation"]];
-    
-    NSLog(@"%@", [object objectForKey:@"createdBy"]);
+
     // Date formatter
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
   

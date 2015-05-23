@@ -11,12 +11,11 @@
 #import <ParseUI/ParseUI.h>
 
 
+
 //IB_DESIGNABLE
 @class Screening;
 
 @interface ScreeningDetailViewController : UIViewController
-
-//@property (nonatomic, strong) Screening *screening;
 
 @property (nonatomic, strong) PFObject *screening;
 

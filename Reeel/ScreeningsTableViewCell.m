@@ -7,8 +7,6 @@
 //
 
 #import "ScreeningsTableViewCell.h"
-#import "Screening.h"
-#import "ScreeningStore.h"
 
 @interface ScreeningsTableViewCell ()
 
