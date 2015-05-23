@@ -8,4 +8,5 @@ target 'Reeel' do
   pod 'FontAwesomeIconFactory'
   pod 'MaterialDesignCocoa'
   pod 'PACScrollView'
+  pod 'FXBlurView'
 end

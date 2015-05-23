@@ -53,7 +53,8 @@
     [super viewDidLoad];
     [self queryForTable];
     self.navigationItem.title = @"Upcoming Screening";
-    
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
+
     
     self.tableView.separatorColor = [UIColor clearColor];
     

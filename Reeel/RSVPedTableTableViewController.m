@@ -32,6 +32,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.navigationItem.title = [self.screening objectForKey:@"screeningTitle"];
+    
+    self.tableView.separatorColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,12 +80,12 @@
 
     CGFloat height = 0;
     if (indexPath.row == 0) {
-        height = FIRST_ROW_HEIGHT;
+        height = ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
     } else {
-        height = OTHER_ROWS_HEIGHT;
+        height = ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 4;
     }
 
-    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, cell.frame.size.width - 20, height - 10)];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, height - 10)];
     backgroundView.backgroundColor = [UIColor whiteColor];
     backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
     backgroundView.layer.shadowOffset = CGSizeMake(1, 1);
@@ -94,7 +96,7 @@
     [cell.contentView addSubview:backgroundView];
     
     
-    self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+    self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 300)];
     self.descriptionLabel.textColor = [UIColor blackColor];
     
     self.descriptionLabel.contentMode = UIViewContentModeScaleAspectFit;
@@ -122,9 +124,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return FIRST_ROW_HEIGHT;
+        return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
     }else {
-        return OTHER_ROWS_HEIGHT;
+        return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 4 - 5;
     }
 }
 

@@ -27,6 +27,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.1.5)
   - FontAwesomeIconFactory (2.0)
+  - FXBlurView (1.6.3)
   - MaterialDesignCocoa (0.0.2)
   - PACScrollView (1.0)
   - Parse (1.7.2):
@@ -37,6 +38,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - FontAwesomeIconFactory
+  - FXBlurView
   - MaterialDesignCocoa
   - PACScrollView
   - Parse
@@ -46,6 +48,7 @@ SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
   Bolts: aac24961496d504aa56fc267cde95162a71bac39
   FontAwesomeIconFactory: d161a1832f8220d764033e0fcc4f4a8388495ab7
+  FXBlurView: c6d23f3d35af2c6282296a2930f61c6e2c788d01
   MaterialDesignCocoa: 271e7ed939a4825f125d1f2591d1e284e1999541
   PACScrollView: 090c1d5bc632e9f2eecfd58fa79df95dff6e16f3
   Parse: e1959adb9fe2fcd4736dac20b3ac691d47a4f06c

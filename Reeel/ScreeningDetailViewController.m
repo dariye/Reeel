@@ -9,28 +9,29 @@
 #import "ScreeningDetailViewController.h"
 #import "RSVPDetailViewController.h"
 #import "ScreeningScrollContentViewController.h"
+#import <FXBlurView/FXBlurView.h>
 
 @interface ScreeningDetailViewController () <UINavigationControllerDelegate, UIScrollViewDelegate>
-@property (strong, nonatomic) IBOutlet UIImageView *screeningImageView;
-//@property (weak, nonatomic) IBOutlet UILabel *movieRatingLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *movieSynopsisText;
-//@property (weak, nonatomic) IBOutlet UIButton *RSVPButton;
-//@property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *releaseDateLabel;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *screeningImageView;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) ScreeningScrollContentViewController *contentView;
-
+@property (strong, nonatomic) FXBlurView *blurScreeningImageView;
 
 @end
 
 @implementation ScreeningDetailViewController
 
-@synthesize screening;
-@synthesize scrollView;
-@synthesize contentView;
+@synthesize screening = _screening;
+@synthesize scrollView = _scrollView;
+@synthesize contentView = _contentView;
 
-
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+    }
+    return _scrollView;
+}
 
 - (IBAction)RSVPButtonPressed:(UIButton *)sender {
     RSVPDetailViewController *rsvpDetail = [[RSVPDetailViewController alloc] init];
@@ -40,27 +41,37 @@
     [self.navigationController pushViewController:rsvpDetail animated:YES];
 }
 
-
-- (void)viewDidAppear:(BOOL)animated
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [super viewDidAppear:animated];
-    
+    CGFloat y = scrollView.contentOffset.y;
+    self.blurScreeningImageView.alpha = y / [UIScreen mainScreen].bounds.size.height;
 }
 
+- (void)initContent
+{
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, [UIScreen mainScreen].bounds.size.height - 50, [UIScreen mainScreen].bounds.size.width, 21)];
+    title.text = @"Jason Ji";
+    
+    [self.scrollView addSubview:title];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self initContent];
+}
 
 - (void)viewDidLoad {
     
     
     [super viewDidLoad];
     
-    screening = self.screening;
+    //contentView = [[ScreeningScrollContentViewController alloc] initWithNibName:@"ScreeningScrollContentViewController" bundle:nil];
     
-    contentView = [[ScreeningScrollContentViewController alloc] initWithNibName:@"ScreeningScrollContentViewController" bundle:nil];
+    //contentView.screeningTitleLabel.text = [screening objectForKey:@"screeningTitle"];
     
-    contentView.screeningTitleLabel.text = [screening objectForKey:@"screeningTitle"];
-    
-    [self.scrollView addSubview:contentView.scrollContentView];
+    //[self.scrollView addSubview:contentView.scrollContentView];
     
     
 //    contentView.backgroundColor = [UIColor whiteColor];
@@ -83,12 +94,12 @@
 //    scrollView = [CustomScreeningScrollViewController new];
     
     
-    self.navigationItem.title = [screening objectForKey:@"screeningTitle"];
+    self.navigationItem.title = [_screening objectForKey:@"screeningTitle"];
     
     // Set background color of view
     self.view.backgroundColor = [UIColor whiteColor];
     // Set assign image from assets
-    PFFile *screeningPoster =  [screening objectForKey:@"screeningPoster"];
+    PFFile *screeningPoster =  [_screening objectForKey:@"screeningPoster"];
     
     [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
         if (!error) {
@@ -96,12 +107,23 @@
         }
         
     }];
-//    
+    
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    self.screeningImageView = backgroundImageView;
+    [self.view addSubview:self.screeningImageView];
+    
+    self.blurScreeningImageView = [[FXBlurView alloc] initWithFrame:self.screeningImageView.frame];
+    self.blurScreeningImageView.alpha = 0;
+    [self.screeningImageView addSubview:self.blurScreeningImageView];
+    
+    self.scrollView.delegate = self;
+    self.scrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 2);
+    self.scrollView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.scrollView];
+//
 //    [scrollView addSubview:contentView.view];
 //    
-    
-
-    
     
     
 
@@ -129,13 +151,6 @@
 //    
 //    [[self releaseDateLabel] setText:[releaseDateFormat stringFromDate:[self.screening objectForKey:@"screeningReleaseDate"]]];
 
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

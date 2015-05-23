@@ -11,4 +11,16 @@
 
 @interface RSVPTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) UILabel *screeningTitleLabel;
+@property (strong, nonatomic) UILabel *screeningDateLabel;
+
+@property (strong, nonatomic) UILabel *screeningLocationLabel;
+@property (strong, nonatomic) UIImageView *screeningImageView;
+
+@property (strong, nonatomic) UIView *imageBackgroundView;
+
+@property (strong, nonatomic) UIView *cardView;
+
+- (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view;
+
 @end
