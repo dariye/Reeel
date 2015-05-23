@@ -16,64 +16,7 @@
 
 @implementation ScreeningsTableViewCell
 
-
-- (void)awakeFromNib {
-    // Initialization code
-    [super awakeFromNib];
-    [self setup];
-}
-
-- (void)setup
-{
-    
-}
-
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    [self setup];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-
 /* Code From: https://medium.com/@cwRichardKim/ios-xcode-tutorial-a-card-based-newsfeed-8bedeb7b8df7 */
-- (void)layoutSubviews
-{
-    [self cardSetup];
-    [self imageSetup];
-}
-
-- (void)cardSetup
-{
-    [self.cardView setAlpha:1];
-    self.cardView.layer.masksToBounds = NO;
-    self.cardView.layer.cornerRadius = 2;
-    self.cardView.layer.shadowOffset = CGSizeMake(1, 1);
-    self.cardView.layer.shadowRadius = 1;
-    self.cardView.layer.shadowColor = [UIColor blackColor].CGColor;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.cardView.bounds];
-    self.cardView.layer.shadowPath = path.CGPath;
-    self.cardView.layer.shadowOpacity = 0.2;
-    
-    self.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
-
-}
-
-- (void)imageSetup
-{
-   
-    _imageBackgroundView.clipsToBounds = YES;
-    _screeningImageView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    _screeningImageView.backgroundColor = [UIColor whiteColor];
-    [_imageBackgroundView addSubview:_screeningImageView];
-}
-
-
 
 
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view

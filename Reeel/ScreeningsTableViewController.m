@@ -19,7 +19,6 @@
 @property (nonatomic) CGFloat height;
 
 @property (nonatomic, strong) NSArray *screenings;
-\
 
 
 @end
@@ -49,12 +48,6 @@
     [super awakeFromNib];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self.tableView reloadData];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -63,7 +56,6 @@
     
     
     self.tableView.separatorColor = [UIColor clearColor];
-    self.view.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
     
 }
 
@@ -93,19 +85,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenHeight = screenRect.size.height;
-    CGFloat tabbarHeight = self.tabBarController.tabBar.frame.size.height;
-    CGFloat navbarHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat rowHeight = (screenHeight - (tabbarHeight + navbarHeight + 30))/2;
-    self.height = rowHeight;
-    return self.height;
+    return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
 }
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
  
     ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
@@ -116,39 +101,85 @@
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
         
-        
     }
     
+    for (UIView *view in cell.contentView.subviews) {
+        [view removeFromSuperview];
+    }
     
     // set values for ui objects
-
-    // set imageBackgroundView dynamically.
-    CGRect newFrame = cell.imageBackgroundView.frame;
+    cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 30)];
+    cell.cardView.backgroundColor = [UIColor whiteColor];
+    cell.cardView.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.cardView.layer.shadowOffset = CGSizeMake(1, 1);
+    cell.cardView.layer.shadowOpacity = 0.3;
+    cell.cardView.layer.shadowRadius = 2.0f;
+    cell.cardView.layer.cornerRadius = 2.0f;
     
-    newFrame.size.width = cell.imageBackgroundView.frame.size.width;
-    newFrame.size.height = cell.frame.size.height * 2/3 - 5;
-    [cell.imageBackgroundView setFrame:newFrame];
+    [cell.contentView addSubview:cell.cardView];
+    
+    
+    // set imageBackgroundView dynamically.
+    cell.imageBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.cardView.frame.size.width, cell.cardView.frame.size.height * 2/3)];
+    cell.imageBackgroundView.clipsToBounds = YES;
+    
+    [cell.cardView addSubview:cell.imageBackgroundView];
+
+    cell.screeningImageView = [[UIImageView alloc] init];
+    cell.screeningImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.screeningImageView.frame = CGRectMake(0, -20, cell.frame.size.width, cell.frame.size.height + 40);
+    [cell.imageBackgroundView addSubview:cell.screeningImageView];
     
     PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
     
     [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
         if (!error) {
             cell.screeningImageView.image = [UIImage imageWithData:imageData];
-            cell.screeningImageView.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height + 40);
         }
         
     }];
     
-    [[cell screeningTitleLabel] setText:[object objectForKey:@"screeningTitle"]];
+    cell.screeningTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.imageBackgroundView.frame.size.height + 10, cell.cardView.frame.size.width, 21)];
     
-    [[cell screeningLocationLabel] setText:[object objectForKey:@"screeningLocation"]];
-
+    [cell.screeningTitleLabel setText:[object objectForKey:@"screeningTitle"]];
+    cell.screeningTitleLabel.numberOfLines = 0;
+    [cell.screeningTitleLabel sizeToFit];
+    cell.screeningTitleLabel.font = [UIFont systemFontOfSize:14];
+    cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
+    
+    
+    [cell.cardView addSubview:cell.screeningTitleLabel];
+    
+    
     // Date formatter
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-  
+    
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
-    [[cell screeningDateLabel] setText:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
+    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 20, 21)];
+    [cell.screeningDateLabel setText:[object objectForKey:@"screeningLocation"]];
+    cell.screeningDateLabel.numberOfLines = 0;
+    [cell.screeningDateLabel sizeToFit];
+    cell.screeningDateLabel.font = [UIFont systemFontOfSize:14];
+    cell.screeningDateLabel.textColor = [UIColor lightGrayColor];
+    
+    [cell.screeningDateLabel setText:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
+    [cell.cardView addSubview:cell.screeningDateLabel];
+
+    
+    
+    
+    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.cardView.frame.size.height * 2/3 + 40, cell.cardView.frame.size.width - 20, 21)];
+    [cell.screeningLocationLabel setText:[object objectForKey:@"screeningLocation"]];
+    cell.screeningLocationLabel.numberOfLines = 0;
+    [cell.screeningLocationLabel sizeToFit];
+    //CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
+    cell.screeningLocationLabel.font = [UIFont systemFontOfSize:14];
+    cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
+    
+
+    [cell.cardView addSubview:cell.screeningLocationLabel];
+    
     
   
 

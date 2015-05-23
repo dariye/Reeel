@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <MaterialDesignCocoa/UIColor+MaterialDesignCocoa.h>
-#import <MaterialDesignCocoa/UIFont+MaterialDesignCocoa.h>
+
 #import "ScreeningDetailViewController.h"
 #import "RSVPTableViewController.h"
 #import "ProfileTableViewController.h"
@@ -34,15 +33,15 @@
     
     
     // Material Design UINavigationController
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor mdcRedColorWithPaletteId:kUIColorMDCPaletteIdPrimary]];
-    [[UINavigationBar appearance] setTitleTextAttributes:
-     @{
-       NSForegroundColorAttributeName: [UIColor whiteColor],
-       //     UITextAttributeTextShadowColor: [NSNull null],
-       //     UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, 0)],
-       NSFontAttributeName: [UIFont mdcHeadlineFont],
-       }];
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor mdcRedColorWithPaletteId:kUIColorMDCPaletteIdPrimary]];
+//    [[UINavigationBar appearance] setTitleTextAttributes:
+//     @{
+//       NSForegroundColorAttributeName: [UIColor whiteColor],
+//       //     UITextAttributeTextShadowColor: [NSNull null],
+//       //     UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, 0)],
+//       NSFontAttributeName: [UIFont mdcHeadlineFont],
+//       }];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     

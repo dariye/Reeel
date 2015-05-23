@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface ScreeningsTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *screeningTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *screeningDateLabel;
-\
-@property (weak, nonatomic) IBOutlet UILabel *screeningLocationLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *screeningImageView;
+@property (strong, nonatomic) UILabel *screeningTitleLabel;
+@property (strong, nonatomic) UILabel *screeningDateLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *imageBackgroundView;
+@property (strong, nonatomic) UILabel *screeningLocationLabel;
+@property (strong, nonatomic) UIImageView *screeningImageView;
 
-@property (weak, nonatomic) IBOutlet UIView *cardView;
+@property (strong, nonatomic) UIView *imageBackgroundView;
+
+@property (strong, nonatomic) UIView *cardView;
 
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view;
 
