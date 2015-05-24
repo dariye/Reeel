@@ -1,6 +1,0 @@
-framework module PACScrollView {
-  umbrella header "Pods-Reeel-PACScrollView-umbrella.h"
-
-  export *
-  module * { export * }
-}

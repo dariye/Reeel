@@ -16,6 +16,10 @@
 @interface RSVPedTableTableViewController ()
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UIView *mapImageView;
+@property (nonatomic, strong) UIButton *ticketButton;
+@property (nonatomic, strong) UIButton *cancelRSVPButton;
+
 
 @end
 
@@ -34,15 +38,19 @@
     self.navigationItem.title = [self.screening objectForKey:@"screeningTitle"];
     
     self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
 }
 
-- (void)didReceiveMemoryWarning
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if (indexPath.row == 0) {
+        return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
+    }else {
+        return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 4 - 5;
+    }
 }
 
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -78,6 +86,7 @@
 
     cell.backgroundColor = [UIColor clearColor];
 
+
     CGFloat height = 0;
     if (indexPath.row == 0) {
         height = ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
@@ -96,99 +105,50 @@
     [cell.contentView addSubview:backgroundView];
     
     
-    self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, 300)];
-    self.descriptionLabel.textColor = [UIColor blackColor];
+    /* Map View 
+    - pull saved screening location image from parse
+     */
     
-    self.descriptionLabel.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:self.descriptionLabel];
     
-    switch (indexPath.row) {
-        case 0:
-            break;
-            
-        case 1:
-            self.descriptionLabel.text = @"Ticket";
-            break;
-        case 2:
-            self.descriptionLabel.text = @"Cancel RSVP";
-           
-            break;
-            
-        default:
-            break;
+   
+    //self.button.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
+    if (indexPath.row == 0) {
+       self.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height * 2/3)];
+       self.mapImageView.clipsToBounds = YES;
+        
+       self.descriptionLabel.textColor = [UIColor blackColor];
+        self.descriptionLabel.text = [self.screening objectForKey:@"screeningLocation"];
+       [cell addSubview:self.descriptionLabel];
+        
+    }else if (indexPath.row == 1){
+        self.ticketButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.ticketButton.frame = CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, height - 10);
+        [self.ticketButton setContentMode:UIViewContentModeScaleAspectFit];
+        [self.ticketButton setClipsToBounds:YES];
+        [self.ticketButton setBackgroundColor:[UIColor whiteColor]];
+        [self.ticketButton setTitle:@"Ticket" forState:UIControlStateNormal];
+        [self.ticketButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.ticketButton.titleLabel setFont:[UIFont systemFontOfSize:22]];
+        [cell addSubview:self.ticketButton];
+        
+    }else {
+        self.cancelRSVPButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.cancelRSVPButton.frame = CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, height - 10);
+        [self.cancelRSVPButton setContentMode:UIViewContentModeScaleAspectFit];
+        [self.cancelRSVPButton setClipsToBounds:YES];
+        [self.cancelRSVPButton setBackgroundColor:[UIColor whiteColor]];
+        [self.cancelRSVPButton setTitle:@"Cancel RSVP" forState:UIControlStateNormal];
+        [self.cancelRSVPButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [self.cancelRSVPButton.titleLabel setFont:[UIFont systemFontOfSize:22]];
+ 
+        [cell addSubview:self.cancelRSVPButton];
     }
-    
+
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
-    }else {
-        return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 4 - 5;
-    }
-}
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

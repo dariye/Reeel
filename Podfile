@@ -6,7 +6,6 @@ target 'Reeel' do
   pod 'ParseUI'
   pod 'AFNetworking', '~> 2.0'
   pod 'FontAwesomeIconFactory'
-  pod 'MaterialDesignCocoa'
-  pod 'PACScrollView'
   pod 'FXBlurView'
+  pod 'GoogleMaps'
 end

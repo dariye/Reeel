@@ -14,6 +14,7 @@
 #import "ScreeningsTableViewController.h"
 #import <Parse/Parse.h>
 
+
 @interface AppDelegate ()
 
 @end
@@ -30,7 +31,7 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
+
     
     // Material Design UINavigationController
 //    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];

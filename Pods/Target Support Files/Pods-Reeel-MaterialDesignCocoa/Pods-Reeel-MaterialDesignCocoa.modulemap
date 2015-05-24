@@ -1,6 +1,0 @@
-framework module MaterialDesignCocoa {
-  umbrella header "Pods-Reeel-MaterialDesignCocoa-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -65,7 +65,6 @@
             
             if (!error) {
                 for (PFObject *object in objects) {
-                    NSLog(@"yayaya %@", object[@"guestEmail"]);
                     [screeningQuery  whereKey:@"objectId" equalTo:object[@"screeningId" ]];
                     [screeningQuery getFirstObjectInBackgroundWithBlock:^(PFObject *screening, NSError *error) {
                         if (!error) {
@@ -124,8 +123,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%ld", [_screenings count]);
-    return [_screenings count];
+    return [self.screenings count];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -139,8 +137,6 @@
 {
 
     PFObject *screening = self.screenings[indexPath.row];
-    
-    NSLog(@"%@", screening);
     
     
     RSVPTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPsCell"];

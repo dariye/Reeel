@@ -38,6 +38,8 @@
         self.objectsPerPage = 25;
         
     }
+     [self queryForTable];
+    
     
     return self;
     
@@ -51,11 +53,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self queryForTable];
+   
     self.navigationItem.title = @"Upcoming Screening";
-    [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
-
-    
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
     self.tableView.separatorColor = [UIColor clearColor];
     
 }
@@ -69,8 +69,7 @@
     }
     
     [query orderByDescending:@"createdAt"];
-    
-    self.screenings = self.objects;
+
     
     return query;
 }
