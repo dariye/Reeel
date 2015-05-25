@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		7612EEF31B0525760024A933 /* RSVPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7612EEF11B0525760024A933 /* RSVPTableViewCell.m */; };
 		7612EEF41B0525760024A933 /* RSVPTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */; };
-		763F77361B0BE7CE00B52149 /* ScreeningScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F77341B0BE7CE00B52149 /* ScreeningScrollContentViewController.m */; };
-		763F77371B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F77351B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib */; };
 		763F77401B0C19E800B52149 /* RSVPedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F773E1B0C19E800B52149 /* RSVPedTableTableViewController.m */; };
 		763F77411B0C19E800B52149 /* RSVPedTableTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F773F1B0C19E800B52149 /* RSVPedTableTableViewController.xib */; };
 		764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */; };
@@ -51,9 +49,6 @@
 		7612EEF01B0525760024A933 /* RSVPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVPTableViewCell.h; sourceTree = "<group>"; };
 		7612EEF11B0525760024A933 /* RSVPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVPTableViewCell.m; sourceTree = "<group>"; };
 		7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSVPTableViewCell.xib; sourceTree = "<group>"; };
-		763F77331B0BE7CE00B52149 /* ScreeningScrollContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningScrollContentViewController.h; sourceTree = "<group>"; };
-		763F77341B0BE7CE00B52149 /* ScreeningScrollContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningScrollContentViewController.m; sourceTree = "<group>"; };
-		763F77351B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningScrollContentViewController.xib; sourceTree = "<group>"; };
 		763F773D1B0C19E800B52149 /* RSVPedTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVPedTableTableViewController.h; sourceTree = "<group>"; };
 		763F773E1B0C19E800B52149 /* RSVPedTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVPedTableTableViewController.m; sourceTree = "<group>"; };
 		763F773F1B0C19E800B52149 /* RSVPedTableTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSVPedTableTableViewController.xib; sourceTree = "<group>"; };
@@ -215,9 +210,6 @@
 				7665D2D51AE4571200487F59 /* ScreeningDetailViewController.h */,
 				7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */,
 				7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */,
-				763F77331B0BE7CE00B52149 /* ScreeningScrollContentViewController.h */,
-				763F77341B0BE7CE00B52149 /* ScreeningScrollContentViewController.m */,
-				763F77351B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib */,
 			);
 			name = Screenings;
 			sourceTree = "<group>";
@@ -356,7 +348,6 @@
 				F09972031AF523D400F18DA6 /* RSVPDetailViewController.xib in Resources */,
 				76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */,
 				764069361AF09BB6004DD42B /* TermsAndConditionsViewController.xib in Resources */,
-				763F77371B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib in Resources */,
 				7612EEF41B0525760024A933 /* RSVPTableViewCell.xib in Resources */,
 				76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */,
 				76E735091AE83C5600F312E2 /* RSVPTableViewController.xib in Resources */,
@@ -434,7 +425,6 @@
 				767E79471AD61392003E9A23 /* AppDelegate.m in Sources */,
 				7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */,
 				764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */,
-				763F77361B0BE7CE00B52149 /* ScreeningScrollContentViewController.m in Sources */,
 				767E79441AD61392003E9A23 /* main.m in Sources */,
 				76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */,
 				76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */,
