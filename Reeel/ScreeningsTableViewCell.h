@@ -19,6 +19,9 @@
 
 @property (strong, nonatomic) UIView *cardView;
 
+@property (strong, nonatomic) UIImageView *timeIconImageView;
+@property (strong, nonatomic) UIImageView *locationIconImageView;
+
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view;
 
 

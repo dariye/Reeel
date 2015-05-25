@@ -11,6 +11,7 @@
 #import "ScreeningDetailViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "AppDelegate.h"
 
 
 @interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate, UIScrollViewDelegate, MKMapViewDelegate>
@@ -19,14 +20,14 @@
 @property (nonatomic) CGFloat height;
 
 @property (nonatomic, strong) NSArray *screenings;
-
+@property (nonatomic, strong) NSDate *lastRefresh;
 
 @end
 
 @implementation ScreeningsTableViewController
 
 @synthesize scrollView;
-@synthesize screenings;
+@synthesize screenings = _screenings;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,27 +37,24 @@
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = NO;
         self.objectsPerPage = 25;
+        [self retrieveFromParse];
         
     }
-     [self queryForTable];
-    
     
     return self;
     
 }
 
-- (void)awakeFromNib {
-    // Initialization code
-    [super awakeFromNib];
-}
-
 - (void)viewDidLoad
 {
+    self.tableView.separatorColor = [UIColor clearColor];
+    
     [super viewDidLoad];
-   
+    
     self.navigationItem.title = @"Upcoming Screening";
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
-    self.tableView.separatorColor = [UIColor clearColor];
+    
+    self.lastRefresh = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScreeningsTableViewControllerLastRefreshKey"];
     
 }
 
@@ -64,16 +62,44 @@
 -  (PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    if ([self.objects count] == 0) {
+    
+    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    
+    if ([self.objects count] == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
-    
     [query orderByDescending:@"createdAt"];
-
+//    [query setLimit:0];
     
     return query;
 }
 
+- (void)retrieveFromParse
+{
+   
+    [[self queryForTable] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.screenings = [[NSArray alloc] initWithArray:objects];
+            [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void)objectsDidLoad:(nullable NSError *)error
+{
+    [super objectsDidLoad:error];
+    
+    self.lastRefresh = [NSDate date];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.lastRefresh forKey:@"ScreeningsTableViewControllerLastRefreshKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+     if (self.objects.count == 0 && ![[self queryForTable] hasCachedResult]) {
+         self.tableView.scrollEnabled = NO;
+     }else {
+         self.tableView.scrollEnabled = YES;
+     }
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -83,6 +109,13 @@
 }
 
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2;
@@ -90,22 +123,25 @@
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
-    ScreeningsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
+    static NSString *CellIdentifier = @"ScreeningsCell";
+    static NSString *CellNib = @"ScreeningsTableViewCell";
+    
+    
+    ScreeningsTableViewCell *cell = (ScreeningsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-                
-       [tableView registerNib:[UINib nibWithNibName:@"ScreeningsTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreeningsCell"];
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningsCell"];
-        
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellNib owner:self options:nil];
+        cell = (ScreeningsTableViewCell *)[nib objectAtIndex:0];
+        for (UIView *view in cell.contentView.subviews) {
+            [view removeFromSuperview];
+        }
     }
+
+ 
     
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
+    PFObject *screening = self.screenings[indexPath.row];
     
     // set values for ui objects
     cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 30)];
@@ -130,7 +166,7 @@
     cell.screeningImageView.frame = CGRectMake(0, -20, cell.frame.size.width, cell.frame.size.height + 40);
     [cell.imageBackgroundView addSubview:cell.screeningImageView];
     
-    PFFile *screeningPoster = [object objectForKey:@"screeningPoster"];
+    PFFile *screeningPoster = [screening objectForKey:@"screeningPoster"];
     
     [screeningPoster getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error){
         if (!error) {
@@ -141,7 +177,7 @@
     
     cell.screeningTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.imageBackgroundView.frame.size.height + 10, cell.cardView.frame.size.width, 21)];
     
-    [cell.screeningTitleLabel setText:[object objectForKey:@"screeningTitle"]];
+    [cell.screeningTitleLabel setText:[screening objectForKey:@"screeningTitle"]];
     cell.screeningTitleLabel.numberOfLines = 0;
     [cell.screeningTitleLabel sizeToFit];
     cell.screeningTitleLabel.font = [UIFont systemFontOfSize:14];
@@ -150,53 +186,61 @@
     
     [cell.cardView addSubview:cell.screeningTitleLabel];
     
+    // Time Icon
+    UIImage *timeImage = [UIImage imageNamed:@"access-time"];
+    cell.timeIconImageView = [[UIImageView alloc] initWithImage:timeImage];
+     cell.timeIconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.timeIconImageView.frame = CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 20, 12, 12);
+    cell.timeIconImageView.clipsToBounds = YES;
+   
+    
+    [cell.cardView addSubview:cell.timeIconImageView];
     
     // Date formatter
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
-    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 20, 21)];
-    [cell.screeningDateLabel setText:[object objectForKey:@"screeningLocation"]];
+    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 40, 21)];
+    [cell.screeningDateLabel setText:[screening objectForKey:@"screeningLocation"]];
     cell.screeningDateLabel.numberOfLines = 0;
     [cell.screeningDateLabel sizeToFit];
     cell.screeningDateLabel.font = [UIFont systemFontOfSize:14];
     cell.screeningDateLabel.textColor = [UIColor lightGrayColor];
     
-    [cell.screeningDateLabel setText:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
+    [cell.screeningDateLabel setText:[dateFormat stringFromDate:[screening objectForKey:@"screeningDate"]]];
     [cell.cardView addSubview:cell.screeningDateLabel];
 
+    // Location Icon
+    UIImage *locationImage = [UIImage imageNamed:@"location"];
+    cell.locationIconImageView = [[UIImageView alloc] initWithImage:locationImage];
+    cell.locationIconImageView.frame = CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 37, 12, 12);
+    cell.locationIconImageView.clipsToBounds = YES;
+    cell.locationIconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [cell.cardView addSubview:cell.locationIconImageView];
     
     
-    
-    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.cardView.frame.size.height * 2/3 + 40, cell.cardView.frame.size.width - 20, 21)];
-    [cell.screeningLocationLabel setText:[object objectForKey:@"screeningLocation"]];
+    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 25, cell.cardView.frame.size.width - 40, 21)];
+    [cell.screeningLocationLabel setText:[screening objectForKey:@"screeningLocation"]];
+//    CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
+//    
     cell.screeningLocationLabel.numberOfLines = 0;
     [cell.screeningLocationLabel sizeToFit];
-    //CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     cell.screeningLocationLabel.font = [UIFont systemFontOfSize:14];
     cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
-    
-
     [cell.cardView addSubview:cell.screeningLocationLabel];
     
     
   
-
+    [cell layoutSubviews];
     return cell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningDetailViewController *detailViewController = [[ScreeningDetailViewController alloc] init];
-    screenings = self.objects;
     
-    PFObject *selectedScreening = screenings[indexPath.row];
+    PFObject *selectedScreening = self.screenings[indexPath.row];
     
     detailViewController.screening = selectedScreening;
     

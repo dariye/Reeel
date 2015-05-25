@@ -54,6 +54,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'FontAwesomeIconFactory.framework'
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
+  install_framework 'Reachability.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
@@ -62,4 +63,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'FontAwesomeIconFactory.framework'
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
+  install_framework 'Reachability.framework'
 fi

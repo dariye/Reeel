@@ -8,4 +8,5 @@ target 'Reeel' do
   pod 'FontAwesomeIconFactory'
   pod 'FXBlurView'
   pod 'GoogleMaps'
+  pod 'Reachability'
 end

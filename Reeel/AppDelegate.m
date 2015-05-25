@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "Reachability.h"
 #import "ScreeningDetailViewController.h"
 #import "RSVPTableViewController.h"
 #import "ProfileTableViewController.h"
@@ -17,9 +17,16 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic,strong) ScreeningsTableViewController *homeController;
+
 @end
 
 @implementation AppDelegate
+
+- (BOOL)isParseReachable
+{
+    return self.networkStatus != NotReachable;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -31,6 +38,11 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Create Anonymous User
+//    [PFUser enableAutomaticUser];
+//    [[PFUser currentUser] incrementKey:@"RunCount"];
+//    [[PFUser currentUser] saveInBackground];
 
     
     // Material Design UINavigationController
@@ -56,8 +68,12 @@
     
     ProfileTableViewController *profile = [[ProfileTableViewController alloc] init];
     
+    
+    // Use Reachablility to monitor connectivity
+    [self monitorReachability];
+    
     // Instantiate Tabbar Controller
-  
+    
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
@@ -82,12 +98,35 @@
     
     
     // Override point for customization after application launch.
+    
    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
    
     return YES;
 }
+
+- (void)monitorReachability {
+    Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
+    
+    hostReach.reachableBlock = ^(Reachability*reach) {
+        _networkStatus = [reach currentReachabilityStatus];
+        
+        if ([self isParseReachable] && [PFUser currentUser] && self.homeController.objects.count == 0) {
+            // Refresh home timeline on network restoration. Takes care of a freshly installed app that failed to load the main timeline under bad network conditions.
+            [self.homeController loadObjects];
+        }
+    };
+    
+    hostReach.unreachableBlock = ^(Reachability*reach) {
+        _networkStatus = [reach currentReachabilityStatus];
+    };
+    
+    [hostReach startNotifier];
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

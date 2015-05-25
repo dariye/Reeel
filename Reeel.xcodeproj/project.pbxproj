@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7612EEF31B0525760024A933 /* RSVPTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7612EEF11B0525760024A933 /* RSVPTableViewCell.m */; };
 		7612EEF41B0525760024A933 /* RSVPTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */; };
-		7612EEF71B05A0CB0024A933 /* ParallaxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7612EEF61B05A0CB0024A933 /* ParallaxTableViewCell.m */; };
 		763F77361B0BE7CE00B52149 /* ScreeningScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F77341B0BE7CE00B52149 /* ScreeningScrollContentViewController.m */; };
 		763F77371B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F77351B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib */; };
 		763F77401B0C19E800B52149 /* RSVPedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F773E1B0C19E800B52149 /* RSVPedTableTableViewController.m */; };
@@ -52,8 +51,6 @@
 		7612EEF01B0525760024A933 /* RSVPTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVPTableViewCell.h; sourceTree = "<group>"; };
 		7612EEF11B0525760024A933 /* RSVPTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVPTableViewCell.m; sourceTree = "<group>"; };
 		7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSVPTableViewCell.xib; sourceTree = "<group>"; };
-		7612EEF51B05A0CB0024A933 /* ParallaxTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxTableViewCell.h; sourceTree = "<group>"; };
-		7612EEF61B05A0CB0024A933 /* ParallaxTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxTableViewCell.m; sourceTree = "<group>"; };
 		763F77331B0BE7CE00B52149 /* ScreeningScrollContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningScrollContentViewController.h; sourceTree = "<group>"; };
 		763F77341B0BE7CE00B52149 /* ScreeningScrollContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningScrollContentViewController.m; sourceTree = "<group>"; };
 		763F77351B0BE7CE00B52149 /* ScreeningScrollContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningScrollContentViewController.xib; sourceTree = "<group>"; };
@@ -151,8 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				76E2F4471B0BAF3000C99B72 /* Screenings */,
-				7612EEF51B05A0CB0024A933 /* ParallaxTableViewCell.h */,
-				7612EEF61B05A0CB0024A933 /* ParallaxTableViewCell.m */,
 				76E2F4481B0BAF7900C99B72 /* RSVPs */,
 				767E79451AD61392003E9A23 /* AppDelegate.h */,
 				767E79461AD61392003E9A23 /* AppDelegate.m */,
@@ -440,7 +435,6 @@
 				7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */,
 				764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */,
 				763F77361B0BE7CE00B52149 /* ScreeningScrollContentViewController.m in Sources */,
-				7612EEF71B05A0CB0024A933 /* ParallaxTableViewCell.m in Sources */,
 				767E79441AD61392003E9A23 /* main.m in Sources */,
 				76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */,
 				76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */,

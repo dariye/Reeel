@@ -12,7 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
+
 
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view
 {

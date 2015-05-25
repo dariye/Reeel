@@ -7,15 +7,8 @@
 //
 
 #import "RSVPTableViewController.h"
-#import <MaterialDesignCocoa/UIColor+MaterialDesignCocoa.h>
-#import <MaterialDesignCocoa/UIFont+MaterialDesignCocoa.h>
-#import "ScreeningsTableViewCell.h"
-#import "ScreeningDetailViewController.h"
 #import "RSVPedTableTableViewController.h"
 #import "RSVPTableViewCell.h"
-
-#define FIRST_ROW_HEIGHT 220;
-#define OTHER_ROWS_HEIGHT 110;
 
 @interface RSVPTableViewController () <UINavigationControllerDelegate, UITableViewDelegate>
 @property (nonatomic, readonly, retain) UIScrollView *scrollView;
@@ -50,9 +43,11 @@
 {
     [super viewWillAppear:animated];
     
+    
     defaults = [NSUserDefaults standardUserDefaults];
     guestlist = [[NSArray alloc] init];
     self.screenings = [[NSMutableArray alloc] init];
+    
     NSString *userEmail = @"paul.dariye@gmail.com";
     
     guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
@@ -70,7 +65,6 @@
                         if (!error) {
                             [self.screenings addObject:screening];
                             [self.tableView reloadData];
-
                         } else {
                             
                         }
@@ -84,9 +78,12 @@
     }
 }
 
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     
 
     self.navigationItem.title = @"RSVPs";
@@ -99,7 +96,6 @@
 
 
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,30 +124,28 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    for (ScreeningsTableViewCell *cell in [self.tableView visibleCells]) {
+    for (RSVPTableViewCell *cell in [self.tableView visibleCells]) {
         [cell cellOnTableView:self.tableView didScrollOnView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 49)]];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    PFObject *screening = self.screenings[indexPath.row];
     
+    static NSString *CellIdentifier = @"RSVPsCell";
+    static NSString *CellNib = @"RSVPTableViewCell";
     
-    RSVPTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPsCell"];
+    RSVPTableViewCell *cell = (RSVPTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        
-        [tableView registerNib:[UINib nibWithNibName:@"RSVPTableViewCell" bundle:nil] forCellReuseIdentifier:@"RSVPsCell"];
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPsCell"];
-        
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellNib owner:self options:nil];
+        cell = (RSVPTableViewCell *)[nib objectAtIndex:0];
     }
     
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
+    PFObject *screening = self.screenings[indexPath.row];
     
     // set values for ui objects
     cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 30)];
@@ -196,13 +190,22 @@
     
     [cell.cardView addSubview:cell.screeningTitleLabel];
     
+    // Time Icon
+    UIImage *timeImage = [UIImage imageNamed:@"access-time"];
+    cell.timeIconImageView = [[UIImageView alloc] initWithImage:timeImage];
+    cell.timeIconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.timeIconImageView.frame = CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 20, 12, 12);
+    cell.timeIconImageView.clipsToBounds = YES;
+    
+    
+    [cell.cardView addSubview:cell.timeIconImageView];
     
     // Date formatter
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
-    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 20, 21)];
+    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 40, 21)];
     [cell.screeningDateLabel setText:[screening objectForKey:@"screeningLocation"]];
     cell.screeningDateLabel.numberOfLines = 0;
     [cell.screeningDateLabel sizeToFit];
@@ -212,20 +215,28 @@
     [cell.screeningDateLabel setText:[dateFormat stringFromDate:[screening objectForKey:@"screeningDate"]]];
     [cell.cardView addSubview:cell.screeningDateLabel];
     
+    // Location Icon
+    UIImage *locationImage = [UIImage imageNamed:@"location"];
+    cell.locationIconImageView = [[UIImageView alloc] initWithImage:locationImage];
+    cell.locationIconImageView.frame = CGRectMake(10, cell.screeningTitleLabel.frame.origin.y + 37, 12, 12);
+    cell.locationIconImageView.clipsToBounds = YES;
+    cell.locationIconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [cell.cardView addSubview:cell.locationIconImageView];
     
     
-    
-    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.cardView.frame.size.height * 2/3 + 40, cell.cardView.frame.size.width - 20, 21)];
+    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 25, cell.cardView.frame.size.width - 40, 21)];
     [cell.screeningLocationLabel setText:[screening objectForKey:@"screeningLocation"]];
+    //    CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
+    //
     cell.screeningLocationLabel.numberOfLines = 0;
     [cell.screeningLocationLabel sizeToFit];
-    //CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     cell.screeningLocationLabel.font = [UIFont systemFontOfSize:14];
     cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
-    
-    
     [cell.cardView addSubview:cell.screeningLocationLabel];
-
+    
+    
+    
+    [cell layoutSubviews];
     return cell;
 }
 
