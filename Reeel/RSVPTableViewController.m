@@ -48,34 +48,26 @@
     guestlist = [[NSArray alloc] init];
     self.screenings = [[NSMutableArray alloc] init];
     
-    NSString *userEmail = @"paul.dariye@gmail.com";
-    
     guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
     screeningQuery = [PFQuery queryWithClassName:@"Screening"];
-    
-    if (userEmail) {
-        [guestlistQuery whereKey:@"guestEmail" equalTo:userEmail];
+    [guestlistQuery fromLocalDatastore];
+//    [guestlistQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [guestlistQuery includeKey:@"screening"];
+
+    [guestlistQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         
-        [guestlistQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-            
-            if (!error) {
-                for (PFObject *object in objects) {
-                    [screeningQuery  whereKey:@"objectId" equalTo:object[@"screeningId" ]];
-                    [screeningQuery getFirstObjectInBackgroundWithBlock:^(PFObject *screening, NSError *error) {
-                        if (!error) {
-                            [self.screenings addObject:screening];
-                            [self.tableView reloadData];
-                        } else {
-                            
-                        }
-                    }];
-                }
-            } else {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
+        if (!error) {
+            for (PFObject *object in objects) {
+                [self.screenings addObject:[object objectForKey:@"screening" ]];
             }
-            
-        }];
-    }
+            [self.tableView reloadData];
+        
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+    }];
+
 }
 
 
@@ -152,9 +144,9 @@
     cell.cardView.backgroundColor = [UIColor whiteColor];
     cell.cardView.layer.shadowColor = [UIColor blackColor].CGColor;
     cell.cardView.layer.shadowOffset = CGSizeMake(1, 1);
-    cell.cardView.layer.shadowOpacity = 0.3;
-    cell.cardView.layer.shadowRadius = 2.0f;
-    cell.cardView.layer.cornerRadius = 2.0f;
+    cell.cardView.layer.shadowOpacity = 0.1;
+    cell.cardView.layer.shadowRadius = 1.0f;
+    cell.cardView.layer.cornerRadius = 1.0f;
     
     [cell.contentView addSubview:cell.cardView];
     
@@ -240,18 +232,11 @@
     return cell;
 }
 
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     RSVPedTableTableViewController *detailViewController = [[RSVPedTableTableViewController alloc] init];
-    
     PFObject *selectedScreening = self.screenings[indexPath.row];
-    
     detailViewController.screening = selectedScreening;
-    
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

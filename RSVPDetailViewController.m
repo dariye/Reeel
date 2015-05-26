@@ -9,6 +9,7 @@
 #import "RSVPDetailViewController.h"
 
 
+
 @interface RSVPDetailViewController () <UINavigationControllerDelegate, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userEmailLabel;
@@ -38,7 +39,7 @@
 @synthesize termsSwitch;
 @synthesize confirmButton;
 @synthesize guestList;
-@synthesize screening;
+@synthesize screening = _screening;
 @synthesize defaults;
 @synthesize query;
 
@@ -50,9 +51,6 @@
     // query
     query = [PFQuery queryWithClassName:@"GuestList"];
     
-    // assign screening object
-    screening = self.screening;
-    
     defaults = [NSUserDefaults standardUserDefaults];
     
     userNameLabel.text = [defaults objectForKey:@"userName"];
@@ -61,12 +59,6 @@
     termsLabel.text = @"Agree to Terms and Conditions";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUserData:) name:UIKeyboardDidHideNotification object:nil];
-
-    // Do any additional setup after loading the view from its nib.
-    // Set background color of view
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.navigationItem.title = @"RSVP";
     
     // remove keyboard with outside touch
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
@@ -80,94 +72,85 @@
     
 }
 
-// confirmButton press action
-//**********************************
 - (IBAction)RSVPButtonPressed:(UIButton *)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+     UIAlertView *updateAlert = [[UIAlertView alloc] initWithTitle:@"RSVP Updated" message:@"Your RSVP Information has been updated" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     
-//    [query whereKey:@"screeningId" equalTo:screening.objectId];
-//    
-//    PFObject *storedGuestlist = [PFObject objectWithClassName:@"GuestList"];
-    
-    guestList[@"screeningId"] = screening.objectId;
+    guestList[@"screening"] = self.screening;
+    guestList[@"user"] = [PFUser currentUser];
     guestList[@"guestName"] = [defaults objectForKey:@"userName"];
     guestList[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
     guestList[@"guestCount"] = [defaults objectForKey:@"guestCount"];
     
-        
-    [query getObjectInBackgroundWithId:[defaults objectForKey:@"screeningId"] block:^(PFObject *object, NSError *error) {
+    [query whereKey:@"screening" equalTo:self.screening];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         
         if (!error) {
-            object[@"screeningId"] = screening.objectId;
+            object[@"screening"] = self.screening;
+            object[@"user"] = [PFUser currentUser];
             object[@"guestName"] = [defaults objectForKey:@"userName"];
             object[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
             object[@"guestCount"] = [defaults objectForKey:@"guestCount"];
             [object saveInBackground];
+            [object pinInBackground];
+            [updateAlert show];
             
         }else {
             
             [guestList saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
-                    
-                    [defaults setObject:guestList.objectId forKey:@"screeningId"];
-                    
-                    [alert show];
+                    [guestList pinInBackground];
+                    [guestList saveEventually];
+                    [saveAlert show];
                     
                 }else {
                     
                 }
-                //            [guestList fetch];
             }];
             
+           
         }
         
-        
-        
-        
-        //            [object fetch];
-        
     }];
-    
-    
-    
-  
-    
-    // Check if user have RSVPed
-//    [query whereKey:@"objectId" equalTo:guestList.objectId];
-//    [query whereKey:@"screeningId" equalTo:screening.objectId];
-//    
-//    [query  getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-//        if (!object) {
-//            return;
-//        } else {
-//            tempGuestlist = object;
-//        }
-//        
-//    }];
-    
-    
-    
 
-    
 }
 
 - (IBAction)optOutButton:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:@"Not sure?" otherButtonTitles:@"OK", nil];
     
-    [query getObjectInBackgroundWithId:guestList.objectId block:^(PFObject *guestList, NSError *error){
-        [guestList deleteInBackground];
-        [alert show];
+    
+    [query whereKey:@"screening" equalTo:self.screening];
+    [query includeKey:@"user"];
+    
+    PFQuery *guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
+    [guestlistQuery fromLocalDatastore];
+    [guestlistQuery whereKey:@"screening" equalTo:self.screening];
+    
+    [query getObjectInBackgroundWithId:guestList.objectId block:^(PFObject *gl, NSError *error){
+        
+        if (!error) {
+            [alert show];
+            [gl deleteInBackground];
+            
+        } else {
+            [guestlistQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+                if (!error) {
+                    [alert show];
+                    [object unpinInBackground];
+                    
+                }
+            }];
+        }
         
     }];
-  
 
 }
 
-//**********************************
 
-// check to see if text field is in the format of an email, triggers an alert if it is not
 - (void)checkEmailAndDisplayAlert {
     if(![self validateEmail:[userEmailLabel text]]) {
         // user entered invalid email address

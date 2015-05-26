@@ -16,7 +16,6 @@
 
 @implementation ScreeningsTableViewCell
 
-/* Code From: https://medium.com/@cwRichardKim/ios-xcode-tutorial-a-card-based-newsfeed-8bedeb7b8df7 */
 
 
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view

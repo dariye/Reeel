@@ -12,6 +12,7 @@
 
 @interface RSVPedTableTableViewController : UITableViewController
 
-@property (nonatomic,strong) PFObject *screening;
+@property (nonatomic, strong) PFObject *screening;
+@property (nonatomic, strong) PFObject *guestlist;
 
 @end

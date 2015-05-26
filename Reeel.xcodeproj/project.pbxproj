@@ -543,6 +543,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39CBF1BD44BB2317D498396A /* Pods-Reeel.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Reeel/Info.plist;
@@ -555,6 +556,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E308284A5C96ECBA1E9D5563 /* Pods-Reeel.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Reeel/Info.plist;

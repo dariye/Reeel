@@ -8,6 +8,7 @@
 
 #import "RSVPedTableTableViewController.h"
 #import "RSVPTableViewCell.h"
+#import "UIColor+BFPaperColors.h"
 
 
 #define FIRST_ROW_HEIGHT 220;
@@ -28,12 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.navigationItem.title = [self.screening objectForKey:@"screeningTitle"];
     
@@ -98,9 +93,9 @@
     backgroundView.backgroundColor = [UIColor whiteColor];
     backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
     backgroundView.layer.shadowOffset = CGSizeMake(1, 1);
-    backgroundView.layer.shadowOpacity = 0.3;
-    backgroundView.layer.shadowRadius = 2.0f;
-    backgroundView.layer.cornerRadius = 2.0f;
+    backgroundView.layer.shadowOpacity = 0.2;
+    backgroundView.layer.shadowRadius = 1.0f;
+    backgroundView.layer.cornerRadius = 1.0f;
     
     [cell.contentView addSubview:backgroundView];
     
@@ -108,10 +103,6 @@
     /* Map View 
     - pull saved screening location image from parse
      */
-    
-    
-   
-    //self.button.contentMode = UIViewContentModeScaleAspectFit;
     
     
     if (indexPath.row == 0) {
@@ -138,15 +129,47 @@
         self.cancelRSVPButton.frame = CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, height - 10);
         [self.cancelRSVPButton setContentMode:UIViewContentModeScaleAspectFit];
         [self.cancelRSVPButton setClipsToBounds:YES];
-        [self.cancelRSVPButton setBackgroundColor:[UIColor whiteColor]];
+        [self.cancelRSVPButton setBackgroundColor:[UIColor paperColorRed600]];
         [self.cancelRSVPButton setTitle:@"Cancel RSVP" forState:UIControlStateNormal];
-        [self.cancelRSVPButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [self.cancelRSVPButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.cancelRSVPButton.titleLabel setFont:[UIFont systemFontOfSize:22]];
+        
+        [self.cancelRSVPButton addTarget:self action:@selector(optOutButton:) forControlEvents:UIControlEventTouchUpInside];
  
         [cell addSubview:self.cancelRSVPButton];
     }
 
     return cell;
+}
+
+- (IBAction)optOutButton:(id)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"GuestList"];
+    [query whereKey:@"screening" equalTo:self.screening];
+    [query includeKey:@"user"];
+    
+    PFQuery *guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
+    [guestlistQuery fromLocalDatastore];
+    [guestlistQuery whereKey:@"screening" equalTo:self.screening];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *gl, NSError *error){
+        if (!error) {
+            [gl deleteInBackground];
+            [alert show];
+        } else {
+            [guestlistQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+                if (!error) {
+                    [object unpinInBackground];
+                    [alert show];
+                }
+            }];
+            
+        }
+        
+    }];
+    
 }
 
 

@@ -16,6 +16,7 @@
 }
 
 
+
 - (void)cellOnTableView:(UITableView *)tableView didScrollOnView:(UIView *)view
 {
     CGRect rectInSuperview = [tableView convertRect:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.imageBackgroundView.frame.size.width, self.imageBackgroundView.frame.size.height) toView:view];

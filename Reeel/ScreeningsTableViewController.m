@@ -63,11 +63,11 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
-    [query setCachePolicy:kPFCachePolicyNetworkOnly];
-    
-    if ([self.objects count] == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    }
+//    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+//    
+//    if ([self.objects count] == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
+//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+//    }
     [query orderByDescending:@"createdAt"];
 //    [query setLimit:0];
     
@@ -148,9 +148,9 @@
     cell.cardView.backgroundColor = [UIColor whiteColor];
     cell.cardView.layer.shadowColor = [UIColor blackColor].CGColor;
     cell.cardView.layer.shadowOffset = CGSizeMake(1, 1);
-    cell.cardView.layer.shadowOpacity = 0.3;
-    cell.cardView.layer.shadowRadius = 2.0f;
-    cell.cardView.layer.cornerRadius = 2.0f;
+    cell.cardView.layer.shadowOpacity = 0.1;
+    cell.cardView.layer.shadowRadius = 1.0f;
+    cell.cardView.layer.cornerRadius = 1.0f;
     
     [cell.contentView addSubview:cell.cardView];
     

@@ -13,6 +13,7 @@
 #import "ProfileTableViewController.h"
 #import "ScreeningsTableViewController.h"
 #import <Parse/Parse.h>
+#import "UIColor+BFPaperColors.h"
 
 
 @interface AppDelegate ()
@@ -31,32 +32,33 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
+    [Parse enableLocalDatastore];
      // Initialize Parse
     [Parse setApplicationId:@"R0o50fZOPQuUPEsL5L4wSs0ToG9PF26eQRQD8W0s"
                   clientKey:@"36cPEUKfUwRR9JtZCjthxgSUSMTdCjBIxD9b7ZWR"];
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
-    // Create Anonymous User
-//    [PFUser enableAutomaticUser];
-//    [[PFUser currentUser] incrementKey:@"RunCount"];
-//    [[PFUser currentUser] saveInBackground];
 
     
-    // Material Design UINavigationController
-//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor mdcRedColorWithPaletteId:kUIColorMDCPaletteIdPrimary]];
-//    [[UINavigationBar appearance] setTitleTextAttributes:
-//     @{
-//       NSForegroundColorAttributeName: [UIColor whiteColor],
-//       //     UITextAttributeTextShadowColor: [NSNull null],
-//       //     UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, 0)],
-//       NSFontAttributeName: [UIFont mdcHeadlineFont],
-//       }];
+    // Create Anonymous User
+    [PFUser enableAutomaticUser];
+    [[PFUser currentUser] incrementKey:@"RunCount"];
+    [[PFUser currentUser] saveInBackground];
+
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          nil]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor paperColorRed600]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     
     // ScreeningsTableViewController
     ScreeningsTableViewController *screening = [[ScreeningsTableViewController alloc] init];
@@ -71,6 +73,8 @@
     
     // Use Reachablility to monitor connectivity
     [self monitorReachability];
+    
+    
     
     // Instantiate Tabbar Controller
     

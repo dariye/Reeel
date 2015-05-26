@@ -9,6 +9,7 @@
 #import "ScreeningDetailViewController.h"
 #import "RSVPDetailViewController.h"
 #import <FXBlurView/FXBlurView.h>
+#import "UIColor+BFPaperColors.h"
 
 @interface ScreeningDetailViewController () <UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) UIImageView *screeningImageView;
@@ -57,14 +58,13 @@
     if (self.lastContentOffset > scrollView.contentOffset.y) {
         self.blurScreeningImageView.alpha = y / ([UIScreen mainScreen].bounds.size.height * 0.65);
         self.gradientImageView.alpha = y / ([UIScreen mainScreen].bounds.size.height * 0.5);
-        self.upIconImageView.alpha = y / ([UIScreen mainScreen].bounds.size.height);
-        self.lastContentOffset = scrollView.contentOffset.y;
+        self.upIconImageView.alpha = 0.0;
     } else if (self.lastContentOffset < scrollView.contentOffset.y) {
-        NSLog(@"value--> %f ", ([UIScreen mainScreen].bounds.size.height * 0.2)/y);
         self.gradientImageView.alpha = ([UIScreen mainScreen].bounds.size.height)/y;
         self.upIconImageView.alpha = ([UIScreen mainScreen].bounds.size.height * 0.5)/y;
-        self.lastContentOffset = scrollView.contentOffset.y;
     }
+    self.lastContentOffset = scrollView.contentOffset.y;
+
     
 }
 
@@ -137,7 +137,7 @@
     self.rsvpButton.frame = CGRectMake(25, [UIScreen mainScreen].bounds.size.height - (self.starsLabel.frame.size.height - 40), [UIScreen mainScreen].bounds.size.width - 50, 80);
     [self.rsvpButton setContentMode:UIViewContentModeScaleAspectFit];
     [self.rsvpButton setClipsToBounds:YES];
-    [self.rsvpButton setBackgroundColor:[UIColor redColor]];
+    [self.rsvpButton setBackgroundColor:[UIColor paperColorRed600]];
     [self.rsvpButton setTitle:@"RSVP" forState:UIControlStateNormal];
     [self.rsvpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.rsvpButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
