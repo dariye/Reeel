@@ -10,4 +10,6 @@ target 'Reeel' do
     pod 'GoogleMaps'
     pod 'Reachability'
     pod 'UIColor+BFPaperColors', :head
+    pod 'SSKeychain'
+    pod 'SDWebImage', '~>3.6'
 end

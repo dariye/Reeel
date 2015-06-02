@@ -79,6 +79,7 @@
     
     guestList[@"screening"] = self.screening;
     guestList[@"user"] = [PFUser currentUser];
+    NSLog(@"%@", [PFUser currentUser]);
     guestList[@"guestName"] = [defaults objectForKey:@"userName"];
     guestList[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
     guestList[@"guestCount"] = [defaults objectForKey:@"guestCount"];

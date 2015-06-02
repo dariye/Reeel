@@ -55,6 +55,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
   install_framework 'Reachability.framework'
+  install_framework 'SDWebImage.framework'
+  install_framework 'SSKeychain.framework'
   install_framework 'UIColor_BFPaperColors.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -65,5 +67,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Parse.framework'
   install_framework 'ParseUI.framework'
   install_framework 'Reachability.framework'
+  install_framework 'SDWebImage.framework'
+  install_framework 'SSKeychain.framework'
   install_framework 'UIColor_BFPaperColors.framework'
 fi

@@ -9,6 +9,8 @@
 #import "RSVPedTableTableViewController.h"
 #import "RSVPTableViewCell.h"
 #import "UIColor+BFPaperColors.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 
 #define FIRST_ROW_HEIGHT 220;
@@ -17,7 +19,7 @@
 @interface RSVPedTableTableViewController ()
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UIView *mapImageView;
+@property (nonatomic, strong) UIImageView *mapImageView;
 @property (nonatomic, strong) UIButton *ticketButton;
 @property (nonatomic, strong) UIButton *cancelRSVPButton;
 
@@ -106,12 +108,17 @@
     
     
     if (indexPath.row == 0) {
-       self.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height * 2/3)];
-       self.mapImageView.clipsToBounds = YES;
+        self.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height * 2/3)];
+        self.mapImageView.clipsToBounds = YES;
+//        self.mapImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@""]]];
+        [self.mapImageView sd_setImageWithURL:[NSURL URLWithString:[self.screening objectForKey:@"locationImage"]] placeholderImage:nil];
         
-       self.descriptionLabel.textColor = [UIColor blackColor];
-        self.descriptionLabel.text = [self.screening objectForKey:@"screeningLocation"];
-       [cell addSubview:self.descriptionLabel];
+        [backgroundView addSubview:self.mapImageView];
+        
+        
+//       self.descriptionLabel.textColor = [UIColor blackColor];
+//        self.descriptionLabel.text = [self.screening objectForKey:@"screeningLocation"];
+//       [cell addSubview:self.descriptionLabel];
         
     }else if (indexPath.row == 1){
         self.ticketButton = [UIButton buttonWithType:UIButtonTypeCustom];

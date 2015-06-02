@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 
 
+
 @interface ScreeningsTableViewController () <UINavigationControllerDelegate, UITableViewDelegate, UIScrollViewDelegate, MKMapViewDelegate>
 @property(nonatomic, readonly, retain) UIScrollView *scrollView;
 
@@ -21,6 +22,7 @@
 
 @property (nonatomic, strong) NSArray *screenings;
 @property (nonatomic, strong) NSDate *lastRefresh;
+@property (nonatomic, strong) NSMutableArray *sections;
 
 @end
 
@@ -28,6 +30,7 @@
 
 @synthesize scrollView;
 @synthesize screenings = _screenings;
+@synthesize sections = _sections;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -50,6 +53,8 @@
     self.tableView.separatorColor = [UIColor clearColor];
     
     [super viewDidLoad];
+    self.sections = [[NSMutableArray alloc] init];
+
     
     self.navigationItem.title = @"Upcoming Screening";
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
@@ -62,14 +67,7 @@
 -  (PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    
-//    [query setCachePolicy:kPFCachePolicyNetworkOnly];
-//    
-//    if ([self.objects count] == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
-//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-//    }
-    [query orderByDescending:@"createdAt"];
-//    [query setLimit:0];
+    [query orderByDescending:@"screeningDate"];
     
     return query;
 }
@@ -80,9 +78,23 @@
     [[self queryForTable] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.screenings = [[NSArray alloc] initWithArray:objects];
+            
+            [self setSections];
             [self.tableView reloadData];
+            
         }
     }];
+}
+- (void)setSections
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MMM d"];
+    
+    for (PFObject *object in self.screenings) {
+        
+        [self.sections addObject:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
+    }
+    
 }
 
 - (void)objectsDidLoad:(nullable NSError *)error
@@ -134,12 +146,12 @@
     if (!cell) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellNib owner:self options:nil];
         cell = (ScreeningsTableViewCell *)[nib objectAtIndex:0];
-        for (UIView *view in cell.contentView.subviews) {
-            [view removeFromSuperview];
-        }
+    }
+    
+    for (UIView *view in cell.contentView.subviews) {
+        [view removeFromSuperview];
     }
 
- 
     
     PFObject *screening = self.screenings[indexPath.row];
     
@@ -198,17 +210,16 @@
     
     // Date formatter
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
-    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 40, 21)];
-    [cell.screeningDateLabel setText:[screening objectForKey:@"screeningLocation"]];
+    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 14, cell.cardView.frame.size.width - 40, 21)];
+    [cell.screeningDateLabel setText:[dateFormat stringFromDate:[screening objectForKey:@"screeningDate"]]];
     cell.screeningDateLabel.numberOfLines = 0;
     [cell.screeningDateLabel sizeToFit];
     cell.screeningDateLabel.font = [UIFont systemFontOfSize:14];
     cell.screeningDateLabel.textColor = [UIColor lightGrayColor];
     
-    [cell.screeningDateLabel setText:[dateFormat stringFromDate:[screening objectForKey:@"screeningDate"]]];
+   
     [cell.cardView addSubview:cell.screeningDateLabel];
 
     // Location Icon

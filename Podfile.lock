@@ -29,6 +29,10 @@ PODS:
   - ParseUI (1.1.4):
     - Parse (~> 1.7)
   - Reachability (3.2)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
+  - SSKeychain (1.2.3)
   - UIColor+BFPaperColors (HEAD based on 1.7.1)
 
 DEPENDENCIES:
@@ -39,6 +43,8 @@ DEPENDENCIES:
   - Parse
   - ParseUI
   - Reachability
+  - SDWebImage (~> 3.6)
+  - SSKeychain
   - UIColor+BFPaperColors (HEAD)
 
 SPEC CHECKSUMS:
@@ -50,6 +56,8 @@ SPEC CHECKSUMS:
   Parse: 6ca512c6e860b66739c95151b2f76ac4712b7842
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   UIColor+BFPaperColors: b1efa4320e2f56c4b14f73232faf967ba0e5b4a2
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2

@@ -12,17 +12,23 @@
 #import "RSVPTableViewController.h"
 #import "ProfileTableViewController.h"
 #import "ScreeningsTableViewController.h"
-#import <Parse/Parse.h>
 #import "UIColor+BFPaperColors.h"
+#import <SSKeychain/SSKeychain.h>
 
 
 @interface AppDelegate ()
 
 @property (nonatomic,strong) ScreeningsTableViewController *homeController;
 
+
 @end
 
+
+
+
 @implementation AppDelegate
+
+@synthesize currentUser = _currentUser;
 
 - (BOOL)isParseReachable
 {
@@ -39,16 +45,39 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-
     
-    // Create Anonymous User
-    [PFUser enableAutomaticUser];
-    [[PFUser currentUser] incrementKey:@"RunCount"];
-    [[PFUser currentUser] saveInBackground];
+    NSString *uniqueID = [[NSString alloc] initWithString:[self getUniqueDeviceIdentifierAsString]];
+
+   
+    // Query User Object
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:uniqueID];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        if (!error) {
+            NSLog(@"user exists");
+            [PFUser logInWithUsernameInBackground:uniqueID password:uniqueID block:^(PFUser *user, NSError *error) {
+                    if (user) {
+                        // Do stuff after successful login.
+                        self.currentUser = [PFUser currentUser];
+                    } else {
+                    // The login failed. Check error to see why.
+                    }
+                }];
+        } else {
+            NSLog(@"user doesn't exist");
+            // Create  new user
+            [self signUp];
+
+        }
+    }];
+    
+    
+//       NSLog(@"%@", uniqueID);
+//    [[PFUser currentUser] saveInBackground];
 
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
     
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -110,6 +139,21 @@
     return YES;
 }
 
+- (void)signUp
+{
+    PFUser *user = [PFUser user];
+    NSString *uniqueID = [[NSString alloc] initWithString:[self getUniqueDeviceIdentifierAsString]];
+    user.username = uniqueID;
+    user.password = uniqueID;
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
+        if (!error) {
+            NSLog(@"created new user account successfulyy");
+            self.currentUser = user;
+            
+        }
+    }];
+}
+
 - (void)monitorReachability {
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
     
@@ -129,8 +173,20 @@
     [hostReach startNotifier];
 }
 
-
-
+-(NSString *)getUniqueDeviceIdentifierAsString
+{
+    
+    NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
+    
+    NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
+    if (strApplicationUUID == nil)
+    {
+        strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
+    }
+    
+    return strApplicationUUID;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -152,6 +208,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [PFUser logOut];
+    self.currentUser = [PFUser currentUser];
 }
 
 @end

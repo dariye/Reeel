@@ -50,9 +50,9 @@
     
     guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
     screeningQuery = [PFQuery queryWithClassName:@"Screening"];
-    [guestlistQuery fromLocalDatastore];
-//    [guestlistQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [guestlistQuery whereKey:@"user" equalTo:[PFUser currentUser]];
     [guestlistQuery includeKey:@"screening"];
+    [guestlistQuery fromLocalDatastore];
 
     [guestlistQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         
@@ -135,8 +135,9 @@
     }
     
     for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
+       [view removeFromSuperview];
     }
+    
     PFObject *screening = self.screenings[indexPath.row];
     
     // set values for ui objects
