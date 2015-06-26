@@ -156,7 +156,7 @@
     PFObject *screening = self.screenings[indexPath.row];
     
     // set values for ui objects
-    cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 30)];
+    cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 10, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 15)];
     cell.cardView.backgroundColor = [UIColor whiteColor];
     cell.cardView.layer.shadowColor = [UIColor blackColor].CGColor;
     cell.cardView.layer.shadowOffset = CGSizeMake(1, 1);

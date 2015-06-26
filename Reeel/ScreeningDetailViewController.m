@@ -115,26 +115,28 @@
     [self.synopsisLabel sizeToFit];
     [self.scrollView addSubview:self.synopsisLabel];
     
+    CGFloat height = [self.synopsisLabel.text boundingRectWithSize:CGSizeMake(self.synopsisLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     
-    self.directorsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, [UIScreen mainScreen].bounds.size.height - (self.synopsisLabel.frame.size.height + 30), [UIScreen mainScreen].bounds.size.width - 50, 21)];
+    self.directorsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.synopsisLabel.frame.origin.y +  height + 70, [UIScreen mainScreen].bounds.size.width - 50, 21)];
     self.directorsLabel.text = [NSString stringWithFormat:@"Director(s): %@", [self.screening objectForKey:@"screeningDirectorInfo"]];
     self.directorsLabel.textColor = [UIColor whiteColor];
     self.directorsLabel.numberOfLines = 0;
     [self.directorsLabel sizeToFit];
     [self.scrollView addSubview:self.directorsLabel];
     
+    height = [self.directorsLabel.text boundingRectWithSize:CGSizeMake(self.directorsLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     
-    
-    self.starsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, [UIScreen mainScreen].bounds.size.height - (self.directorsLabel.frame.size.height + 40), [UIScreen mainScreen].bounds.size.width - 50, 21)];
+    self.starsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.directorsLabel.frame.origin.y +  height + 10, [UIScreen mainScreen].bounds.size.width - 50, 21)];
     self.starsLabel.text = [NSString stringWithFormat:@"Star(s): %@", [self.screening objectForKey:@"screeningStarInfo"]];
     self.starsLabel.textColor = [UIColor whiteColor];
     self.starsLabel.numberOfLines = 0;
     [self.starsLabel sizeToFit];
     [self.scrollView addSubview:self.starsLabel];
     
+    height = [self.starsLabel.text boundingRectWithSize:CGSizeMake(self.starsLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     
     self.rsvpButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rsvpButton.frame = CGRectMake(25, [UIScreen mainScreen].bounds.size.height - (self.starsLabel.frame.size.height - 40), [UIScreen mainScreen].bounds.size.width - 50, 80);
+    self.rsvpButton.frame = CGRectMake(25, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width - 50, 80);
     [self.rsvpButton setContentMode:UIViewContentModeScaleAspectFit];
     [self.rsvpButton setClipsToBounds:YES];
     [self.rsvpButton setBackgroundColor:[UIColor paperColorRed600]];
@@ -144,7 +146,7 @@
     self.rsvpButton.layer.shadowOpacity = 0.3;
     self.rsvpButton.layer.shadowRadius = 2.0f;
     self.rsvpButton.layer.cornerRadius = 2.0f;
-    self.rsvpButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height - (self.starsLabel.frame.size.height - 80));
+    self.rsvpButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height  + ([UIScreen mainScreen].bounds.size.height * 0.32));
     
     [self.rsvpButton addTarget:self action:@selector(RSVPButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.rsvpButton];

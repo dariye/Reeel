@@ -52,7 +52,7 @@
     screeningQuery = [PFQuery queryWithClassName:@"Screening"];
     [guestlistQuery whereKey:@"user" equalTo:[PFUser currentUser]];
     [guestlistQuery includeKey:@"screening"];
-    [guestlistQuery fromLocalDatastore];
+//    [guestlistQuery fromLocalDatastore];
 
     [guestlistQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         
