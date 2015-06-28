@@ -12,4 +12,5 @@ target 'Reeel' do
     pod 'UIColor+BFPaperColors', :head
     pod 'SSKeychain'
     pod 'SDWebImage', '~>3.6'
+    pod 'XLForm', '~> 3.0.0'
 end

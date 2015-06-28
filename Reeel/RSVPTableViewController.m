@@ -42,8 +42,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    
     defaults = [NSUserDefaults standardUserDefaults];
     guestlist = [[NSArray alloc] init];
     self.screenings = [[NSMutableArray alloc] init];
@@ -76,13 +74,8 @@
     
     [super viewDidLoad];
     
-    
-
     self.navigationItem.title = @"RSVPs";
- 
-    
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
-    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.separatorColor  = [UIColor clearColor];
 

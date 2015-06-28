@@ -34,6 +34,7 @@ PODS:
   - SDWebImage/Core (3.7.2)
   - SSKeychain (1.2.3)
   - UIColor+BFPaperColors (HEAD based on 1.7.1)
+  - XLForm (3.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.6)
   - SSKeychain
   - UIColor+BFPaperColors (HEAD)
+  - XLForm (~> 3.0.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -59,5 +61,6 @@ SPEC CHECKSUMS:
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   UIColor+BFPaperColors: b1efa4320e2f56c4b14f73232faf967ba0e5b4a2
+  XLForm: 10fc7eb9e2d5df21a515fa3a794f4e26319abd0e
 
 COCOAPODS: 0.37.2

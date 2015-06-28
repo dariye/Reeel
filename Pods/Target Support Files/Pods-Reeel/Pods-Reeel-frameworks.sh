@@ -58,6 +58,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'SDWebImage.framework'
   install_framework 'SSKeychain.framework'
   install_framework 'UIColor_BFPaperColors.framework'
+  install_framework 'XLForm.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
@@ -70,4 +71,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'SDWebImage.framework'
   install_framework 'SSKeychain.framework'
   install_framework 'UIColor_BFPaperColors.framework'
+  install_framework 'XLForm.framework'
 fi

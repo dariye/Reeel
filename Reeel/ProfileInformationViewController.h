@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XLForm.h"
+#import "XLFormViewController.h"
 
-@interface ProfileInformationViewController : UIViewController
+@interface ProfileInformationViewController : XLFormViewController
 
 @end

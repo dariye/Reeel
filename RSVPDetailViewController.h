@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "XLForm.h"
+#import "XLFormViewController.h"
 
 //IB_DESIGNABLE
 
 @class Screening;
 
-@interface RSVPDetailViewController : UIViewController
+@interface RSVPDetailViewController : XLFormViewController
 //@property (nonatomic, strong) Screening *screening;
 @property (nonatomic,strong) PFObject *screening;
 

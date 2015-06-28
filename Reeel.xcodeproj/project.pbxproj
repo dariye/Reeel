@@ -12,7 +12,6 @@
 		763F77401B0C19E800B52149 /* RSVPedTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F773E1B0C19E800B52149 /* RSVPedTableTableViewController.m */; };
 		763F77411B0C19E800B52149 /* RSVPedTableTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F773F1B0C19E800B52149 /* RSVPedTableTableViewController.xib */; };
 		764069351AF09BB6004DD42B /* TermsAndConditionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */; };
-		764069361AF09BB6004DD42B /* TermsAndConditionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */; };
 		7665D2D81AE4571200487F59 /* ScreeningDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */; };
 		7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */; };
 		767E79441AD61392003E9A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79431AD61392003E9A23 /* main.m */; };
@@ -21,7 +20,6 @@
 		767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767E79501AD61392003E9A23 /* LaunchScreen.xib */; };
 		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
 		76BEB5251AF097DB00F708EF /* ProfileInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */; };
-		76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */; };
 		76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */; };
 		76E735031AE83C2B00F312E2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */; };
 		76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E735021AE83C2B00F312E2 /* ProfileTableViewController.xib */; };
@@ -31,7 +29,6 @@
 		76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E7350C1AE8424200F312E2 /* ScreeningsTableViewCell.xib */; };
 		8F0FBE229E29BBB2CE14FAD3 /* Pods_Reeel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FEB03FA154DA69D6F0070C /* Pods_Reeel.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F09972021AF523D400F18DA6 /* RSVPDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09972001AF523D400F18DA6 /* RSVPDetailViewController.m */; };
-		F09972031AF523D400F18DA6 /* RSVPDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F09972011AF523D400F18DA6 /* RSVPDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +51,6 @@
 		763F773F1B0C19E800B52149 /* RSVPedTableTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSVPedTableTableViewController.xib; sourceTree = "<group>"; };
 		764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsAndConditionsViewController.h; sourceTree = "<group>"; };
 		764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsAndConditionsViewController.m; sourceTree = "<group>"; };
-		764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndConditionsViewController.xib; sourceTree = "<group>"; };
 		7665D2D51AE4571200487F59 /* ScreeningDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningDetailViewController.h; sourceTree = "<group>"; };
 		7665D2D61AE4571200487F59 /* ScreeningDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningDetailViewController.m; sourceTree = "<group>"; };
 		7665D2D71AE4571200487F59 /* ScreeningDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeningDetailViewController.xib; sourceTree = "<group>"; };
@@ -81,7 +77,6 @@
 		767E798B1AD616AD003E9A23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		76BEB5221AF097DB00F708EF /* ProfileInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInformationViewController.h; sourceTree = "<group>"; };
 		76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInformationViewController.m; sourceTree = "<group>"; };
-		76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileInformationViewController.xib; sourceTree = "<group>"; };
 		76E734F11AE827C300F312E2 /* ScreeningsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningsTableViewController.h; sourceTree = "<group>"; };
 		76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningsTableViewController.m; sourceTree = "<group>"; };
 		76E735001AE83C2B00F312E2 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
@@ -97,7 +92,6 @@
 		E308284A5C96ECBA1E9D5563 /* Pods-Reeel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reeel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Reeel/Pods-Reeel.release.xcconfig"; sourceTree = "<group>"; };
 		F09971FF1AF523D400F18DA6 /* RSVPDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSVPDetailViewController.h; path = ../RSVPDetailViewController.h; sourceTree = "<group>"; };
 		F09972001AF523D400F18DA6 /* RSVPDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSVPDetailViewController.m; path = ../RSVPDetailViewController.m; sourceTree = "<group>"; };
-		F09972011AF523D400F18DA6 /* RSVPDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RSVPDetailViewController.xib; path = ../RSVPDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,12 +138,12 @@
 			children = (
 				76E2F4471B0BAF3000C99B72 /* Screenings */,
 				76E2F4481B0BAF7900C99B72 /* RSVPs */,
+				76E2F4491B0BAFA300C99B72 /* Profile */,
 				767E79451AD61392003E9A23 /* AppDelegate.h */,
 				767E79461AD61392003E9A23 /* AppDelegate.m */,
 				767E794E1AD61392003E9A23 /* Images.xcassets */,
 				767E79501AD61392003E9A23 /* LaunchScreen.xib */,
 				767E79411AD61392003E9A23 /* Supporting Files */,
-				76E2F4491B0BAFA300C99B72 /* Profile */,
 			);
 			path = Reeel;
 			sourceTree = "<group>";
@@ -222,7 +216,6 @@
 				76E735071AE83C5600F312E2 /* RSVPTableViewController.xib */,
 				F09971FF1AF523D400F18DA6 /* RSVPDetailViewController.h */,
 				F09972001AF523D400F18DA6 /* RSVPDetailViewController.m */,
-				F09972011AF523D400F18DA6 /* RSVPDetailViewController.xib */,
 				7612EEF01B0525760024A933 /* RSVPTableViewCell.h */,
 				7612EEF11B0525760024A933 /* RSVPTableViewCell.m */,
 				7612EEF21B0525760024A933 /* RSVPTableViewCell.xib */,
@@ -238,10 +231,8 @@
 			children = (
 				76BEB5221AF097DB00F708EF /* ProfileInformationViewController.h */,
 				76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */,
-				76BEB5241AF097DB00F708EF /* ProfileInformationViewController.xib */,
 				764069321AF09BB6004DD42B /* TermsAndConditionsViewController.h */,
 				764069331AF09BB6004DD42B /* TermsAndConditionsViewController.m */,
-				764069341AF09BB6004DD42B /* TermsAndConditionsViewController.xib */,
 				76E735001AE83C2B00F312E2 /* ProfileTableViewController.h */,
 				76E735011AE83C2B00F312E2 /* ProfileTableViewController.m */,
 				76E735021AE83C2B00F312E2 /* ProfileTableViewController.xib */,
@@ -345,9 +336,6 @@
 				76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */,
 				767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */,
 				7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */,
-				F09972031AF523D400F18DA6 /* RSVPDetailViewController.xib in Resources */,
-				76BEB5261AF097DB00F708EF /* ProfileInformationViewController.xib in Resources */,
-				764069361AF09BB6004DD42B /* TermsAndConditionsViewController.xib in Resources */,
 				7612EEF41B0525760024A933 /* RSVPTableViewCell.xib in Resources */,
 				76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */,
 				76E735091AE83C5600F312E2 /* RSVPTableViewController.xib in Resources */,

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XLForm.h"
+#import "XLFormViewController.h"
 
-@interface TermsAndConditionsViewController : UIViewController
+@interface TermsAndConditionsViewController : XLFormViewController
 
 @end

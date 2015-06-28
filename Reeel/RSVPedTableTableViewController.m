@@ -7,6 +7,7 @@
 //
 
 #import "RSVPedTableTableViewController.h"
+#import "RSVPTableViewController.h"
 #import "RSVPTableViewCell.h"
 #import "UIColor+BFPaperColors.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -149,7 +150,7 @@
     return cell;
 }
 
-- (IBAction)optOutButton:(id)sender {
+- (void)optOutButton:(id)sender {
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     
@@ -177,6 +178,9 @@
         
     }];
     
+    RSVPTableViewController *rsvpViewController = [[RSVPTableViewController alloc] init];
+    [rsvpViewController.tableView reloadData];
+    [self.navigationController pushViewController:rsvpViewController animated:YES];
 }
 
 

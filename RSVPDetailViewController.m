@@ -7,19 +7,17 @@
 //
 
 #import "RSVPDetailViewController.h"
+#import "UIColor+BFPaperColors.h"
+#import "RSVPedTableTableViewController.h"
 
+NSString *const kValidationName = @"kName";
+NSString *const kValidationEmail = @"kEmail";
+NSString *const kValidationInteger = @"kInteger";
+NSString *const khiderow = @"tag1";
+NSString *const khidesection = @"tag2";
+NSString *const khidetext = @"tag3";
 
-
-@interface RSVPDetailViewController () <UINavigationControllerDelegate, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
-@property (weak, nonatomic) IBOutlet UITextField *userEmailLabel;
-@property (weak, nonatomic) IBOutlet UITextField *guestsLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *termsLabel;
-@property (retain, nonatomic) IBOutlet UISwitch *termsSwitch;
-@property (retain, nonatomic) IBOutlet UIButton *confirmButton;
-
-@property (nonatomic, assign) id currentResponder;
+@interface RSVPDetailViewController ()
 
 @property (nonatomic, strong) PFObject *guestList;
 
@@ -30,223 +28,215 @@
 
 @end
 
-@implementation RSVPDetailViewController 
 
-@synthesize userNameLabel;
-@synthesize userEmailLabel;
-@synthesize guestsLabel;
-@synthesize termsLabel;
-@synthesize termsSwitch;
-@synthesize confirmButton;
-@synthesize guestList;
+@implementation RSVPDetailViewController
+@synthesize guestList = _guestList;
 @synthesize screening = _screening;
-@synthesize defaults;
-@synthesize query;
+@synthesize defaults = _defaults;
+@synthesize query = _query;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    //initialize new Guestlist Object
-    guestList = [PFObject objectWithClassName:@"GuestList"];
-    // query
-    query = [PFQuery queryWithClassName:@"GuestList"];
-    
-    defaults = [NSUserDefaults standardUserDefaults];
-    
-    userNameLabel.text = [defaults objectForKey:@"userName"];
-    userEmailLabel.text = [defaults objectForKey:@"userEmail"];
-    guestsLabel.text = [defaults objectForKey:@"guestCount"];
-    termsLabel.text = @"Agree to Terms and Conditions";
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUserData:) name:UIKeyboardDidHideNotification object:nil];
-    
-    // remove keyboard with outside touch
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
-    
-    [singleTap setNumberOfTapsRequired:1];
-    
-    [singleTap setNumberOfTouchesRequired:1];
-    
-    [self.view addGestureRecognizer:singleTap];
-    //[singleTap release];
-    
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self initializeForm];
+    }
+    return self;
 }
 
-- (IBAction)RSVPButtonPressed:(UIButton *)sender
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self initializeForm];
+    }
+    return self;
+}
+
+- (void)initializeForm
+{
+    //initialize new Guestlist Object
+    self.guestList = [PFObject objectWithClassName:@"GuestList"];
+    // query
+    self.query = [PFQuery queryWithClassName:@"GuestList"];
+    self.defaults = [NSUserDefaults standardUserDefaults];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLocal:) name:UIKeyboardDidHideNotification object:nil];
+    
+    XLFormDescriptor *form;
+    XLFormSectionDescriptor *section;
+    XLFormRowDescriptor *row;
+    
+    form = [XLFormDescriptor formDescriptorWithTitle:@"RSVP"];
+    
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Information"];
+    section.footerTitle = @"No more than 4 tickets";
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kValidationName rowType:XLFormRowDescriptorTypeName];
+    [row.cellConfigAtConfigure setObject:@"Name" forKey:@"textField.placeholder"];
+    row.required = YES;
+    row.value = [self.defaults objectForKey:@"name"];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kValidationEmail rowType:XLFormRowDescriptorTypeEmail];
+    [row.cellConfigAtConfigure setObject:@"Email" forKey:@"textField.placeholder"];
+    row.required = YES;
+    row.value = [self.defaults objectForKey:@"email"];
+    [row addValidator: [XLFormValidator emailValidator]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kValidationInteger rowType:XLFormRowDescriptorTypeInteger];
+    [row.cellConfigAtConfigure setObject:@"Guests" forKey:@"textField.placeholder"];
+    row.required = YES;
+    row.value = @1;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"Sorry, no more than 4 seats" regex:@"^[1-4]$"]];
+    [section addFormRow:row];
+    
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Terms & Conditions"];
+    section.footerTitle = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit mi nec ipsum convallis posuere. In eu arcu ut libero dignissim varius ultricies non nisl. Phasellus ornare enim non orci mattis cursus. Duis lacus ante, venenatis ac mattis sed, iaculis id tellus. Cras gravida nulla vitae enim facilisis, sodales suscipit est feugiat. Pellentesque vitae turpis pharetra arcu finibus faucibus eu quis sapien. Aliquam pulvinar mauris non ligula blandit mattis. Aenean viverra nisi ac ante consectetur, eu eleifend justo auctor. Fusce in convallis tellus, ac pharetra purus. Donec hendrerit posuere scelerisque.";
+    [form addFormSection:section];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:khiderow rowType:XLFormRowDescriptorTypeBooleanSwitch title:@" I agree to the Terms & Conditions"];
+//    row.hidden = [NSString stringWithFormat:@"$%@==0", khiderow];
+    row.value = @0;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:khidesection rowType:XLFormRowDescriptorTypeButton title:@"Sign me up!"];
+    [row.cellConfigAtConfigure setObject:[UIColor paperColorRed] forKey:@"backgroundColor"];
+    [row.cellConfig setObject:[UIColor whiteColor] forKey:@"textLabel.color"];
+    [row.cellConfig setObject:[UIFont fontWithName:@"Helvetica" size:38] forKey:@"textLabel.font"];
+    row.hidden = [NSString stringWithFormat:@"$%@==0", khiderow];
+    row.value = @1;
+    row.action.formSelector = @selector(rsvp:);
+    [section addFormRow:row];
+    
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    [form addFormSection:section];
+
+    self.form = form;
+
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[self.form formRowAtIndex:indexPath].tag isEqualToString:@"Button"]){
+        return 100.0;
+    }
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
+- (void)rsvp:(UIButton *)sender
 {
     UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-     UIAlertView *updateAlert = [[UIAlertView alloc] initWithTitle:@"RSVP Updated" message:@"Your RSVP Information has been updated" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    UIAlertView *updateAlert = [[UIAlertView alloc] initWithTitle:@"RSVP Updated" message:@"Your RSVP Information has been updated" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
     
-    guestList[@"screening"] = self.screening;
-    guestList[@"user"] = [PFUser currentUser];
-    NSLog(@"%@", [PFUser currentUser]);
-    guestList[@"guestName"] = [defaults objectForKey:@"userName"];
-    guestList[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
-    guestList[@"guestCount"] = [defaults objectForKey:@"guestCount"];
-    
-    [query whereKey:@"screening" equalTo:self.screening];
-    [query whereKey:@"user" equalTo:[PFUser currentUser]];
-    
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        
-        if (!error) {
-            object[@"screening"] = self.screening;
-            object[@"user"] = [PFUser currentUser];
-            object[@"guestName"] = [defaults objectForKey:@"userName"];
-            object[@"guestEmail"] = [[defaults objectForKey:@"userEmail"] lowercaseString];
-            object[@"guestCount"] = [defaults objectForKey:@"guestCount"];
-            [object saveInBackground];
-            [object pinInBackground];
-            [updateAlert show];
-            
-        }else {
-            
-            [guestList saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    [guestList pinInBackground];
-                    [guestList saveEventually];
-                    [saveAlert show];
-                    
-                }else {
-                    
-                }
-            }];
-            
-           
-        }
-        
-    }];
-
-}
-
-- (IBAction)optOutButton:(id)sender {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:@"Not sure?" otherButtonTitles:@"OK", nil];
-    
-    
-    [query whereKey:@"screening" equalTo:self.screening];
-    [query includeKey:@"user"];
-    
-    PFQuery *guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
-    [guestlistQuery fromLocalDatastore];
-    [guestlistQuery whereKey:@"screening" equalTo:self.screening];
-    
-    [query getObjectInBackgroundWithId:guestList.objectId block:^(PFObject *gl, NSError *error){
-        
-        if (!error) {
-            [alert show];
-            [gl deleteInBackground];
-            
-        } else {
-            [guestlistQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                if (!error) {
-                    [alert show];
-                    [object unpinInBackground];
-                    
-                }
-            }];
-        }
-        
-    }];
-
-}
-
-
-- (void)checkEmailAndDisplayAlert {
-    if(![self validateEmail:[userEmailLabel text]]) {
-        // user entered invalid email address
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid email address." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-        //[alert release];
+    NSLog(@"%@", [self formValidationErrors]);
+    if ([[self formValidationErrors] count] >= 1) {
+        [self validateForm:self];
+        return;
     } else {
-        // user entered valid email address
+        self.guestList[@"screening"] = self.screening;
+        self.guestList[@"user"] = [PFUser currentUser];
+        self.guestList[@"name"] = [self.defaults objectForKey:@"name"];
+        self.guestList[@"email"] = [self.defaults objectForKey:@"email"];
+        self.guestList[@"sitting"] = [self.defaults objectForKey:@"sitting"];
+
+        [self.query whereKey:@"screening" equalTo:self.screening];
+        [self.query whereKey:@"user" equalTo:[PFUser currentUser]];
+
+        [self.query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!error) {
+                object[@"screening"] = self.screening;
+                object[@"user"] = [PFUser currentUser];
+                object[@"name"] = [self.defaults objectForKey:@"name"];
+                object[@"email"] = [self.defaults objectForKey:@"email"];
+                object[@"sitting"] = [self.defaults objectForKey:@"sitting"];
+                [object saveInBackground];
+                [object pinInBackground];
+                [updateAlert show];
+            }else {
+                [self.guestList saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [self.guestList pinInBackground];
+                        [self.guestList saveEventually];
+                        [saveAlert show];
+                    }else {
+
+                    }
+                }];
+            }
+
+        }];
+        
+        RSVPedTableTableViewController *detailViewController = [[RSVPedTableTableViewController alloc] init];
+        detailViewController.screening = self.screening;
+        [detailViewController.tableView reloadData];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+        
     }
 }
 
-// check to determine whether a text field is a valid email
-- (BOOL)validateEmail:(NSString *)emailStr {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:emailStr];
-}
-
-// restrict keyboard selection to non-zero integers for guests label
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (void)validateForm:(id)sender
 {
-    if (textField == guestsLabel) {
-        NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"123456789"] invertedSet];
-        if ([string stringByTrimmingCharactersInSet:nonNumberSet].length > 0)return YES;
-        if (!string.length)return YES;
-
-        return NO;
-    }
-    else {
-        return YES;
-    }
+    NSArray *array = [self formValidationErrors];
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        XLFormValidationStatus *validationStatus  = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
+        
+        if ([validationStatus.rowDescriptor.tag isEqualToString:kValidationName]) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
+//            [validationStatus.rowDescriptor.cellConfigAtConfigure setObject:[UIColor paperColorRed300] forKey:@"textLabel.textColor"];
+//            [self reloadFormRow:validationStatus.rowDescriptor];
+            [self animateCell:cell];
+            
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:kValidationEmail]){
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
+            cell.textLabel.textColor = [UIColor paperColorRed300];
+            [self animateCell:cell];
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:kValidationInteger]){
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
+            cell.textLabel.textColor = [UIColor paperColorRed300];
+            [self animateCell:cell];
+        }
+        
+    }];
     
 }
 
-// keyboard removal through touch outside keyboard
-- (void)resignOnTap:(id)iSender {
-    [self.currentResponder resignFirstResponder];
-}
-
-// assist keyboard removal by identifying first responder
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.currentResponder = textField;
-}
-
-
-// hide keyboard on return key
--(BOOL) textFieldShouldReturn: (UITextField *) textField {
-    [textField resignFirstResponder];
-    return YES;
-}
-
-// terms and conditions must be accepted, all fields completed correctly before confirmation enabled. specific warnings on exit of uncompleted fields
-- (IBAction)toggleEnabledConfirmButton: (id) sender {
-    if (sender == guestsLabel) {
-        if ((!guestsLabel.text.length > 0) && (![guestsLabel.text intValue] > 0)) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid number of guests" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
+- (void)saveLocal:(NSNotification *)notify
+{
+    for (id key in [self.form formValues]) {
+        if ([key isEqualToString:kValidationName]) {
+            [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"name"];
+            [self.defaults synchronize];
+        } else if ([key isEqualToString:kValidationEmail]){
+            [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"email"];
+            [self.defaults synchronize];
+        } else if ([key isEqualToString:kValidationInteger]) {
+            [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"sitting"];
+            [self.defaults synchronize];
         }
     }
-    if (sender == userNameLabel) {
-        if (!userNameLabel.text.length > 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
-        }
-    }
-    if (sender == userEmailLabel) {
-        [self checkEmailAndDisplayAlert];
-    }
-    if ((termsSwitch.on) && (guestsLabel.text.length > 0) && (userEmailLabel.text.length > 0) && (userNameLabel.text.length > 0) && [self validateEmail:[userEmailLabel text]] && ([guestsLabel.text intValue] > 0)) {
-        confirmButton.enabled = YES;
-    }
-    else {
-        confirmButton.enabled = NO;
-    }
-    }
-
-
-// data persistence
-- (void)saveUserData: (NSNotification *)notify
-{
-    [userNameLabel resignFirstResponder];
-    [userEmailLabel resignFirstResponder];
-    [guestsLabel resignFirstResponder];
-    
-    NSString *userName = [userNameLabel text];
-    NSString *userEmail = [userEmailLabel text];
-    NSString *guests = [guestsLabel text];
-    
-    [defaults setObject:userName forKey:@"userName"];
-    [defaults setObject:userEmail forKey:@"userEmail"];
-    [defaults setObject:guests forKey:@"guestCount"];
-    [defaults synchronize];
-    
 }
 
+-(void)animateCell:(UITableViewCell *)cell
+{
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = @"position.x";
+    animation.values =  @[ @0, @20, @-20, @10, @0];
+    animation.keyTimes = @[@0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1];
+    animation.duration = 0.3;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.additive = YES;
+    
+    [cell.layer addAnimation:animation forKey:@"shake"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -254,5 +244,5 @@
 }
 
 
-
 @end
+

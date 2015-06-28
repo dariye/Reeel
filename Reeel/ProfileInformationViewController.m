@@ -8,127 +8,94 @@
 
 #import "ProfileInformationViewController.h"
 
-@interface ProfileInformationViewController () <UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
-@property (weak, nonatomic) IBOutlet UITextField *userEmailLabel;
+NSString *const kName = @"kName";
+NSString *const kEmail = @"kEmail";
 
-@property (nonatomic, assign) id currentResponder;
+@interface ProfileInformationViewController ()
+@property (nonatomic, strong) NSUserDefaults *defaults;
 
 @end
 
 @implementation ProfileInformationViewController
 
-@synthesize userNameLabel;
-@synthesize userEmailLabel;
+@synthesize defaults = _defaults;
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self initializeForm];
+    }
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self initializeForm];
+    }
+    return self;
+}
+
+- (void)initializeForm
+{
+    self.defaults = [NSUserDefaults standardUserDefaults];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveLocal:) name:UIKeyboardDidHideNotification object:nil];
+    
+    XLFormDescriptor *form;
+    XLFormSectionDescriptor *section;
+    XLFormRowDescriptor *row;
+    
+    form = [XLFormDescriptor formDescriptorWithTitle:@"Information"];
+    
+    section = [XLFormSectionDescriptor formSection];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kName rowType:XLFormRowDescriptorTypeName];
+    [row.cellConfigAtConfigure setObject:@"Name" forKey:@"textField.placeholder"];
+    row.required = YES;
+    row.value = [self.defaults objectForKey:@"name"];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kEmail rowType:XLFormRowDescriptorTypeEmail];
+    [row.cellConfigAtConfigure setObject:@"Email" forKey:@"textField.placeholder"];
+    row.required = YES;
+    row.value = [self.defaults objectForKey:@"email"];
+    [row addValidator: [XLFormValidator emailValidator]];
+    [section addFormRow:row];
+    
+    self.form = form;
+
+}
 
 - (void)viewDidLoad {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    userNameLabel.text = [defaults objectForKey:@"userName"];
-    userEmailLabel.text = [defaults objectForKey:@"userEmail"];
-    
     [super viewDidLoad];
-    self.navigationItem.title = @"Information";
     // Do any additional setup after loading the view from its nib.
-    
-    // Listen for keyboard appearances and disappearances
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUserData:) name:UIKeyboardDidHideNotification object:nil];
-    
-    // remove keyboard with outside touch
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
-    [singleTap setNumberOfTapsRequired:1];
-    [singleTap setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:singleTap];
-    //[singleTap release];
-    
-    
+
 }
 
-- (void)saveUserData: (NSNotification *)notify
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [userNameLabel resignFirstResponder];
-    [userEmailLabel resignFirstResponder];
-    
-    NSString *userName = [userNameLabel text];
-    NSString *userEmail = [userEmailLabel text];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:userName forKey:@"userName"];
-    [defaults setObject:userEmail forKey:@"userEmail"];
-    [defaults synchronize];
-    
+    if ([[self.form formRowAtIndex:indexPath].tag isEqualToString:@"Button"]){
+        return 100.0;
+    }
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-// check to see if text field is in the format of an email, triggers an alert if it is not
-- (void)checkEmailAndDisplayAlert {
-    if(![self validateEmail:[userEmailLabel text]]) {
-        // user entered invalid email address
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid email address." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [alert show];
-        //[alert release];
-    } else {
-        // user entered valid email address
-    }
-}
-
-// check to determine whether a text field is a valid email
-- (BOOL)validateEmail:(NSString *)emailStr {
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:emailStr];
-}
-
-
-// makes sure fields are valid when edited
-- (IBAction) checkFields: (id) sender {
-    if (sender == userNameLabel) {
-        if (!userNameLabel.text.length > 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
-        }
-    }
-    if (sender == userEmailLabel) {
-        [self checkEmailAndDisplayAlert];
-    }
-    if (sender == userNameLabel) {
-        if (!userEmailLabel.text.length > 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter a valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
+- (void)saveLocal:(NSNotification *)notify
+{
+    for (id key in [self.form formValues]) {
+        if ([key isEqualToString:kName]) {
+            [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"name"];
+            [self.defaults synchronize];
+        } else if ([key isEqualToString:kEmail]){
+            [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"email"];
+            [self.defaults synchronize];
         }
     }
 }
 
-// keyboard removal through touch outside keyboard
-- (void)resignOnTap:(id)iSender {
-    [self.currentResponder resignFirstResponder];
-}
-
-// assist keyboard removal by identifying first responder
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.currentResponder = textField;
-}
-
-
-// hide keyboard on return key
--(BOOL) textFieldShouldReturn: (UITextField *) textField {
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

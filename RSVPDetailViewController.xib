@@ -4,17 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RSVPDetailViewController">
-            <connections>
-                <outlet property="confirmButton" destination="mtK-XD-QIQ" id="uZ2-17-f6N"/>
-                <outlet property="guestsLabel" destination="ceo-Ta-BNI" id="VYa-Eb-RWX"/>
-                <outlet property="termsLabel" destination="WCA-yf-QR7" id="DWy-QB-v5D"/>
-                <outlet property="termsSwitch" destination="9nd-XV-Kk7" id="Qxs-Mc-vGL"/>
-                <outlet property="userEmailLabel" destination="Pmg-Zq-5zg" id="D1z-Ek-SEo"/>
-                <outlet property="userNameLabel" destination="5RC-lJ-VUr" id="gUT-6J-hiv"/>
-                <outlet property="view" destination="nUv-Xh-ra7" id="ax0-L6-alg"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nUv-Xh-ra7">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -23,31 +13,20 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="5RC-lJ-VUr">
                     <rect key="frame" x="23" y="106" width="275" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="editingDidEnd" id="VX2-jB-oYz"/>
-                        <outlet property="delegate" destination="-1" id="EHX-AZ-kn8"/>
-                    </connections>
                 </textField>
                 <textField autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Number of Guests" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="ceo-Ta-BNI">
                     <rect key="frame" x="23" y="221" width="275" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
-                    <connections>
-                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="editingDidEnd" id="TI7-ro-CWs"/>
-                        <outlet property="delegate" destination="-1" id="oIR-i9-evc"/>
-                    </connections>
                 </textField>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="9nd-XV-Kk7">
                     <rect key="frame" x="249" y="276" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="valueChanged" id="T6C-1c-g4S"/>
-                    </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WCA-yf-QR7">
                     <rect key="frame" x="23" y="281" width="206" height="21"/>
@@ -63,9 +42,6 @@
                     <state key="normal" title="Confirm">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="RSVPButtonPressed:" destination="-1" eventType="touchUpInside" id="RHc-Pw-dQL"/>
-                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mYQ-N8-irg">
                     <rect key="frame" x="0.0" y="383" width="320" height="30"/>
@@ -74,20 +50,13 @@
                         <color key="titleColor" red="1" green="0.38530067019999997" blue="0.32269274409999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="optOutButton:" destination="-1" eventType="touchUpInside" id="3yC-Zq-U5s"/>
-                    </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="Pmg-Zq-5zg">
                     <rect key="frame" x="23" y="163" width="275" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <action selector="toggleEnabledConfirmButton:" destination="-1" eventType="editingDidEnd" id="7Tr-wq-WNa"/>
-                        <outlet property="delegate" destination="-1" id="EYC-dw-lhZ"/>
-                    </connections>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
