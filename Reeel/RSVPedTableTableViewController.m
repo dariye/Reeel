@@ -15,10 +15,11 @@
 
 
 
+
 #define FIRST_ROW_HEIGHT 220;
 #define OTHER_ROWS_HEIGHT 110;
 
-@interface RSVPedTableTableViewController ()
+@interface RSVPedTableTableViewController () 
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UIImageView *mapImageView;
@@ -57,7 +58,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     // Return the number of sections.
     return 1;
 }
@@ -71,8 +71,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    RSVPTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPsCell" forIndexPath:indexPath];
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RSVPsCell"];
     
     if (!cell) {
@@ -202,6 +200,11 @@
     RSVPTableViewController *rsvpViewController = [[RSVPTableViewController alloc] init];
     [rsvpViewController.tableView reloadData];
     [self.navigationController pushViewController:rsvpViewController animated:YES];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 

@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-@interface RSVPedTableTableViewController : UITableViewController
+@interface RSVPedTableTableViewController : UITableViewController 
 
 @property (nonatomic, strong) PFObject *screening;
 @property (nonatomic, strong) PFObject *guestlist;

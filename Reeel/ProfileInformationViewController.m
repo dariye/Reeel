@@ -112,4 +112,9 @@ NSString *const kEmail = @"kEmail";
 }
 
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 @end
