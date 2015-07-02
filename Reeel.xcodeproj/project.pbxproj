@@ -136,6 +136,7 @@
 		767E79401AD61392003E9A23 /* Reeel */ = {
 			isa = PBXGroup;
 			children = (
+				76EF528B1B406F1800EB75F2 /* reeel.pass */,
 				76E2F4471B0BAF3000C99B72 /* Screenings */,
 				76E2F4481B0BAF7900C99B72 /* RSVPs */,
 				76E2F4491B0BAFA300C99B72 /* Profile */,
@@ -238,6 +239,13 @@
 				76E735021AE83C2B00F312E2 /* ProfileTableViewController.xib */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		76EF528B1B406F1800EB75F2 /* reeel.pass */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = reeel.pass;
 			sourceTree = "<group>";
 		};
 		E9346436934DD8FF288DEA9B /* Pods */ = {
