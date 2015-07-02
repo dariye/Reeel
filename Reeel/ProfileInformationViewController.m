@@ -7,6 +7,7 @@
 //
 
 #import "ProfileInformationViewController.h"
+#import <SIAlertView/SIAlertView.h>
 
 NSString *const kName = @"kName";
 NSString *const kEmail = @"kEmail";
@@ -86,13 +87,21 @@ NSString *const kEmail = @"kEmail";
 
 - (void)saveLocal:(NSNotification *)notify
 {
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Personal Info Updated!" andMessage:@""];
+    
+    [alertView addButtonWithTitle:@"OK" type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alert) { NSLog(@"OK button Clicked");}];
+    
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
     for (id key in [self.form formValues]) {
         if ([key isEqualToString:kName]) {
             [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"name"];
             [self.defaults synchronize];
+            [alertView show];
         } else if ([key isEqualToString:kEmail]){
             [self.defaults setObject:[[self.form formValues] objectForKey:key] forKey:@"email"];
             [self.defaults synchronize];
+            [alertView show];
         }
     }
 }

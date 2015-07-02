@@ -1,6 +1,0 @@
-framework module MTCardLayout {
-  umbrella header "Pods-Reeel-MTCardLayout-umbrella.h"
-
-  export *
-  module * { export * }
-}

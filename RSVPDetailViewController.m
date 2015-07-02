@@ -9,11 +9,12 @@
 #import "RSVPDetailViewController.h"
 #import "UIColor+BFPaperColors.h"
 #import "RSVPedTableTableViewController.h"
+#import <SIAlertView/SIAlertView.h>
 
 NSString *const kValidationName = @"kName";
 NSString *const kValidationEmail = @"kEmail";
 NSString *const kValidationInteger = @"kInteger";
-NSString *const khiderow = @"tag1";
+NSString *const khiderow = @"kTerms";
 NSString *const khidesection = @"tag2";
 NSString *const khidetext = @"tag3";
 
@@ -89,14 +90,23 @@ NSString *const khidetext = @"tag3";
     row = [XLFormRowDescriptor formRowDescriptorWithTag:kValidationInteger rowType:XLFormRowDescriptorTypeInteger];
     [row.cellConfigAtConfigure setObject:@"Guests" forKey:@"textField.placeholder"];
     row.required = YES;
-    row.value = @1;
+    
+    if ([self.defaults objectForKey:@"sitting"]) {
+        row.value = [self.defaults objectForKey:@"sitting"];
+    } else {
+        row.value = @1;
+    }
+    
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:@"Sorry, no more than 4 seats" regex:@"^[1-4]$"]];
     [section addFormRow:row];
     
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Terms & Conditions"];
+    
     section.footerTitle = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit mi nec ipsum convallis posuere. In eu arcu ut libero dignissim varius ultricies non nisl. Phasellus ornare enim non orci mattis cursus. Duis lacus ante, venenatis ac mattis sed, iaculis id tellus. Cras gravida nulla vitae enim facilisis, sodales suscipit est feugiat. Pellentesque vitae turpis pharetra arcu finibus faucibus eu quis sapien. Aliquam pulvinar mauris non ligula blandit mattis. Aenean viverra nisi ac ante consectetur, eu eleifend justo auctor. Fusce in convallis tellus, ac pharetra purus. Donec hendrerit posuere scelerisque.";
+    
     [form addFormSection:section];
-
+    
+    // TODO: remember that user has accepted terms & conditions for screening
     row = [XLFormRowDescriptor formRowDescriptorWithTag:khiderow rowType:XLFormRowDescriptorTypeBooleanSwitch title:@" I agree to the Terms & Conditions"];
 //    row.hidden = [NSString stringWithFormat:@"$%@==0", khiderow];
     row.value = @0;
@@ -134,8 +144,14 @@ NSString *const khidetext = @"tag3";
 
 - (void)rsvp:(UIButton *)sender
 {
-    UIAlertView *saveAlert = [[UIAlertView alloc] initWithTitle:@"Thank You" message:@"Your RSVP has been confirmed." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    UIAlertView *updateAlert = [[UIAlertView alloc] initWithTitle:@"RSVP Updated" message:@"Your RSVP Information has been updated" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    SIAlertView *saveAlert = [[SIAlertView alloc] initWithTitle:@"RSVP Saved!" andMessage:@"Your reservations has been saved."];
+    SIAlertView *updateAlert = [[SIAlertView alloc] initWithTitle:@"RSVP Updated!" andMessage:@"Your reservation has been updated."];
+    
+    [saveAlert addButtonWithTitle:@"OK" type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alert) { NSLog(@"OK button Clicked");}];
+    [updateAlert addButtonWithTitle:@"OK" type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alert) { NSLog(@"OK button Clicked");}];
+    
+    saveAlert.transitionStyle = SIAlertViewTransitionStyleBounce;
+    updateAlert.transitionStyle = SIAlertViewTransitionStyleBounce;
     
     NSLog(@"%@", [self formValidationErrors]);
     if ([[self formValidationErrors] count] >= 1) {

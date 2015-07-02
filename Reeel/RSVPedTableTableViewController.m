@@ -11,6 +11,7 @@
 #import "RSVPTableViewCell.h"
 #import "UIColor+BFPaperColors.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SIAlertView/SIAlertView.h>
 
 
 
@@ -142,7 +143,7 @@
         [self.cancelRSVPButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.cancelRSVPButton.titleLabel setFont:[UIFont systemFontOfSize:22]];
         
-        [self.cancelRSVPButton addTarget:self action:@selector(optOutButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self.cancelRSVPButton addTarget:self action:@selector(confirmButton:) forControlEvents:UIControlEventTouchUpInside];
  
         [cell addSubview:self.cancelRSVPButton];
     }
@@ -150,9 +151,25 @@
     return cell;
 }
 
-- (void)optOutButton:(id)sender {
+- (void)confirmButton:(id)sender
+{
+    SIAlertView *confirmAlertView = [[SIAlertView alloc] initWithTitle:@"Cancel RSVP" andMessage:@"Are you sure you want to cancel your RSVP?"];
+    [confirmAlertView addButtonWithTitle:@"Cancel" type:SIAlertViewButtonTypeCancel handler:^(SIAlertView *alert) { return; }];
+    [confirmAlertView addButtonWithTitle:@"OK" type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alert) { [self optOutButton:self]; }];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"RSVP Removed" message:@"We'll miss you" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    confirmAlertView.transitionStyle = SIAlertViewTransitionStyleDropDown;
+    
+    [confirmAlertView show];
+}
+
+- (void)optOutButton:(id)sender
+{
+    
+    SIAlertView *cancelAlertView = [[SIAlertView alloc] initWithTitle:@"RSVP Removed!" andMessage:@"We'll miss you"];
+    
+    [cancelAlertView addButtonWithTitle:@"OK" type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alert) { NSLog(@"OK button Clicked");}];
+    
+    cancelAlertView.transitionStyle = SIAlertViewTransitionStyleBounce;
     
     PFQuery *query = [PFQuery queryWithClassName:@"GuestList"];
     [query whereKey:@"screening" equalTo:self.screening];
@@ -165,12 +182,12 @@
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *gl, NSError *error){
         if (!error) {
             [gl deleteInBackground];
-            [alert show];
+            [cancelAlertView show];
         } else {
             [guestlistQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
                 if (!error) {
                     [object unpinInBackground];
-                    [alert show];
+                    [cancelAlertView show];
                 }
             }];
             
