@@ -140,6 +140,11 @@ NSString *const khidetext = @"tag3";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[SIAlertView appearance] setMessageFont:[UIFont systemFontOfSize:13]];
+    [[SIAlertView appearance] setButtonColor:[UIColor paperColorGreen]];
+    [[SIAlertView appearance] setCancelButtonColor:[UIColor paperColorRed]];
+    [[SIAlertView appearance] setDestructiveButtonColor:[UIColor paperColorBlue]];
 }
 
 - (void)rsvp:(UIButton *)sender

@@ -8,6 +8,7 @@
 
 #import "ProfileInformationViewController.h"
 #import <SIAlertView/SIAlertView.h>
+#import "UIColor+BFPaperColors.h"
 
 NSString *const kName = @"kName";
 NSString *const kEmail = @"kEmail";
@@ -74,7 +75,11 @@ NSString *const kEmail = @"kEmail";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    [[SIAlertView appearance] setMessageFont:[UIFont systemFontOfSize:13]];
+    [[SIAlertView appearance] setButtonColor:[UIColor paperColorGreen]];
+    [[SIAlertView appearance] setCancelButtonColor:[UIColor paperColorRed]];
+    [[SIAlertView appearance] setDestructiveButtonColor:[UIColor paperColorBlue]];
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

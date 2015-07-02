@@ -38,6 +38,10 @@
     
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
+    [[SIAlertView appearance] setMessageFont:[UIFont systemFontOfSize:13]];
+    [[SIAlertView appearance] setButtonColor:[UIColor paperColorGreen]];
+    [[SIAlertView appearance] setCancelButtonColor:[UIColor paperColorRed]];
+    [[SIAlertView appearance] setDestructiveButtonColor:[UIColor paperColorBlue]];
 }
 
 
