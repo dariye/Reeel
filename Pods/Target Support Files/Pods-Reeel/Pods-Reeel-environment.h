@@ -72,6 +72,12 @@
 #define COCOAPODS_VERSION_MINOR_GoogleMaps 9
 #define COCOAPODS_VERSION_PATCH_GoogleMaps 2
 
+// GoogleMapsKit
+#define COCOAPODS_POD_AVAILABLE_GoogleMapsKit
+#define COCOAPODS_VERSION_MAJOR_GoogleMapsKit 1
+#define COCOAPODS_VERSION_MINOR_GoogleMapsKit 0
+#define COCOAPODS_VERSION_PATCH_GoogleMapsKit 5
+
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
 #define COCOAPODS_VERSION_MAJOR_Parse 1

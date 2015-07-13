@@ -14,4 +14,5 @@ target 'Reeel' do
     pod 'SDWebImage', '~>3.6'
     pod 'XLForm', '~> 3.0.0'
     pod 'SIAlertView'
+    pod 'GoogleMapsKit', '~> 1.0'
 end

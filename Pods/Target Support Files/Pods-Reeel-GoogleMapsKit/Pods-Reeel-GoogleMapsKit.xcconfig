@@ -1,0 +1,1 @@
+PODS_REEEL_GOOGLEMAPSKIT_OTHER_LDFLAGS = -framework "CoreLocation"

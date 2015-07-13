@@ -10,8 +10,6 @@
 
 @interface ScreeningsTableViewCell ()
 
-
-
 @end
 
 @implementation ScreeningsTableViewCell

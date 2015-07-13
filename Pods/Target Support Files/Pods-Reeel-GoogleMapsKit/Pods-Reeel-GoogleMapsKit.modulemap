@@ -1,0 +1,6 @@
+framework module GoogleMapsKit {
+  umbrella header "Pods-Reeel-GoogleMapsKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

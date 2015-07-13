@@ -12,6 +12,8 @@
 #import "UIColor+BFPaperColors.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SIAlertView/SIAlertView.h>
+#import <MapKit/MapKit.h>
+#import "GoogleMapsKit.h"
 
 
 
@@ -19,17 +21,20 @@
 #define FIRST_ROW_HEIGHT 220;
 #define OTHER_ROWS_HEIGHT 110;
 
-@interface RSVPedTableTableViewController () 
+@interface RSVPedTableTableViewController () <UIActionSheetDelegate>
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UIImageView *mapImageView;
 @property (nonatomic, strong) UIButton *ticketButton;
 @property (nonatomic, strong) UIButton *cancelRSVPButton;
+@property (nonatomic, strong) UIButton *mapButton;
 
 
 @end
 
 @implementation RSVPedTableTableViewController
+
+@synthesize mapButton = _mapButton;
 
 - (void)viewDidLoad
 {
@@ -112,12 +117,20 @@
     
     
     if (indexPath.row == 0) {
+        
+        self.mapButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.mapButton.frame = CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height * 2/3);
+        [self.mapButton addTarget:self action:@selector(openLocationInMaps:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height * 2/3)];
         self.mapImageView.clipsToBounds = YES;
 //        self.mapImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@""]]];
         [self.mapImageView sd_setImageWithURL:[NSURL URLWithString:[self.screening objectForKey:@"locationImage"]] placeholderImage:nil];
         
-        [backgroundView addSubview:self.mapImageView];
+        [self.mapButton addSubview:self.mapImageView];
+        
+
+        [backgroundView addSubview:self.mapButton];
         
         
 //       self.descriptionLabel.textColor = [UIColor blackColor];
@@ -200,6 +213,37 @@
     RSVPTableViewController *rsvpViewController = [[RSVPTableViewController alloc] init];
     [rsvpViewController.tableView reloadData];
     [self.navigationController pushViewController:rsvpViewController animated:YES];
+}
+
+- (void)openLocationInMaps:(id)sender
+{
+    if([GoogleMapsKit isGoogleMapsInstalled]){
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Maps", @"Open in Google Maps", nil];
+        [actionSheet showInView:self.view];
+    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Maps", nil];
+        [actionSheet showInView:self.view];
+    }
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    double lat = [[[self.screening objectForKey:@"latlng"] objectForKey:@"lat"] doubleValue];
+    double lng = [[[self.screening objectForKey:@"latlng"] objectForKey:@"lng"] doubleValue];
+    
+    CLLocationCoordinate2D screeningLocation = CLLocationCoordinate2DMake(lat,lng);
+    
+    if (buttonIndex == 0) {
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:screeningLocation addressDictionary:nil];
+        MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
+        item.name = @"Screening Location";
+        [item openInMapsWithLaunchOptions:nil];
+    }else if (buttonIndex == 1) {
+        if([GoogleMapsKit isGoogleMapsInstalled]){
+            [GoogleMapsKit  showMapWithCenter:CLLocationCoordinate2DMake(lat, lng) zoom:14 mapMode:GoogleMapsModeDefault view:GoogleMapsViewClearAll];
+        }
+    }
 }
 
 - (NSUInteger)supportedInterfaceOrientations
