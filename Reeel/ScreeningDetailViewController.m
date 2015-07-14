@@ -142,8 +142,17 @@
     self.rsvpButton.frame = CGRectMake(25, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width - 50, 80);
     [self.rsvpButton setContentMode:UIViewContentModeScaleAspectFit];
     [self.rsvpButton setClipsToBounds:YES];
-    [self.rsvpButton setBackgroundColor:[UIColor paperColorRed600]];
-    [self.rsvpButton setTitle:@"RSVP" forState:UIControlStateNormal];
+    //Check if user has Rsvped for this
+    PFQuery *guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
+    [guestlistQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [guestlistQuery whereKey:@"screening" equalTo:self.screening];
+    if ([guestlistQuery getFirstObject]) {
+        [self.rsvpButton setBackgroundColor:[UIColor paperColorGreen600]];
+        [self.rsvpButton setTitle:@"Change RSVP" forState:UIControlStateNormal];
+    }else {
+        [self.rsvpButton setBackgroundColor:[UIColor paperColorRed600]];
+        [self.rsvpButton setTitle:@"RSVP" forState:UIControlStateNormal];
+    }
     [self.rsvpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.rsvpButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
     self.rsvpButton.layer.shadowOpacity = 0.3;
@@ -211,6 +220,9 @@
     self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.5);
     self.scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.scrollView];
+    
+    
+    
    
 
 }
