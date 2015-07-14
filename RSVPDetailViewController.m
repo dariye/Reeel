@@ -101,8 +101,9 @@ NSString *const khidetext = @"tag3";
     [section addFormRow:row];
     
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Terms & Conditions"];
-    
-    section.footerTitle = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam hendrerit mi nec ipsum convallis posuere. In eu arcu ut libero dignissim varius ultricies non nisl. Phasellus ornare enim non orci mattis cursus. Duis lacus ante, venenatis ac mattis sed, iaculis id tellus. Cras gravida nulla vitae enim facilisis, sodales suscipit est feugiat. Pellentesque vitae turpis pharetra arcu finibus faucibus eu quis sapien. Aliquam pulvinar mauris non ligula blandit mattis. Aenean viverra nisi ac ante consectetur, eu eleifend justo auctor. Fusce in convallis tellus, ac pharetra purus. Donec hendrerit posuere scelerisque.";
+    NSLog(@"%@", [self.screening objectForKey:@"screeningTerms"]);
+    // TODO: Check to usability.
+    section.footerTitle = [self.screening objectForKey:@"screeningTerms"];
     
     [form addFormSection:section];
     
