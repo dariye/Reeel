@@ -72,9 +72,6 @@
 {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query orderByDescending:@"screeningDate"];
-    
-    
-    
     return query;
 }
 

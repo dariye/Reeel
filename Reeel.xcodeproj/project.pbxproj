@@ -17,7 +17,6 @@
 		767E79441AD61392003E9A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79431AD61392003E9A23 /* main.m */; };
 		767E79471AD61392003E9A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E79461AD61392003E9A23 /* AppDelegate.m */; };
 		767E794F1AD61392003E9A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 767E794E1AD61392003E9A23 /* Images.xcassets */; };
-		767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767E79501AD61392003E9A23 /* LaunchScreen.xib */; };
 		767E795E1AD61393003E9A23 /* ReeelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E795D1AD61393003E9A23 /* ReeelTests.m */; };
 		76BEB5251AF097DB00F708EF /* ProfileInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BEB5231AF097DB00F708EF /* ProfileInformationViewController.m */; };
 		76E734F41AE827C300F312E2 /* ScreeningsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E734F21AE827C300F312E2 /* ScreeningsTableViewController.m */; };
@@ -60,7 +59,6 @@
 		767E79451AD61392003E9A23 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		767E79461AD61392003E9A23 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		767E794E1AD61392003E9A23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		767E79511AD61392003E9A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		767E79571AD61393003E9A23 /* ReeelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReeelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		767E795C1AD61393003E9A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		767E795D1AD61393003E9A23 /* ReeelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReeelTests.m; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				767E79451AD61392003E9A23 /* AppDelegate.h */,
 				767E79461AD61392003E9A23 /* AppDelegate.m */,
 				767E794E1AD61392003E9A23 /* Images.xcassets */,
-				767E79501AD61392003E9A23 /* LaunchScreen.xib */,
 				767E79411AD61392003E9A23 /* Supporting Files */,
 			);
 			path = Reeel;
@@ -342,7 +339,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76E7350E1AE8424200F312E2 /* ScreeningsTableViewCell.xib in Resources */,
-				767E79521AD61392003E9A23 /* LaunchScreen.xib in Resources */,
 				7665D2D91AE4571200487F59 /* ScreeningDetailViewController.xib in Resources */,
 				7612EEF41B0525760024A933 /* RSVPTableViewCell.xib in Resources */,
 				76E735041AE83C2B00F312E2 /* ProfileTableViewController.xib in Resources */,
@@ -447,17 +443,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		767E79501AD61392003E9A23 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				767E79511AD61392003E9A23 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		767E795F1AD61393003E9A23 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -541,6 +526,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Reeel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -554,6 +540,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Reeel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
