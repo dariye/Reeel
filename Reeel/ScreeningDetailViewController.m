@@ -75,7 +75,7 @@
 {
     UIImage *gradient = [UIImage imageNamed:@"gradient"];
     self.gradientImageView = [[UIImageView alloc] initWithImage:gradient];
-    self.gradientImageView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.5);
+    self.gradientImageView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.70);
     self.gradientImageView.clipsToBounds = YES;
     self.gradientImageView.tintColor = [UIColor blackColor];
     self.gradientImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -120,7 +120,7 @@
     
     CGFloat height = [self.synopsisLabel.text boundingRectWithSize:CGSizeMake(self.synopsisLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     
-    self.directorsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.synopsisLabel.frame.origin.y +  height + 70, [UIScreen mainScreen].bounds.size.width - 50, 21)];
+    self.directorsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.synopsisLabel.frame.origin.y + height*2.6, [UIScreen mainScreen].bounds.size.width - 50, 21)];
     self.directorsLabel.text = [NSString stringWithFormat:@"Director(s): %@", [self.screening objectForKey:@"screeningDirectorInfo"]];
     self.directorsLabel.textColor = [UIColor whiteColor];
     self.directorsLabel.numberOfLines = 0;
@@ -129,7 +129,7 @@
     
     height = [self.directorsLabel.text boundingRectWithSize:CGSizeMake(self.directorsLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     
-    self.starsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.directorsLabel.frame.origin.y +  height + 10, [UIScreen mainScreen].bounds.size.width - 50, 21)];
+    self.starsLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.directorsLabel.frame.origin.y +  height*2, [UIScreen mainScreen].bounds.size.width - 50, 21)];
     self.starsLabel.text = [NSString stringWithFormat:@"Star(s): %@", [self.screening objectForKey:@"screeningStarInfo"]];
     self.starsLabel.textColor = [UIColor whiteColor];
     self.starsLabel.numberOfLines = 0;
@@ -137,6 +137,17 @@
     [self.scrollView addSubview:self.starsLabel];
     
     height = [self.starsLabel.text boundingRectWithSize:CGSizeMake(self.starsLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
+    
+    
+    self.urlButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    self.urlButton.frame = CGRectMake(25, self.starsLabel.frame.origin.y + height*2.3, 200, 40);
+    [self.urlButton setTitle:@"" forState:UIControlStateNormal];
+    [self.urlButton setContentMode:UIViewContentModeScaleAspectFit];
+    [self.urlButton addTarget:self action:@selector(moreInfoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.urlButton.center = CGPointMake(35, self.starsLabel.frame.origin.y + height*2.3);
+    if ([self.screening objectForKey:@"screeningLink"]) {
+        [self.scrollView addSubview:self.urlButton];
+    }
     
     self.rsvpButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rsvpButton.frame = CGRectMake(25, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width - 50, 80);
@@ -158,20 +169,12 @@
     self.rsvpButton.layer.shadowOpacity = 0.3;
     self.rsvpButton.layer.shadowRadius = 2.0f;
     self.rsvpButton.layer.cornerRadius = 2.0f;
-    self.rsvpButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height  + ([UIScreen mainScreen].bounds.size.height * 0.32));
+//    self.rsvpButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height  + ([UIScreen mainScreen].bounds.size.height * 0.32));
     
+    self.rsvpButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, self.starsLabel.frame.origin.y + height*4.6);
+//    
     [self.rsvpButton addTarget:self action:@selector(rsvpButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    self.urlButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    self.urlButton.frame = CGRectMake(25, self.rsvpButton.frame.origin.y * 0.95, 200, 40);
-    [self.urlButton setTitle:@"" forState:UIControlStateNormal];
-    [self.urlButton setContentMode:UIViewContentModeScaleAspectFit];
-    [self.urlButton addTarget:self action:@selector(moreInfoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    self.urlButton.center = CGPointMake(35, self.rsvpButton.frame.origin.y * 0.97);
-    if ([self.screening objectForKey:@"screeningLink"]) {
-        [self.scrollView addSubview:self.urlButton];
-    }
-
     [self.scrollView addSubview:self.rsvpButton];
     
     [self.scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight ];
@@ -217,7 +220,7 @@
     self.scrollView.delegate = self;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.5);
+    self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.65);
     self.scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.scrollView];
     
