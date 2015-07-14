@@ -159,7 +159,9 @@
     [self.urlButton setContentMode:UIViewContentModeScaleAspectFit];
     [self.urlButton addTarget:self action:@selector(moreInfoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     self.urlButton.center = CGPointMake(35, self.rsvpButton.frame.origin.y * 0.97);
-    [self.scrollView addSubview:self.urlButton];
+    if ([self.screening objectForKey:@"screeningLink"]) {
+        [self.scrollView addSubview:self.urlButton];
+    }
 
     [self.scrollView addSubview:self.rsvpButton];
     
@@ -240,6 +242,7 @@
     [self.navigationController pushViewController:webBrowser animated:YES];
     
     [webBrowser loadURLString:[self.screening objectForKey:@"screeningLink"]];
+    
     webBrowser.tintColor = [UIColor whiteColor];
     webBrowser.barTintColor = [UIColor paperColorRed];
     [webBrowser.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
