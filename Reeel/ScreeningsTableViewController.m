@@ -73,21 +73,22 @@
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query orderByDescending:@"screeningDate"];
     
+    
+    
     return query;
 }
 
 - (void)retrieveFromParse
 {
-   
     [[self queryForTable] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.screenings = [[NSArray alloc] initWithArray:objects];
-            
             [self setSections];
             [self.tableView reloadData];
             
         }
     }];
+    [PFObject pinAllInBackground:self.screenings];
 }
 - (void)setSections
 {
