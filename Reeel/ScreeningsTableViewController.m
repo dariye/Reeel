@@ -241,9 +241,10 @@
     cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
     [cell.cardView addSubview:cell.screeningLocationLabel];
     
-    
-  
     [cell layoutSubviews];
+    [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    
+    
     return cell;
 }
 

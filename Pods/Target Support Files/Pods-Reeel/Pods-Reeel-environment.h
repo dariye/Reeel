@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
+// ARChromeActivity
+#define COCOAPODS_POD_AVAILABLE_ARChromeActivity
+#define COCOAPODS_VERSION_MAJOR_ARChromeActivity 1
+#define COCOAPODS_VERSION_MINOR_ARChromeActivity 0
+#define COCOAPODS_VERSION_PATCH_ARChromeActivity 2
+
 // Bolts/Tasks
 #define COCOAPODS_POD_AVAILABLE_Bolts_Tasks
 #define COCOAPODS_VERSION_MAJOR_Bolts_Tasks 1
@@ -77,6 +83,12 @@
 #define COCOAPODS_VERSION_MAJOR_GoogleMapsKit 1
 #define COCOAPODS_VERSION_MINOR_GoogleMapsKit 0
 #define COCOAPODS_VERSION_PATCH_GoogleMapsKit 5
+
+// KINWebBrowser
+#define COCOAPODS_POD_AVAILABLE_KINWebBrowser
+#define COCOAPODS_VERSION_MAJOR_KINWebBrowser 1
+#define COCOAPODS_VERSION_MINOR_KINWebBrowser 2
+#define COCOAPODS_VERSION_PATCH_KINWebBrowser 5
 
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
@@ -119,6 +131,12 @@
 #define COCOAPODS_VERSION_MAJOR_SSKeychain 1
 #define COCOAPODS_VERSION_MINOR_SSKeychain 2
 #define COCOAPODS_VERSION_PATCH_SSKeychain 3
+
+// TUSafariActivity
+#define COCOAPODS_POD_AVAILABLE_TUSafariActivity
+#define COCOAPODS_VERSION_MAJOR_TUSafariActivity 1
+#define COCOAPODS_VERSION_MINOR_TUSafariActivity 0
+#define COCOAPODS_VERSION_PATCH_TUSafariActivity 2
 
 // UIColor+BFPaperColors
 #define COCOAPODS_POD_AVAILABLE_UIColor_BFPaperColors

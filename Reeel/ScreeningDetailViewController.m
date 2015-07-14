@@ -7,6 +7,7 @@
 //
 
 #import "ScreeningDetailViewController.h"
+#import "KINWebBrowserViewController.h"
 #import "RSVPDetailViewController.h"
 #import <FXBlurView/FXBlurView.h>
 #import "UIColor+BFPaperColors.h"
@@ -25,6 +26,8 @@
 @property (strong, nonatomic) UILabel *metaLabel;
 @property (strong, nonatomic) UILabel *directorsLabel;
 @property (strong, nonatomic) UILabel *starsLabel;
+@property (strong, nonatomic) UIButton *urlButton;
+//@property (strong, nonatomic) UILabel *terms;
 
 @end
 
@@ -42,7 +45,7 @@
     return _scrollView;
 }
 
-- (IBAction)RSVPButtonPressed:(UIButton *)sender
+- (void)rsvpButtonPressed
 {
     RSVPDetailViewController *rsvpDetail = [[RSVPDetailViewController alloc] init];
     
@@ -148,8 +151,19 @@
     self.rsvpButton.layer.cornerRadius = 2.0f;
     self.rsvpButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height  + ([UIScreen mainScreen].bounds.size.height * 0.32));
     
-    [self.rsvpButton addTarget:self action:@selector(RSVPButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsvpButton addTarget:self action:@selector(rsvpButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.urlButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    self.urlButton.frame = CGRectMake(25, self.rsvpButton.frame.origin.y * 0.95, 200, 40);
+    [self.urlButton setTitle:@"" forState:UIControlStateNormal];
+    [self.urlButton setContentMode:UIViewContentModeScaleAspectFit];
+    [self.urlButton addTarget:self action:@selector(moreInfoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.urlButton.center = CGPointMake(35, self.rsvpButton.frame.origin.y * 0.97);
+    [self.scrollView addSubview:self.urlButton];
+
     [self.scrollView addSubview:self.rsvpButton];
+    
+    [self.scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight ];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -164,6 +178,8 @@
     [super viewDidLoad];
     
     self.navigationItem.title = [_screening objectForKey:@"screeningTitle"];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonPressed)];
+    self.navigationItem.rightBarButtonItem = shareButton;
     
     self.gradientImageView.alpha = 1;
     
@@ -193,7 +209,46 @@
     self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.5);
     self.scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.scrollView];
+   
 
+}
+
+-(void)shareButtonPressed
+{
+    NSString *text = [NSString stringWithFormat:@"Get FREE tickets for screening of %@", [self.screening objectForKey:@"screeningTitle"]];
+    NSURL *screeningLink = [self.screening objectForKey:@"screeningLink"];
+    
+    NSArray *sharePayload = @[text, screeningLink];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:sharePayload applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self.navigationController presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (void)moreInfoButtonPressed
+{
+    KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowser];
+    [self.navigationController pushViewController:webBrowser animated:YES];
+    
+    [webBrowser loadURLString:[self.screening objectForKey:@"screeningLink"]];
+    webBrowser.tintColor = [UIColor whiteColor];
+    webBrowser.barTintColor = [UIColor paperColorRed];
+    [webBrowser.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+//    webBrowser.navigationController.navigationBar.translucent = NO;
+    webBrowser.actionButtonHidden = YES;
+    webBrowser.showsURLInNavigationBar = NO;
+    webBrowser.uiWebView.scrollView.showsVerticalScrollIndicator = NO;
+    webBrowser.showsPageTitleInNavigationBar = YES;
+    
 }
 
 - (NSUInteger)supportedInterfaceOrientations
