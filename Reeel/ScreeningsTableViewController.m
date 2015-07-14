@@ -41,7 +41,6 @@
         self.paginationEnabled = NO;
         self.objectsPerPage = 25;
         [self retrieveFromParse];
-        
     }
     
     return self;
@@ -54,9 +53,14 @@
     
     [super viewDidLoad];
     self.sections = [[NSMutableArray alloc] init];
-
     
-    self.navigationItem.title = @"Upcoming Screening";
+    // TODO: Find a cleaner way of implementing this
+    if([[[self queryForTable] findObjects:nil] count] > 1) {
+        self.navigationItem.title = @"Upcoming Screenings";
+    }else {
+        self.navigationItem.title = @"Upcoming Screening";
+    }
+
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
     
     self.lastRefresh = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScreeningsTableViewControllerLastRefreshKey"];
@@ -111,6 +115,8 @@
      }else {
          self.tableView.scrollEnabled = YES;
      }
+    
+    [self.tableView setShowsVerticalScrollIndicator:NO];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

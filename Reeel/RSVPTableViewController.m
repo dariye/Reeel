@@ -74,10 +74,17 @@
     
     [super viewDidLoad];
     
-    self.navigationItem.title = @"RSVPs";
+    if([self.screenings count] > 1) {
+        self.navigationItem.title = @"Passes";
+    }else {
+        self.navigationItem.title = @"Pass";
+    }
+    
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.separatorColor  = [UIColor clearColor];
+    
+    
 
 
 }
