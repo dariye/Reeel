@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSUserDefaults *defaults;
 
 @property (nonatomic, strong) NSArray *rsvps;
-@property (nonatomic, strong) NSArray *guestlist;
 
 @property (nonatomic, strong) PFQuery *screeningQuery;
 @property (nonatomic, strong) PFQuery *guestlistQuery;
@@ -33,7 +32,6 @@
 @synthesize scrollView;
 @synthesize rsvps;
 @synthesize screeningQuery;
-@synthesize guestlist;
 @synthesize guestlistQuery;
 @synthesize defaults;
 @synthesize query;
@@ -42,8 +40,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     defaults = [NSUserDefaults standardUserDefaults];
-    guestlist = [[NSArray alloc] init];
     self.screenings = [[NSMutableArray alloc] init];
     
     guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
@@ -57,6 +55,7 @@
         if (!error) {
             for (PFObject *object in objects) {
                 [self.screenings addObject:[object objectForKey:@"screening" ]];
+                
             }
             [self.tableView reloadData];
         
@@ -65,20 +64,18 @@
         }
         
     }];
+    
+
 
 }
-
 
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    if([self.screenings count] > 1) {
-        self.navigationItem.title = @"Passes";
-    }else {
-        self.navigationItem.title = @"Pass";
-    }
+    //Check if user has Rsvped for this
+    self.navigationItem.title = @"Passes";
     
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -198,7 +195,7 @@
     
     [dateFormat setDateFormat:@"MMM d '@' HH:mm a"];
     
-    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 5, cell.cardView.frame.size.width - 40, 21)];
+    cell.screeningDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y - 5, cell.cardView.frame.size.width - 40, 21)];
     [cell.screeningDateLabel setText:[screening objectForKey:@"screeningLocation"]];
     cell.screeningDateLabel.numberOfLines = 0;
     [cell.screeningDateLabel sizeToFit];
@@ -217,8 +214,8 @@
     [cell.cardView addSubview:cell.locationIconImageView];
     
     
-    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 25, cell.cardView.frame.size.width - 40, 21)];
-    [cell.screeningLocationLabel setText:[screening objectForKey:@"screeningLocation"]];
+    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 30, cell.cardView.frame.size.width - 40, 21)];
+    [cell.screeningLocationLabel setText:[NSString stringWithFormat:@"%@...", [[screening objectForKey:@"screeningLocation"] substringToIndex:MIN(25, [[screening objectForKey:@"screeningLocation"] length])]]];
     //    CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
     //
     cell.screeningLocationLabel.numberOfLines = 0;

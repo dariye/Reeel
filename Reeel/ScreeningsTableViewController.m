@@ -235,8 +235,8 @@
     [cell.cardView addSubview:cell.locationIconImageView];
     
     
-    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 25, cell.cardView.frame.size.width - 40, 21)];
-    [cell.screeningLocationLabel setText:[screening objectForKey:@"screeningLocation"]];
+    cell.screeningLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, cell.screeningTitleLabel.frame.origin.y + 30, cell.cardView.frame.size.width - 40, 21)];
+    [cell.screeningLocationLabel setText:[NSString stringWithFormat:@"%@...", [[screening objectForKey:@"screeningLocation"] substringToIndex:MIN(25, [[screening objectForKey:@"screeningLocation"] length])]]];
 //    CGFloat height = [cell.screeningLocationLabel.text boundingRectWithSize:CGSizeMake(cell.screeningLocationLabel.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
 //    
     cell.screeningLocationLabel.numberOfLines = 0;
