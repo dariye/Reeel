@@ -15,20 +15,19 @@
 #import <MapKit/MapKit.h>
 #import "GoogleMapsKit.h"
 
-
-
-
 #define FIRST_ROW_HEIGHT 220;
 #define OTHER_ROWS_HEIGHT 110;
 
-@interface RSVPedTableTableViewController () <UIActionSheetDelegate>
+@interface RSVPedTableTableViewController () <UIActionSheetDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UIImageView *mapImageView;
 @property (nonatomic, strong) UIButton *ticketButton;
 @property (nonatomic, strong) UIButton *cancelRSVPButton;
 @property (nonatomic, strong) UIButton *mapButton;
-
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) double currentLat;
+@property (nonatomic) double currentLng;
 
 @end
 
@@ -124,19 +123,18 @@
         
         self.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height * 2/3)];
         self.mapImageView.clipsToBounds = YES;
-//        self.mapImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@""]]];
         [self.mapImageView sd_setImageWithURL:[NSURL URLWithString:[self.screening objectForKey:@"locationImage"]] placeholderImage:nil];
-        
         [self.mapButton addSubview:self.mapImageView];
-        
 
         [backgroundView addSubview:self.mapButton];
         
-        
-//       self.descriptionLabel.textColor = [UIColor blackColor];
-//        self.descriptionLabel.text = [self.screening objectForKey:@"screeningLocation"];
-//       [cell addSubview:self.descriptionLabel];
-        
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, self.mapButton.frame.size.height + 5, backgroundView.frame.size.width - 25, 21)];
+        [self.descriptionLabel setText:[self.screening objectForKey:@"screeningLocation"]];
+        self.descriptionLabel.numberOfLines = 0;
+        [self.descriptionLabel sizeToFit];
+        self.descriptionLabel.font = [UIFont systemFontOfSize:14];
+        self.descriptionLabel.textColor = [UIColor lightGrayColor];
+        [backgroundView addSubview:self.descriptionLabel];
     }else if (indexPath.row == 1){
         self.ticketButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.ticketButton.frame = CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, height - 10);
@@ -217,6 +215,7 @@
 
 - (void)openLocationInMaps:(id)sender
 {
+    
     if([GoogleMapsKit isGoogleMapsInstalled]){
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open in Maps", @"Open in Google Maps", nil];
         [actionSheet showInView:self.view];
@@ -227,21 +226,58 @@
     
 }
 
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = [locations lastObject];
+    self.currentLat = location.coordinate.latitude;
+    self.currentLng = location.coordinate.latitude;
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    //TODO: Review this 
+    [self.locationManager stopUpdatingLocation];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if(nil == self.locationManager){
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+//        [self.locationManager startMonitoringSignificantLocationChanges];
+    }
+    
     double lat = [[[self.screening objectForKey:@"latlng"] objectForKey:@"lat"] doubleValue];
     double lng = [[[self.screening objectForKey:@"latlng"] objectForKey:@"lng"] doubleValue];
     
     CLLocationCoordinate2D screeningLocation = CLLocationCoordinate2DMake(lat,lng);
+    MKPlacemark *destinationPlacemark = [[MKPlacemark alloc] initWithCoordinate:screeningLocation addressDictionary:nil];
     
     if (buttonIndex == 0) {
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:screeningLocation addressDictionary:nil];
-        MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:placemark];
-        item.name = @"Screening Location";
-        [item openInMapsWithLaunchOptions:nil];
+        if ([CLLocationManager locationServicesEnabled]) {
+            MKMapItem *destination = [[MKMapItem alloc] initWithPlacemark:destinationPlacemark];
+            destination.name = [self.screening objectForKey:@"screeningLocation"];
+        
+            NSArray *items = [[NSArray alloc] initWithObjects:destination, nil];
+            NSDictionary *options = [[NSDictionary alloc] initWithObjectsAndKeys:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsDirectionsModeDriving, nil];
+            [MKMapItem openMapsWithItems:items launchOptions:options];
+ 
+        }else {
+            MKMapItem *destination = [[MKMapItem alloc] initWithPlacemark:destinationPlacemark];
+            destination.name = [self.screening objectForKey:@"screeningLocation"];
+            [destination openInMapsWithLaunchOptions:nil];
+        }
+       
     }else if (buttonIndex == 1) {
         if([GoogleMapsKit isGoogleMapsInstalled]){
-            [GoogleMapsKit  showMapWithCenter:CLLocationCoordinate2DMake(lat, lng) zoom:14 mapMode:GoogleMapsModeDefault view:GoogleMapsViewClearAll];
+            if ([CLLocationManager locationServicesEnabled]) {
+                [GoogleMapsKit showMapWithDirectionsForStartingPointCoordinate:CLLocationCoordinate2DMake(self.currentLat, self.currentLng) endPointCoordinate:screeningLocation directionsMode:GoogleMapsDirectionsModeTransit];
+                
+            } else {
+                [GoogleMapsKit  showMapWithCenter:CLLocationCoordinate2DMake(lat, lng) zoom:14 mapMode:GoogleMapsModeDefault view:GoogleMapsViewClearAll];
+            }
         }
     }
 }
