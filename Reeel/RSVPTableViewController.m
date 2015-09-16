@@ -9,86 +9,62 @@
 #import "RSVPTableViewController.h"
 #import "RSVPedTableTableViewController.h"
 #import "RSVPTableViewCell.h"
+#import "BFTask.h"
 
 @interface RSVPTableViewController () <UINavigationControllerDelegate, UITableViewDelegate>
 @property (nonatomic, readonly, retain) UIScrollView *scrollView;
 
 @property (nonatomic, strong) NSUserDefaults *defaults;
 
-@property (nonatomic, strong) NSArray *rsvps;
-
-@property (nonatomic, strong) PFQuery *screeningQuery;
-@property (nonatomic, strong) PFQuery *guestlistQuery;
-
-@property (nonatomic, strong) PFQuery *query;
-@property (nonatomic, strong) NSMutableArray *screenings;
-
 @property (nonatomic) CGFloat height;
 
 @end
 
 @implementation RSVPTableViewController
-
 @synthesize scrollView;
-@synthesize rsvps;
-@synthesize screeningQuery;
-@synthesize guestlistQuery;
 @synthesize defaults;
-@synthesize query;
-@synthesize screenings = _screenings;
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        self.parseClassName = @"GuestList";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = YES;
+        self.objectsPerPage = 25;
+    }
+    
+    return self;
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     defaults = [NSUserDefaults standardUserDefaults];
-    self.screenings = [[NSMutableArray alloc] init];
-    
-    guestlistQuery = [PFQuery queryWithClassName:@"GuestList"];
-    screeningQuery = [PFQuery queryWithClassName:@"Screening"];
-    [guestlistQuery whereKey:@"user" equalTo:[PFUser currentUser]];
-    [guestlistQuery includeKey:@"screening"];
-//    [guestlistQuery fromLocalDatastore];
-
-    [guestlistQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-        
-        if (!error) {
-            for (PFObject *object in objects) {
-                [self.screenings addObject:[object objectForKey:@"screening" ]];
-                
-            }
-            [self.tableView reloadData];
-        
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-        
-    }];
-    
-
-
+//     [self getScreeningsForRsvps];
 }
 
+- (PFQuery *)queryForTable
+{
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query includeKey:@"screening"];
+    [query fromLocalDatastore];
+    return query;
+}
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
-    
     //Check if user has Rsvped for this
     self.navigationItem.title = @"Passes";
-    
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.91 alpha:1.0]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.separatorColor  = [UIColor clearColor];
-    
-    
-
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenHeight = screenRect.size.height;
     CGFloat tabbarHeight = self.tabBarController.tabBar.frame.size.height;
@@ -100,16 +76,17 @@
     
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.screenings count];
-}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return [self.objects count];
+//}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -118,7 +95,7 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     
     static NSString *CellIdentifier = @"RSVPsCell";
@@ -134,9 +111,7 @@
     for (UIView *view in cell.contentView.subviews) {
        [view removeFromSuperview];
     }
-    
-    PFObject *screening = self.screenings[indexPath.row];
-    
+    PFObject *screening = [object objectForKey:@"screening"];
     // set values for ui objects
     cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 15, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 30)];
     cell.cardView.backgroundColor = [UIColor whiteColor];
@@ -223,18 +198,13 @@
     cell.screeningLocationLabel.font = [UIFont systemFontOfSize:14];
     cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
     [cell.cardView addSubview:cell.screeningLocationLabel];
-    
-    
-    
-    [cell layoutSubviews];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RSVPedTableTableViewController *detailViewController = [[RSVPedTableTableViewController alloc] init];
-    PFObject *selectedScreening = self.screenings[indexPath.row];
-    detailViewController.screening = selectedScreening;
+    detailViewController.screening = self.objects[indexPath.row];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

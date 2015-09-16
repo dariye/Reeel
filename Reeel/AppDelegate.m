@@ -122,6 +122,7 @@
     tabBarController.viewControllers = @[screeningNavController, rsvpNavController, profileNavController];
     
     [[tabBarController.tabBar.items objectAtIndex:0] setImage:[UIImage imageNamed:@"home"]];
+    
     [[tabBarController.tabBar.items objectAtIndex:0] setTitle:@"Home"];
 
     [[tabBarController.tabBar.items objectAtIndex:1] setImage:[UIImage imageNamed:@"movie"]];
@@ -130,15 +131,13 @@
     [[tabBarController.tabBar.items objectAtIndex:2] setImage:[UIImage imageNamed:@"account-circle"]];
     [[tabBarController.tabBar.items objectAtIndex:2] setTitle:@"Profile"];
     
+    [tabBarController.tabBar setTintColor:[UIColor paperColorRed500]];
+    
     self.window.rootViewController = tabBarController;
     
-    
     // Override point for customization after application launch.
-    
-   
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-   
     return YES;
 }
 
@@ -152,14 +151,12 @@
         if (!error) {
             NSLog(@"created new user account successfulyy");
             self.currentUser = user;
-            
         }
     }];
 }
 
 - (void)monitorReachability {
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
-    
     hostReach.reachableBlock = ^(Reachability*reach) {
         _networkStatus = [reach currentReachabilityStatus];
         
@@ -168,26 +165,21 @@
             [self.homeController loadObjects];
         }
     };
-    
     hostReach.unreachableBlock = ^(Reachability*reach) {
         _networkStatus = [reach currentReachabilityStatus];
     };
-    
     [hostReach startNotifier];
 }
 
 -(NSString *)getUniqueDeviceIdentifierAsString
 {
-    
     NSString *appName=[[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
-    
     NSString *strApplicationUUID = [SSKeychain passwordForService:appName account:@"incoding"];
     if (strApplicationUUID == nil)
     {
         strApplicationUUID  = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         [SSKeychain setPassword:strApplicationUUID forService:appName account:@"incoding"];
     }
-    
     return strApplicationUUID;
 }
 

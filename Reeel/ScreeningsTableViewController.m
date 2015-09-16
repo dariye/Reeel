@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "AppDelegate.h"
+#import "BFTask.h"
 
 
 
@@ -38,10 +39,9 @@
     if (self) {
         self.parseClassName = @"Screening";
         self.pullToRefreshEnabled = YES;
-        self.paginationEnabled = NO;
+        self.paginationEnabled = YES;
         self.objectsPerPage = 25;
-        [self retrieveFromParse];
-    }
+     }
     
     return self;
     
@@ -54,46 +54,40 @@
     [super viewDidLoad];
     self.sections = [[NSMutableArray alloc] init];
     
-    // TODO: Find a cleaner way of implementing this
-    if([[[self queryForTable] findObjects:nil] count] > 1) {
-        self.navigationItem.title = @"Upcoming Screenings";
-    }else {
-        self.navigationItem.title = @"Upcoming Screening";
-    }
-
+    self.navigationItem.title = @"Upcoming Screenings";
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.91 alpha:1.0];
     
     self.lastRefresh = [[NSUserDefaults standardUserDefaults] objectForKey:@"ScreeningsTableViewControllerLastRefreshKey"];
-    
 }
 
 
--  (PFQuery *)queryForTable
+-(PFQuery *)queryForTable
 {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+//    [query fromLocalDatastore];
     [query orderByDescending:@"screeningDate"];
+    
+//    [[query findObjectsInBackground] continueWithSuccessBlock:^id(BFTask *task){
+//        
+//        return [[PFObject unpinAllObjectsInBackgroundWithName:@"Screenings"] continueWithSuccessBlock:^id(BFTask *ignored){
+//            self.screenings = task.result;
+//            return [PFObject pinAllInBackground:self.screenings withName:@"Screenings"];
+//        }];
+//        
+//    }];
+//    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+//    if (self.objects.count == 0 || ! [[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
+//        [query setCachePolicy:kPFCachePolicyCacheThenNetwork];
+//    }
+    
     return query;
 }
 
-- (void)retrieveFromParse
-{
-    [[self queryForTable] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.screenings = [[NSArray alloc] initWithArray:objects];
-            [self setSections];
-            [self.tableView reloadData];
-            
-        }
-    }];
-    [PFObject pinAllInBackground:self.screenings];
-}
 - (void)setSections
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MMM d"];
-    
     for (PFObject *object in self.screenings) {
-        
         [self.sections addObject:[dateFormat stringFromDate:[object objectForKey:@"screeningDate"]]];
     }
     
@@ -102,12 +96,9 @@
 - (void)objectsDidLoad:(nullable NSError *)error
 {
     [super objectsDidLoad:error];
-    
     self.lastRefresh = [NSDate date];
-    
     [[NSUserDefaults standardUserDefaults] setObject:self.lastRefresh forKey:@"ScreeningsTableViewControllerLastRefreshKey"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
      if (self.objects.count == 0 && ![[self queryForTable] hasCachedResult]) {
          self.tableView.scrollEnabled = NO;
      }else {
@@ -139,7 +130,7 @@
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(nullable PFObject *)object
 {
     static NSString *CellIdentifier = @"ScreeningsCell";
     static NSString *CellNib = @"ScreeningsTableViewCell";
@@ -155,9 +146,7 @@
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
-
-    
-    PFObject *screening = self.screenings[indexPath.row];
+    PFObject *screening = object;
     
     // set values for ui objects
     cell.cardView = [[UIView alloc] initWithFrame:CGRectMake(15, 10, [UIScreen mainScreen].bounds.size.width - 30, ([UIScreen mainScreen].bounds.size.height - 64 - 49) / 2 - 15)];
@@ -167,7 +156,6 @@
     cell.cardView.layer.shadowOpacity = 0.1;
     cell.cardView.layer.shadowRadius = 1.0f;
     cell.cardView.layer.cornerRadius = 1.0f;
-    
     [cell.contentView addSubview:cell.cardView];
     
     
@@ -244,24 +232,15 @@
     cell.screeningLocationLabel.font = [UIFont systemFontOfSize:14];
     cell.screeningLocationLabel.textColor = [UIColor lightGrayColor];
     [cell.cardView addSubview:cell.screeningLocationLabel];
-    
-    [cell layoutSubviews];
     [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-    
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScreeningDetailViewController *detailViewController = [[ScreeningDetailViewController alloc] init];
-    
-    PFObject *selectedScreening = self.screenings[indexPath.row];
-    
-    detailViewController.screening = selectedScreening;
-    
+    detailViewController.screening = self.objects[indexPath.row];
     [self.navigationController pushViewController:detailViewController animated:YES];
-    
 }
 
 - (NSUInteger)supportedInterfaceOrientations

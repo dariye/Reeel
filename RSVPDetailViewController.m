@@ -10,6 +10,7 @@
 #import "UIColor+BFPaperColors.h"
 #import "RSVPedTableTableViewController.h"
 #import <SIAlertView/SIAlertView.h>
+#import "RSVPTableViewController.h"
 
 NSString *const kValidationName = @"kName";
 NSString *const kValidationEmail = @"kEmail";
@@ -159,6 +160,8 @@ NSString *const khidetext = @"tag3";
     saveAlert.transitionStyle = SIAlertViewTransitionStyleBounce;
     updateAlert.transitionStyle = SIAlertViewTransitionStyleBounce;
     
+    RSVPedTableTableViewController *detailViewController = [[RSVPedTableTableViewController alloc] init];
+    
     NSLog(@"%@", [self formValidationErrors]);
     if ([[self formValidationErrors] count] >= 1) {
         [self validateForm:self];
@@ -180,14 +183,25 @@ NSString *const khidetext = @"tag3";
                 object[@"name"] = [self.defaults objectForKey:@"name"];
                 object[@"email"] = [self.defaults objectForKey:@"email"];
                 object[@"sitting"] = [self.defaults objectForKey:@"sitting"];
-                [object saveInBackground];
                 [object pinInBackground];
+                [object saveEventually];
+                RSVPTableViewController *rsvpView = [RSVPTableViewController alloc];
+                [rsvpView.tableView reloadData];
+                [self.navigationController pushViewController:rsvpView animated:YES];
+                detailViewController.screening = self.screening;
+                [self.navigationController pushViewController:detailViewController animated:YES];
                 [updateAlert show];
+                
             }else {
                 [self.guestList saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         [self.guestList pinInBackground];
                         [self.guestList saveEventually];
+                        RSVPTableViewController *rsvpView = [RSVPTableViewController alloc];
+                        [rsvpView.tableView reloadData];
+                        [self.navigationController pushViewController:rsvpView animated:YES];
+                        detailViewController.screening = self.screening;
+                        [self.navigationController pushViewController:detailViewController animated:YES];
                         [saveAlert show];
                     }else {
 
@@ -197,12 +211,13 @@ NSString *const khidetext = @"tag3";
 
         }];
         
-        RSVPedTableTableViewController *detailViewController = [[RSVPedTableTableViewController alloc] init];
-        detailViewController.screening = self.screening;
-        [detailViewController.tableView reloadData];
-        [self.navigationController pushViewController:detailViewController animated:YES];
-        
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
 }
 
 - (void)validateForm:(id)sender

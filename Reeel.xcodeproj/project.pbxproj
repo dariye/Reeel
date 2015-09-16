@@ -116,7 +116,6 @@
 			children = (
 				767E79721AD6158C003E9A23 /* Frameworks */,
 				767E79401AD61392003E9A23 /* Reeel */,
-				767E795A1AD61393003E9A23 /* ReeelTests */,
 				767E793F1AD61392003E9A23 /* Products */,
 				E9346436934DD8FF288DEA9B /* Pods */,
 			);
@@ -141,6 +140,7 @@
 				767E79451AD61392003E9A23 /* AppDelegate.h */,
 				767E79461AD61392003E9A23 /* AppDelegate.m */,
 				767E794E1AD61392003E9A23 /* Images.xcassets */,
+				767E795A1AD61393003E9A23 /* ReeelTests */,
 				767E79411AD61392003E9A23 /* Supporting Files */,
 			);
 			path = Reeel;
@@ -162,7 +162,7 @@
 				767E795B1AD61393003E9A23 /* Supporting Files */,
 			);
 			path = ReeelTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		767E795B1AD61393003E9A23 /* Supporting Files */ = {
 			isa = PBXGroup;

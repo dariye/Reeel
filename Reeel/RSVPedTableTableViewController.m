@@ -14,6 +14,7 @@
 #import <SIAlertView/SIAlertView.h>
 #import <MapKit/MapKit.h>
 #import "GoogleMapsKit.h"
+#import "RSVPDetailViewController.h"
 
 #define FIRST_ROW_HEIGHT 220;
 #define OTHER_ROWS_HEIGHT 110;
@@ -192,25 +193,19 @@
     [guestlistQuery fromLocalDatastore];
     [guestlistQuery whereKey:@"screening" equalTo:self.screening];
     
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *gl, NSError *error){
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
         if (!error) {
-            [gl deleteInBackground];
+            RSVPTableViewController *rsvpView = [[RSVPTableViewController alloc] init];
+            [object unpinInBackground];
+//            [detailView.tableView reloadData];
+            [self.navigationController popViewControllerAnimated:YES];
+            [rsvpView.navigationController popToRootViewControllerAnimated:YES];
+            [self.navigationController pushViewController:rsvpView animated:YES];
             [cancelAlertView show];
-        } else {
-            [guestlistQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                if (!error) {
-                    [object unpinInBackground];
-                    [cancelAlertView show];
-                }
-            }];
-            
+            [object deleteInBackground];
         }
         
     }];
-    
-    RSVPTableViewController *rsvpViewController = [[RSVPTableViewController alloc] init];
-    [rsvpViewController.tableView reloadData];
-    [self.navigationController pushViewController:rsvpViewController animated:YES];
 }
 
 - (void)openLocationInMaps:(id)sender
@@ -246,7 +241,6 @@
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-//        [self.locationManager startMonitoringSignificantLocationChanges];
     }
     
     double lat = [[[self.screening objectForKey:@"latlng"] objectForKey:@"lat"] doubleValue];

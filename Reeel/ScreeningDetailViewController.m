@@ -12,6 +12,7 @@
 #import <FXBlurView/FXBlurView.h>
 #import "UIColor+BFPaperColors.h"
 
+
 @interface ScreeningDetailViewController () <UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) UIImageView *screeningImageView;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -223,11 +224,6 @@
     self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.65);
     self.scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.scrollView];
-    
-    
-    
-   
-
 }
 
 -(void)shareButtonPressed
